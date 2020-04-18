@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Monopoly Du Pauvre</title>
+    <link rel="stylesheet" href="src/lib/style.css">
+    <link rel="icon" href="src/media/favicon.png">
+  </head>
+  <body>
+    <div class="Menu" style="display:block;">
+
+      <div class="SelectionNbrJoueur">
+        <br>
+        <h1>Monopoly Du Pauvre</h1>
+        <table style="z-index:100;">
+          <tr>
+            <td>
+              <input type="radio" name="radiog_lite" id="radio2" class="css-checkbox"checked="checked" style="z-index:100;"/>
+              <label for="radio2" class="css-label radGroup1">2 joueurs</label>
+            </td>
+            <td>
+              <input type="radio" name="radiog_lite" id="radio3" class="css-checkbox" style="z-index:100;"/>
+              <label for="radio3" class="css-label radGroup1">3 joueurs</label>
+            </td>
+            <td>
+              <input type="radio" name="radiog_lite" id="radio4" class="css-checkbox" style="z-index:100;"/>
+              <label for="radio4" class="css-label radGroup1">4 joueurs</label>
+            </td>
+            <td>
+              <input type="radio" name="radiog_lite" id="radio5" class="css-checkbox" style="z-index:100;"/>
+              <label for="radio5" class="css-label radGroup1">5 joueurs</label>
+            </td>
+            <td>
+              <input type="radio" name="radiog_lite" id="radio6" class="css-checkbox" style="z-index:100;"/>
+              <label for="radio6" class="css-label radGroup1">6 joueurs</label>
+            </td>
+          </tr>
+        </table>
+        <section class="portfolio-experiment" style="z-index:-1000;">
+          <a onclick="CheckSelectionNbrJoueur()">
+            <span class="text" style="font-family:bikobold;">Let's Go !</span>
+            <span class="line -right"></span>
+            <span class="line -top"></span>
+            <span class="line -left"></span>
+            <span class="line -bottom"></span>
+          </a>
+        </section>
+      </div>
+
+      <div class="Lobby" style="display:none;">
+        <h1>Selectionnez votre Pion (Pour l'instant indisponible) et votre pseudo :</h1>
+        <div class="LobbyJoueur1" style="display:none;">
+          <input type="text" id="InputPseudoJoueur1" value="Joueur 1">
+        </div>
+        <div class="LobbyJoueur2" style="display:none;">
+          <input type="text" id="InputPseudoJoueur2" value="Joueur 2">
+        </div>
+        <div class="LobbyJoueur3" style="display:none;">
+          <input type="text" id="InputPseudoJoueur3" value="Joueur 3">
+        </div>
+        <div class="LobbyJoueur4" style="display:none;">
+          <input type="text" id="InputPseudoJoueur4" value="Joueur 4">
+        </div>
+        <div class="LobbyJoueur5" style="display:none;">
+          <input type="text" id="InputPseudoJoueur5" value="Joueur 5">
+        </div>
+        <div class="LobbyJoueur6" style="display:none;">
+          <input type="text" id="InputPseudoJoueur6" value="Joueur 6">
+        </div>
+        <button type="button" id="DémarrageButton" onclick="PassageMenuToTableDeJeu()">C'est parti !</button>
+      </div>
+
+    </div>
+
+    <div class="TableDeJeu" style="display:none;">
+      <div class="Plateau">
+        <img src="src/media/template_plateau-lanczos3.png" alt="Plateau du Jeu" id="ImgPlateauDuJeu">
+      </div
+
+      <div class="De">
+      <button type="button" class="buttonLancerDeDe" onclick="LancerDeDes(1,7,8)"><img src="src/media/de.png" alt="Lancer les dés"></button>
+      <p class="ResultatTirageDe"></p>
+      </div>
+
+      <div class="InformationJoueur1" style="display:none;">
+        <p id="PseudoJoueur1">Joueur 1 :</p>
+        <p id="ArgentJoueur1"></p>
+      </div>
+      <div class="InformationJoueur2" style="display:none;">
+        <p id="PseudoJoueur2">Joueur 2 :</p>
+        <p id="ArgentJoueur2"></p>
+      </div>
+      <div class="InformationJoueur3" style="display:none;">
+        <p id="PseudoJoueur3">Joueur 3 :</p>
+        <p id="ArgentJoueur3"></p>
+      </div>
+      <div class="InformationJoueur4" style="display:none;">
+        <p id="PseudoJoueur4">Joueur 4 :</p>
+        <p id="ArgentJoueur4"></p>
+      </div>
+      <div class="InformationJoueur5" style="display:none;">
+        <p id="PseudoJoueur5">Joueur 5 :</p>
+        <p id="ArgentJoueur5"></p>
+      </div>
+      <div class="InformationJoueur6" style="display:none;">
+        <p id="PseudoJoueur6">Joueur 6 :</p>
+        <p id="ArgentJoueur6"></p>
+      </div>
+
+    </div>
+    <script src="src/lib/script.js" charset="utf-8"></script>
+  </body>
+</html>
