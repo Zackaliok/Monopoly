@@ -18,6 +18,7 @@
   var pseudos = new Array();
   var argentJoueur = new Array("null",200000,200000,200000,200000,200000,200000);
   var positionJoueurs = new Array("null",1,1,1,1,1,1);//Position des joueurs dans le plateau[]
+  var autorisationAchat = new Array("null",false,false,false,false,false,false);//Passe à True quand il font 1 tour
   var possessions = new Array("null",pseudos[1],pseudos[2],pseudos[3],pseudos[4],pseudos[5],pseudos[6])
       possessions[1] = new Array();
       possessions[2] = new Array();
@@ -32,7 +33,7 @@
 
   var plateau = new Array("null",1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39);
   var nomCases = new Array("null","Case départ","Boulevard de Belleville","Caisse de communauté","Rue Lecourbe","Impôts sur le revenu","Gare Montparnasse","Rue de Vaugirard","Chance","Rue de Courcelles","Avenue de la République","Prison","Boulevard de la Villette","Compagnie de distribution d'électricité","Avenue de Neuilly","Rue de Paradis","Gare de Lyon","Avenue Mozart","Caisse de communauté","Boulevard Saint-Michel","Place Pigalle","Parc Gratuit","Avenue Matignon","Chance","Boulevard Malesherbes","Avenue Henri-Martin","Gare du Nord","Faubourg Saint-Honoré","Place de la Bourse","Compagnie de distribution des eaux","Rue la Fayette","Allez en prison","Avenue de Breuteuil","Avenue Foch","Caisse de communauté","Boulevard des Capucines","Gare Saint-Lazare","Chance","Avenue des Champs-Elysées","Taxe de luxe","Rue de la Paix");
-  var prixPropriétés = new Array("null",6000,"null",6000,20000,20000,10000,"null",10000,10000,"null",14000,15000,14000,16000,20000,18000,18000,20000,"null",22000,"null",22000,24000,20000,26000,26000,15000,28000,"null",30000,30000,"null",32000,20000,"null",35000,10000,40000);
+  var prixPropriétés = new Array("null","null",6000,"null",6000,20000,20000,10000,"null",10000,10000,"null",14000,15000,14000,16000,20000,18000,18000,20000,"null",22000,"null",22000,24000,20000,26000,26000,15000,28000,"null",30000,30000,"null",32000,20000,"null",35000,10000,40000);
   var loyer = new Array();
   loyer[1]= new Array(200,400,1000,3000,9000,16000,25000);//Boulevard de Belleville
   loyer[3]= new Array(400,800,2000,6000,18000,32000,45000);//Rue Lecourbe
@@ -65,8 +66,8 @@
   // 1 = nu sans Mono / 2 = nu Mono / 3 = 1 Maison / 4 = 2 Maisons / 5 = 3 Maisons / 6 = 4 Maisons / 7 = Hôtel
   // Sauf pour les gares et les compagnies.
 
-  var caisseDeCommunauté = new Array("Vous êtes libéré de prison. Cette carte peut être conservée.","C'est votre anniversaire : Chaque joueurs doit vous donner 1000 Francs.","Erreur de la Banque en votre faveur. Recevez 20000 Francs","Allez en prison. Avancez tout droit en prison. Ne passez pas par la case départ","Recevez votre intérêt sur l'emprunt à 7% : 2500 Francs","Vous héritez 10000 Francs","Payez une amende de 1000 Francs ou tirer une carte chance","Les contributions vous remboursent la somme de 2000 Francs","Payez votre Police d'Assurance s'élevant à 5000 Francs","La vente de votre stock vous rapporte 5000 Francs","Retournez à Belleville","Placez vous sur la case départ","Recevez votre revenu annuel 10000 Francs","Payez la note du Médecin 5000 Francs","Payez à l'Hôpital 10000 Francs");
-  var chance = new Array("Allez en prison. Avancez tout droit en prison. Ne passez pas par la case départ","Faites des réparations dans toutes vos maisons. Versez pour chaque maison 2500 Francs. Versez pour chaque hôtel 10000 Francs","Votre immeuble et votre prêt vous rapportent. Vous touchez 15000 Francs","Avancez jusqu'à la case départ","Reculez de trois cases","Rendez vous Rue de La Paix","Allez à la gare de Lyon","Vous êtes libéré de prison. Cette carte peut être conservée","Amende pour excès de vitesse 1500 Francs","La Banque vous verse un dividende de 5000 Francs","Avancez au Boulevard de la Villette","Rendez vous à l'Avenue Henri-Martin","Payez pour frais de scolarité 15000 Francs","Vous avez gagné le prix de mots croisés. Recevez 10000 Francs","Vous êtes imposé pour les réparations de voirie à raison de : 4000 Francs par maison et 11500 Francs par hôtel","Amende pour ivresse 2000 Francs");
+  var caisseDeCommunauté = new Array("null","Vous êtes libéré de prison. Cette carte peut être conservée.","C'est votre anniversaire : Chaque joueurs doit vous donner 1000 Francs.","Erreur de la Banque en votre faveur. Recevez 20000 Francs","Allez en prison. Avancez tout droit en prison. Ne passez pas par la case départ","Recevez votre intérêt sur l'emprunt à 7% : 2500 Francs","Vous héritez 10000 Francs","Payez une amende de 1000 Francs ou tirer une carte chance","Les contributions vous remboursent la somme de 2000 Francs","Payez votre Police d'Assurance s'élevant à 5000 Francs","La vente de votre stock vous rapporte 5000 Francs","Retournez à Belleville","Placez vous sur la case départ","Recevez votre revenu annuel 10000 Francs","Payez la note du Médecin 5000 Francs","Payez à l'Hôpital 10000 Francs");
+  var chance = new Array("null","Allez en prison. Avancez tout droit en prison. Ne passez pas par la case départ","Faites des réparations dans toutes vos maisons. Versez pour chaque maison 2500 Francs. Versez pour chaque hôtel 10000 Francs","Votre immeuble et votre prêt vous rapportent. Vous touchez 15000 Francs","Avancez jusqu'à la case départ","Reculez de trois cases","Rendez vous Rue de La Paix","Allez à la gare de Lyon","Vous êtes libéré de prison. Cette carte peut être conservée","Amende pour excès de vitesse 1500 Francs","La Banque vous verse un dividende de 5000 Francs","Avancez au Boulevard de la Villette","Rendez vous à l'Avenue Henri-Martin","Payez pour frais de scolarité 15000 Francs","Vous avez gagné le prix de mots croisés. Recevez 10000 Francs","Vous êtes imposé pour les réparations de voirie à raison de : 4000 Francs par maison et 11500 Francs par hôtel","Amende pour ivresse 2000 Francs");
 
   var parcGratuit = 0;//Argent stocké dans le parc gratuit
   var prison = pseudos[0];//Si un joueur est en prison ce sera son id
@@ -145,7 +146,53 @@ function InitialisationPartie() {
       positionJoueurs[aQuiLeTour]-=40;
     }
     alert("La position de "+pseudos[aQuiLeTour]+" = "+positionJoueurs[aQuiLeTour]+", donc à << "+nomCases[positionJoueurs[aQuiLeTour]]+" >>");
-    ChangementDeTour();
+    CheckCarteChance();//Voir si on est sur une carte chance et appliquer la carte
+    CheckCarteCaisseDeCommunaute();//Voir si on est sur une carte caisse de communauté et appliquer la carte
+    CheckPrisonParcTaxeDépart();//Pour check les cases spéciales (Prison=Aller en prison)
+    ChangementDeTour();//Passer au joueur suivant
+  }
+
+  function CheckCarteChance() {
+
+    if (positionJoueurs[aQuiLeTour]==8||positionJoueurs[aQuiLeTour]==23||positionJoueurs[aQuiLeTour]==37) {
+      alert("Carte Chance !")
+      var idChance = parseInt(Math.random()*(17-1)+1);
+      alert(chance[idChance]);
+    }
+
+
+    }
+
+  function CheckCarteCaisseDeCommunaute() {
+  if (positionJoueurs[aQuiLeTour]==3||positionJoueurs[aQuiLeTour]==18||positionJoueurs[aQuiLeTour]==34) {
+          alert("Caisse de Communauté !");
+          var idCaisseDeCommunauté = parseInt(Math.random()*(17-1)+1);
+          alert(caisseDeCommunauté[idCaisseDeCommunauté]);
+        }
+
+
+  }
+
+  function CheckPrisonParcTaxeDépart() {
+    switch (positionJoueurs[aQuiLeTour]) {
+      case 1://Case départ
+          alert("Vous êtes sur la case départ et gagnez 40000 Francs");
+        break;
+      case 5:
+          alert("Vous êtes sur les Impôts et devez payer 20000 Francs");
+        break;
+      case 21:
+          alert("Vous êtes sur le Parc Gratuit et vous gagnez son contenu, soit "+parcGratuit);
+        break;
+      case 31:
+          alert("Allez en prison");
+        break;
+      case 39:
+          alert("Taxe de Luxe, payez 10000 Francs");
+        break;
+      default:break;
+
+    }
   }
 
   function ChangementDeTour() {
