@@ -1,3 +1,5 @@
 Changer le style des incréments input number ---->   https://stackoverflow.com/questions/45396280/customizing-increment-arrows-on-input-of-type-number-using-css
 
 Mettre des écritures à la verticale ----> https://developer.mozilla.org/fr/docs/Web/CSS/writing-mode
+
+Barre de progression de temps ----> https://www.youtube.com/watch?v=AA3pAhQ52lw
