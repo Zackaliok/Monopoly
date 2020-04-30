@@ -234,11 +234,10 @@ label.css-label {
 
 .BarreDeTemps {
   z-index: 100000000;
-  position: relative;
-  bottom: 13px;
-  left: -75px;
+  position: absolute;
+  left: 43%;
   width: 225px;
-  height: 5px;
+  height: 10px;
   background: black;
 }
 .BarreDeTemps div {
@@ -248,6 +247,9 @@ label.css-label {
   transition-duration: 1s;
 }
 
+.ValiderLeTour {
+
+}
 
 .InformationJoueur1 {
   position: absolute;

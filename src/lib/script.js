@@ -79,9 +79,30 @@ function InitialisationPartie() {
     document.querySelector("#PseudoJoueur"+i).innerHTML = document.querySelector("#InputPseudoJoueur"+i).value;
     document.querySelector(".InformationJoueur1").style.border="5px solid red";
     pseudos[i]=document.querySelector("#InputPseudoJoueur"+i).value;
-
   }
+  //Timer();
 }
+
+//async function Timer() {
+//var timerID = aQuiLeTour;
+  //for (var i = 0; i < 21; i++) {
+  //  document.querySelector(".BarreDeTemps div").style.width=Math.floor((100/20)*i)+"%";
+  //  await sleep(1000);
+//   }
+//   alert("Timer Fini !");
+  // if (timerID==aQuiLeTour) {
+//     document.querySelector(".BarreDeTemps div").style.width=0+"%";
+//     ChangementDeTour();
+//   }  else {
+//     document.querySelector(".BarreDeTemps div").style.width=0+"%";
+//   }
+//}
+
+
+
+
+
+
 
 //------------ Fonctions du Menu et autre : ---------------
   //---------- Switch des différentes pages : -------------
@@ -157,7 +178,7 @@ function InitialisationPartie() {
     CheckPrisonParcTaxeDépart();//Pour check les cases spéciales (Prison=Aller en prison)
     PropositionAchat();//Si la propriété est en vente on lui propose d'acheter
     document.querySelector("#ArgentJoueur"+aQuiLeTour).innerHTML=argentJoueur[aQuiLeTour];//On actualise l'argent du joueur
-    ChangementDeTour();//Passer au joueur suivant
+    document.querySelector(".ValiderLeTour").style.display="block";
   }
 
   function CheckCarteChance() {
@@ -341,15 +362,18 @@ function InitialisationPartie() {
   }
 
   function ChangementDeTour() {
+  //  document.querySelector(".BarreDeTemps div").style.width=0+"%";
     document.querySelector(".ResultatTirageDe").innerHTML="";//On remets le dé à 0
     document.querySelector(".DoubleDe").innerHTML="";//On enlève le double si il y en avait
     document.querySelector(".InformationJoueur"+aQuiLeTour).style.border="2px solid white";//On remet le contour du joueur normal
+    document.querySelector("#ArgentJoueur"+aQuiLeTour).innerHTML=argentJoueur[aQuiLeTour];//On actualise l'argent du joueur
     if (aQuiLeTour==nbrJoueur) {
       aQuiLeTour=1 // Si le joueur est le dernier, on retourne au début
     } else {
       aQuiLeTour++; // Sinon on fait ++
     }
     document.querySelector(".InformationJoueur"+aQuiLeTour).style.border="5px solid red";//On change le contour du joueur en train de jouer
+    //Timer();
 
   }
 
