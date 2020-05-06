@@ -209,13 +209,14 @@ label.css-label {
 /*-------- Style de la table de jeu -------------------------*/
 
 .Plateau {
+  z-index: 1;
   position: absolute;
   left: 30%;
   top: 10%;
 }
 
 .buttonLancerDeDe {
-  z-index: 10000;
+  z-index: 2;
   position: absolute;
   top: 40%;
   left: 41%;
@@ -224,7 +225,7 @@ label.css-label {
 }
 
 .ResultatTirageDe {
-  z-index: 10000;
+  z-index: 2;
   color: black;
   font-size: 2em;
   position: absolute;
@@ -232,23 +233,19 @@ label.css-label {
   left: 48%;
 }
 
-.BarreDeTemps {
-  z-index: 100000000;
+.DoubleDe {
+  z-index: 2;
+  color: black;
   position: absolute;
-  left: 43%;
-  width: 225px;
-  height: 10px;
-  background: black;
-}
-.BarreDeTemps div {
-  width: 0;
-  height: 100%;
-  background-color: green;
-  transition-duration: 1s;
+  top: 70%;
+  left: 48%;
 }
 
 .ValiderLeTour {
-
+  z-index: 2;
+ position: absolute;
+ left: 47.5%;
+ bottom: 20%;
 }
 
 .InformationJoueur1 {

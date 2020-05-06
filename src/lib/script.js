@@ -14,6 +14,8 @@
   var nbrJoueur= 0;
   var resultatTirageDe=0;
   var aQuiLeTour=1;
+  var de1=0;
+  var de2=0;
 
   var pseudos = new Array();
   var argentJoueur = new Array("null",200000,200000,200000,200000,200000,200000);
@@ -32,36 +34,40 @@
 
   var plateau = new Array("null",1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39);
   var nomCases = new Array("null","Case départ","Boulevard de Belleville","Caisse de communauté","Rue Lecourbe","Impôts sur le revenu","Gare Montparnasse","Rue de Vaugirard","Chance","Rue de Courcelles","Avenue de la République","Prison","Boulevard de la Villette","Compagnie de distribution d'électricité","Avenue de Neuilly","Rue de Paradis","Gare de Lyon","Avenue Mozart","Caisse de communauté","Boulevard Saint-Michel","Place Pigalle","Parc Gratuit","Avenue Matignon","Chance","Boulevard Malesherbes","Avenue Henri-Martin","Gare du Nord","Faubourg Saint-Honoré","Place de la Bourse","Compagnie de distribution des eaux","Rue la Fayette","Allez en prison","Avenue de Breuteuil","Avenue Foch","Caisse de communauté","Boulevard des Capucines","Gare Saint-Lazare","Chance","Avenue des Champs-Elysées","Taxe de luxe","Rue de la Paix");
+    //var prixPropriétés = new Array("null","null","vendu","null","vendu","null","vendu","vendu","null","vendu","vendu","null","vendu","vendu","vendu","vendu","vendu",18000,"null",18000,20000,"null",22000,"null",22000,24000,20000,26000,26000,15000,28000,"null",30000,30000,"null",32000,20000,"null",35000,"null",40000);
+    //var maisons = new Array("null","null",3,"null",3,"null",3,3,"null",3,3,"null",3,1,3,3,3,0,"null",0,0,"null",0,"null",0,0,0,0,0,0,0,"null",0,0,"null",0,0,"null",0,"null",0);
+    //Les prix de propriété et les maisons au dessus ne sont pas les bons c'est pour un test
   var prixPropriétés = new Array("null","null",6000,"null",6000,"null",20000,10000,"null",10000,10000,"null",14000,15000,14000,16000,20000,18000,"null",18000,20000,"null",22000,"null",22000,24000,20000,26000,26000,15000,28000,"null",30000,30000,"null",32000,20000,"null",35000,"null",40000);
+  var maisons = new Array("null","null",0,"null",0,"null",0,0,"null",0,0,"null",0,0,0,0,0,0,"null",0,0,"null",0,"null",0,0,0,0,0,0,0,"null",0,0,"null",0,0,"null",0,"null",0);
   var loyer = new Array();
-  loyer[1]= new Array(200,400,1000,3000,9000,16000,25000);//Boulevard de Belleville
-  loyer[3]= new Array(400,800,2000,6000,18000,32000,45000);//Rue Lecourbe
-  loyer[5]= new Array(2500,5000,10000,20000);//Gare Montparnasse
-  loyer[6]= new Array(600,1200,3000,9000,27000,40000,55000);//Rue de Vaugirard
-  loyer[8]= new Array(600,1200,3000,9000,27000,40000,55000);//Rue de Courcelles
-  loyer[9]= new Array(800,1600,4000,10000,30000,45000,60000);//Avenue de la République
-  loyer[11]= new Array(1000,2000,5000,15000,45000,62500,75000);//Boulevard de la Villette
-  loyer[12]= new Array(resultatTirageDe*400,resultatTirageDe*1000);//Compagnie d'électricité
-  loyer[13]= new Array(1000,2000,5000,15000,45000,62500,75000)//Avenue de Neuilly
-  loyer[14]= new Array(1200,2400,6000,18000,50000,70000,90000);//Rue de Paradie
-  loyer[15]= new Array(2500,5000,10000,20000);//Gare de Lyon
-  loyer[16]= new Array(1400,2800,7000,20000,55000,75000,95000);//Avenue Mozart
-  loyer[18]= new Array(1400,2800,7000,20000,55000,75000,95000);//Boulevard Saint-Michel
-  loyer[19]= new Array(1600,3200,8000,22000,60000,80000,100000);//Place Pigalle
-  loyer[21]= new Array(1800,3600,9000,25000,70000,87500,105000);//Avenue Matignon
-  loyer[23]= new Array(1800,3600,9000,25000,70000,87500,105000);//Boulevard Malesherbes
-  loyer[24]= new Array(2000,4000,10000,30000,75000,92500,110000);//Avenue Henri-Martin
-  loyer[25]= new Array(2500,5000,10000,20000);//Gare du Nord
-  loyer[26]= new Array(2200,4400,11000,33000,80000,97500,115000);//Faubourg Saint-Honoré
-  loyer[27]= new Array(2200,4400,11000,33000,80000,97500,115000);//Place de la Bourse
-  loyer[28]= new Array(resultatTirageDe*400,resultatTirageDe*1000);//Compagnie des eaux
-  loyer[29]= new Array(2400,4800,12000,36000,85000,102500,120000);//Rue la Fayette
-  loyer[31]= new Array(2600,5200,13000,39000,90000,110000,127500);//Avenue de Breuteuil
-  loyer[32]= new Array(2600,5200,13000,39000,90000,110000,127500);//Avenue Foch
-  loyer[34]= new Array(2800,5600,15000,45000,100000,120000,140000);//Boulevard des Capucines
-  loyer[35]= new Array(2500,5000,10000,20000);//Gare Saint-Lazare
-  loyer[37]= new Array(3500,7000,17500,50000,11000,130000,150000);//Avenue des Champs-Elysées
-  loyer[39]= new Array(5000,10000,20000,60000,140000,170000,200000);//Rue de la Paix
+  loyer[2]= new Array(200,400,1000,3000,9000,16000,25000);//Boulevard de Belleville
+  loyer[4]= new Array(400,800,2000,6000,18000,32000,45000);//Rue Lecourbe
+  loyer[6]= new Array(2500,5000,10000,20000);//Gare Montparnasse
+  loyer[7]= new Array(600,1200,3000,9000,27000,40000,55000);//Rue de Vaugirard
+  loyer[9]= new Array(600,1200,3000,9000,27000,40000,55000);//Rue de Courcelles
+  loyer[10]= new Array(800,1600,4000,10000,30000,45000,60000);//Avenue de la République
+  loyer[12]= new Array(1000,2000,5000,15000,45000,62500,75000);//Boulevard de la Villette
+  loyer[13]= new Array(resultatTirageDe*400,resultatTirageDe*1000);//Compagnie d'électricité
+  loyer[14]= new Array(1000,2000,5000,15000,45000,62500,75000)//Avenue de Neuilly
+  loyer[15]= new Array(1200,2400,6000,18000,50000,70000,90000);//Rue de Paradie
+  loyer[16]= new Array(2500,5000,10000,20000);//Gare de Lyon
+  loyer[17]= new Array(1400,2800,7000,20000,55000,75000,95000);//Avenue Mozart
+  loyer[19]= new Array(1400,2800,7000,20000,55000,75000,95000);//Boulevard Saint-Michel
+  loyer[20]= new Array(1600,3200,8000,22000,60000,80000,100000);//Place Pigalle
+  loyer[22]= new Array(1800,3600,9000,25000,70000,87500,105000);//Avenue Matignon
+  loyer[24]= new Array(1800,3600,9000,25000,70000,87500,105000);//Boulevard Malesherbes
+  loyer[25]= new Array(2000,4000,10000,30000,75000,92500,110000);//Avenue Henri-Martin
+  loyer[26]= new Array(2500,5000,10000,20000);//Gare du Nord
+  loyer[27]= new Array(2200,4400,11000,33000,80000,97500,115000);//Faubourg Saint-Honoré
+  loyer[28]= new Array(2200,4400,11000,33000,80000,97500,115000);//Place de la Bourse
+  loyer[29]= new Array(resultatTirageDe*400,resultatTirageDe*1000);//Compagnie des eaux
+  loyer[30]= new Array(2400,4800,12000,36000,85000,102500,120000);//Rue la Fayette
+  loyer[32]= new Array(2600,5200,13000,39000,90000,110000,127500);//Avenue de Breuteuil
+  loyer[33]= new Array(2600,5200,13000,39000,90000,110000,127500);//Avenue Foch
+  loyer[35]= new Array(2800,5600,15000,45000,100000,120000,140000);//Boulevard des Capucines
+  loyer[36]= new Array(2500,5000,10000,20000);//Gare Saint-Lazare
+  loyer[38]= new Array(3500,7000,17500,50000,11000,130000,150000);//Avenue des Champs-Elysées
+  loyer[40]= new Array(5000,10000,20000,60000,140000,170000,200000);//Rue de la Paix
   // 1 = nu sans Mono / 2 = nu Mono / 3 = 1 Maison / 4 = 2 Maisons / 5 = 3 Maisons / 6 = 4 Maisons / 7 = Hôtel
   // Sauf pour les gares et les compagnies.
 
@@ -80,28 +86,7 @@ function InitialisationPartie() {
     document.querySelector(".InformationJoueur1").style.border="5px solid red";
     pseudos[i]=document.querySelector("#InputPseudoJoueur"+i).value;
   }
-  //Timer();
 }
-
-//async function Timer() {
-//var timerID = aQuiLeTour;
-  //for (var i = 0; i < 21; i++) {
-  //  document.querySelector(".BarreDeTemps div").style.width=Math.floor((100/20)*i)+"%";
-  //  await sleep(1000);
-//   }
-//   alert("Timer Fini !");
-  // if (timerID==aQuiLeTour) {
-//     document.querySelector(".BarreDeTemps div").style.width=0+"%";
-//     ChangementDeTour();
-//   }  else {
-//     document.querySelector(".BarreDeTemps div").style.width=0+"%";
-//   }
-//}
-
-
-
-
-
 
 
 //------------ Fonctions du Menu et autre : ---------------
@@ -143,27 +128,29 @@ function InitialisationPartie() {
     }
 
 
-  //---------- Fonctions pour la partie : -----------------
+//---------- Fonctions pour la partie : -----------------
 
   function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-  async function LancerDeDes(min,max,maxAudio) {
-    var deAudio = new Audio("src/media/de_lance_"+parseInt(Math.random()*(maxAudio-min)+min)+".mp3"); //On choisis une source d'audio aléatoire pour les dés
-    console.log(deAudio.src);
-    deAudio.play();//On joue l'audio
-      for (var i = 0; i < 10; i++) {
-        var de1 = parseInt(Math.random()*(max-min)+min);//On prends 2 valeurs au hasard entre 1 et 6
-        var de2 = parseInt(Math.random()*(max-min)+min);
-        resultatTirageDe=de1+de2;//On les additionne
-        document.querySelector(".ResultatTirageDe").innerHTML=de1+" + "+de2;//On affiche les dés pour l'utilisateur
-        await sleep(50);}//On attends
-        if (de1==de2) {
-          document.querySelector(".DoubleDe").innerHTML="Double !"; //Si il y a un double on l'affiche
-        }
-        DeplacementPion(aQuiLeTour);//On lance la fonction de déplacement du pion
-    }
+    async function LancerDeDes(min,max,maxAudio) {
+      document.querySelector(".DoubleDe").innerHTML="";
+      var deAudio = new Audio("src/media/de_lance_"+parseInt(Math.random()*(maxAudio-min)+min)+".mp3"); //On choisis une source d'audio aléatoire pour les dés
+      console.log(deAudio.src);
+      deAudio.play();//On joue l'audio
+        for (var i = 0; i < 10; i++) {
+          de1 = parseInt(Math.random()*(max-min)+min);//On prends 2 valeurs au hasard entre 1 et 6
+          de2 = parseInt(Math.random()*(max-min)+min);
+          resultatTirageDe=de1+de2;//On les additionne
+          document.querySelector(".ResultatTirageDe").innerHTML=de1+" + "+de2;//On affiche les dés pour l'utilisateur
+          await sleep(50);}//On attends
+          if (de1==de2) {
+            document.querySelector(".DoubleDe").innerHTML="Double !"; //Si il y a un double on l'affiche
+          }
+          document.querySelector(".buttonLancerDeDe").style.display="none";
+          DeplacementPion(aQuiLeTour);//On lance la fonction de déplacement du pion
+      }
 
   function DeplacementPion(aQuiLeTour) {
     positionJoueurs[aQuiLeTour]+=resultatTirageDe;//On ajoute le résultat du dé à la position du joueur
@@ -176,9 +163,41 @@ function InitialisationPartie() {
     CheckCarteChance();//Voir si on est sur une carte chance et appliquer la carte
     CheckCarteCaisseDeCommunaute();//Voir si on est sur une carte caisse de communauté et appliquer la carte
     CheckPrisonParcTaxeDépart();//Pour check les cases spéciales (Prison=Aller en prison)
+    PayerLoyer();
     PropositionAchat();//Si la propriété est en vente on lui propose d'acheter
-    document.querySelector("#ArgentJoueur"+aQuiLeTour).innerHTML=argentJoueur[aQuiLeTour];//On actualise l'argent du joueur
-    document.querySelector(".ValiderLeTour").style.display="block";
+    ActualisationArgent();
+    
+    if (de1==de2) {
+          document.querySelector(".buttonLancerDeDe").style.display="block";
+        } else {
+          document.querySelector(".ValiderLeTour").style.display="block";
+        }
+  }
+
+  function PayerLoyer() {
+    var temp = 0; //Variable pour tester l'intérieur des possessions
+    
+    if (prixPropriétés[positionJoueurs[aQuiLeTour]]=="vendu") {
+
+    for (var i = 1; i <= nbrJoueur ; i++) {
+      temp = possessions[i].indexOf(positionJoueurs[aQuiLeTour]);
+      
+
+      if (temp != -1) {
+        
+        if (i == aQuiLeTour) {
+          alert("C'est ta propriété !");break;
+        } else {
+          alert("Ce n'est pas ta propriété, tu dois donc payer " + loyer[positionJoueurs[aQuiLeTour]][maisons[positionJoueurs[aQuiLeTour]]] + " €");
+          argentJoueur[aQuiLeTour]-=loyer [positionJoueurs[aQuiLeTour]] [maisons[positionJoueurs[aQuiLeTour]] ];
+          argentJoueur[i]+=loyer[positionJoueurs[aQuiLeTour]][maisons[positionJoueurs[aQuiLeTour]]];     //le "0" sera bientôt remplacer par le nombre de maisons que possède la propriété
+          break;
+        }
+      } 
+    }
+    } else {
+     
+  }
   }
 
   function CheckCarteChance() {
@@ -342,7 +361,7 @@ function InitialisationPartie() {
   }
 
   function PropositionAchat() {
-    if  ((prixPropriétés[positionJoueurs[aQuiLeTour]]!="null")&&(argentJoueur[aQuiLeTour]>=prixPropriétés[positionJoueurs[aQuiLeTour]])){
+    if  (((prixPropriétés[positionJoueurs[aQuiLeTour]]!="null")&&(argentJoueur[aQuiLeTour]>=prixPropriétés[positionJoueurs[aQuiLeTour]]))||((prixPropriétés[positionJoueurs[aQuiLeTour]]!="vendu")&&(argentJoueur[aQuiLeTour]>=prixPropriétés[positionJoueurs[aQuiLeTour]]))){
       document.querySelector(".PropositionAchat").style.display="block";//On affiche la proposition d'achat
       document.querySelector("#EMAchat1").innerHTML=nomCases[positionJoueurs[aQuiLeTour]];//Et les buttons
       document.querySelector("#EMAchat2").innerHTML=prixPropriétés[positionJoueurs[aQuiLeTour]];//idem
@@ -353,8 +372,9 @@ function InitialisationPartie() {
     possessions[aQuiLeTour].push(positionJoueurs[aQuiLeTour]);//On rajoute la case aux possessions du joueur
     alert("Vous avez maintenant "+possessions[aQuiLeTour].length+" propriété(s)");//On lui dit combien il a de propriétés
     argentJoueur[aQuiLeTour]-=prixPropriétés[positionJoueurs[aQuiLeTour]];//On retire le prix a la banque du joueur
-    prixPropriétés[positionJoueurs[aQuiLeTour]]="null";//On rend la propriété inachetable
+    prixPropriétés[positionJoueurs[aQuiLeTour]]="vendu";//On rend la propriété inachetable
     document.querySelector(".PropositionAchat").style.display="none";//On fait disparaître la proposition d'achat
+    ActualisationArgent();
   }
 
   function RefusAchatPropriété() {
@@ -362,22 +382,28 @@ function InitialisationPartie() {
   }
 
   function ChangementDeTour() {
-  //  document.querySelector(".BarreDeTemps div").style.width=0+"%";
-    document.querySelector(".ResultatTirageDe").innerHTML="";//On remets le dé à 0
-    document.querySelector(".DoubleDe").innerHTML="";//On enlève le double si il y en avait
+    document.querySelector(".ValiderLeTour").style.display="none";
+    document.querySelector(".ResultatTirageDe").innerHTML="";//Reset du dé
+    document.querySelector(".DoubleDe").innerHTML="";
+    document.querySelector(".buttonLancerDeDe").style.display="block";
     document.querySelector(".InformationJoueur"+aQuiLeTour).style.border="2px solid white";//On remet le contour du joueur normal
-    document.querySelector("#ArgentJoueur"+aQuiLeTour).innerHTML=argentJoueur[aQuiLeTour];//On actualise l'argent du joueur
+    ActualisationArgent();
     if (aQuiLeTour==nbrJoueur) {
       aQuiLeTour=1 // Si le joueur est le dernier, on retourne au début
     } else {
       aQuiLeTour++; // Sinon on fait ++
     }
     document.querySelector(".InformationJoueur"+aQuiLeTour).style.border="5px solid red";//On change le contour du joueur en train de jouer
-    //Timer();
 
+  }
+
+  function ActualisationArgent() {
+    for (var i = 1; i <= nbrJoueur ; i++) {
+      document.querySelector("#ArgentJoueur"+i).innerHTML=argentJoueur[i];
+    }
   }
 
 
   function FonctionDeTest() {
-    alert(positionJoueurs[aQuiLeTour]);
+    alert(possessions[1][1]);
   }

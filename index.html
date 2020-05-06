@@ -76,20 +76,24 @@
   <div class="TableDeJeu" style="display:none;">
       <div class="Plateau">
         <img src="src/media/template_plateau-lanczos3.png" alt="Plateau du Jeu" id="ImgPlateauDuJeu">
-      </div
+      </div>
 
       <div class="De">
-      <button type="button" class="buttonLancerDeDe" onclick="LancerDeDes(1,7,8)"><img src="src/media/de.png" alt="Lancer les dés"></button>
-      <p class="ResultatTirageDe"></p>
-      <span class="DoubleDe"></span>
+        <button type="button" class="buttonLancerDeDe" onclick="LancerDeDes(1,7,8)">
+          <img src="src/media/de.png" alt="Lancer les dés">
+        </button>
+        <p class="ResultatTirageDe"></p>
+        <span class="DoubleDe"></span>
+      </div>
 
 
-    <!--<div class="BarreDeTemps"><div></div></div>-->
+
 
 
       <div class="InformationJoueur1" style="display:none;">
         <p id="PseudoJoueur1">Joueur 1 :</p>
         <p id="ArgentJoueur1"></p>
+        <input type="button" onclick="FonctionDeTest()" name="">
       </div>
       <div class="InformationJoueur2" style="display:none;">
         <p id="PseudoJoueur2">Joueur 2 :</p>
@@ -112,7 +116,7 @@
         <p id="ArgentJoueur6"></p>
       </div>
 
-      <div class="PropositionAchat" style="z-index:999999; display:none; background: white;color:black;" >
+      <div class="PropositionAchat" style="z-index:2; display:none; background: white;color:black;" >
         <span>Voulez-vous acheter <em id="EMAchat1"></em> d'une valeur de <em id="EMAchat2"></em> Francs ?</span>
         <button type="button" id="buttonAchat" onclick="AchatPropriété()">J'achète !</button>
         <button type="button" id="buttonRefusAchat" onclick="RefusAchatPropriété()">Je refuse</button>
