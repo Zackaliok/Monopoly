@@ -308,3 +308,6 @@ label.css-label {
   border: 1px solid white;
   padding-left: 75px;
 }
+#PossessionsJoueur6 {
+  display: none; height: 500px; width: 100%; background: white; color: black; position: absolute;bottom: 0px; left: 0px; z-index: 3;
+}

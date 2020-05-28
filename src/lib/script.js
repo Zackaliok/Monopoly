@@ -68,7 +68,7 @@
   loyer[36]= new Array(2500,5000,10000,20000);//Gare Saint-Lazare
   loyer[38]= new Array(3500,7000,17500,50000,11000,130000,150000);//Avenue des Champs-Elysées
   loyer[40]= new Array(5000,10000,20000,60000,140000,170000,200000);//Rue de la Paix
-  // 1 = nu sans Mono / 2 = nu Mono / 3 = 1 Maison / 4 = 2 Maisons / 5 = 3 Maisons / 6 = 4 Maisons / 7 = Hôtel
+  // 0 = nu sans Mono / 1 = nu Mono / 2 = 1 Maison / 3 = 2 Maisons / 4 = 3 Maisons / 5 = 4 Maisons / 6 = Hôtel
   // Sauf pour les gares et les compagnies.
 
   var caisseDeCommunauté = new Array("null","Vous êtes libéré de prison. Cette carte peut être conservée.","C'est votre anniversaire : Chaque joueurs doit vous donner 1000 Francs.","Erreur de la Banque en votre faveur. Recevez 20000 Francs","Allez en prison. Avancez tout droit en prison. Ne passez pas par la case départ","Recevez votre intérêt sur l'emprunt à 7% : 2500 Francs","Vous héritez 10000 Francs","Payez une amende de 1000 Francs ou tirer une carte chance","Les contributions vous remboursent la somme de 2000 Francs","Payez votre Police d'Assurance s'élevant à 5000 Francs","La vente de votre stock vous rapporte 5000 Francs","Retournez à Belleville","Vous avez gagné le deuxième prix de beauté. Recevez 1000 Francs","Placez vous sur la case départ","Recevez votre revenu annuel 10000 Francs","Payez la note du Médecin 5000 Francs","Payez à l'Hôpital 10000 Francs");
@@ -178,34 +178,22 @@ function InitialisationPartie() {
     var temp = 0; //Variable pour tester l'intérieur des possessions
     
     if (prixPropriétés[positionJoueurs[aQuiLeTour]]=="vendu") {
-
-    for (var i = 1; i <= nbrJoueur ; i++) {
-      temp = possessions[i].indexOf(positionJoueurs[aQuiLeTour]);
-      
-
-      if (temp != -1) {
-        
-        if (i == aQuiLeTour) {
-          alert("C'est ta propriété !");break;
-        } else {
-          alert("Ce n'est pas ta propriété, tu dois donc payer " + loyer[positionJoueurs[aQuiLeTour]][maisons[positionJoueurs[aQuiLeTour]]] + " €");
-          argentJoueur[aQuiLeTour]-=loyer [positionJoueurs[aQuiLeTour]] [maisons[positionJoueurs[aQuiLeTour]] ];
-          argentJoueur[i]+=loyer[positionJoueurs[aQuiLeTour]][maisons[positionJoueurs[aQuiLeTour]]];     //le "0" sera bientôt remplacer par le nombre de maisons que possède la propriété
-          break;
-        }
-      } 
-    }
-    } else {
-     
-  }
-  }
+      for (var i = 1; i <= nbrJoueur ; i++) {
+        temp = possessions[i].indexOf(positionJoueurs[aQuiLeTour]);
+        if (temp != -1) {
+          if (i == aQuiLeTour) {
+            break;
+          } else {
+              alert("Ce n'est pas ta propriété, tu dois donc payer " + loyer[positionJoueurs[aQuiLeTour]][maisons[positionJoueurs[aQuiLeTour]]] + " €");
+              argentJoueur[aQuiLeTour]-=loyer [positionJoueurs[aQuiLeTour]] [maisons[positionJoueurs[aQuiLeTour]] ];
+              argentJoueur[i]+=loyer[positionJoueurs[aQuiLeTour]][maisons[positionJoueurs[aQuiLeTour]]];// ATTENTION Si maison vaut 1 c'est que le joueur possède le monopole de couleur, donc le loyer est doublé.
+              break;}}}} else {}}
 
   function CheckCarteChance() {
 
     if (positionJoueurs[aQuiLeTour]==8||positionJoueurs[aQuiLeTour]==23||positionJoueurs[aQuiLeTour]==37) {
-      alert("Carte Chance !")
       var idChance = parseInt(Math.random()*(17-1)+1);
-      alert(chance[idChance]);
+      alert("Carte Chance ! " + chance[idChance]);
     }
     switch (idChance) {
       case 1://Aller en prison
@@ -214,7 +202,30 @@ function InitialisationPartie() {
           alert("En prison : Joueur "+prison+" En position "+positionJoueurs[aQuiLeTour]);
         break;
       case 2://Faites des réparations 2.500 ou 10.000
-
+         
+          let cagnotteReparations = 0;
+          for (var i = 1; i <= possessions[aQuiLeTour].length; i++) {
+            if ((positionJoueurs[aQuiLeTour]!=6)||(positionJoueurs[aQuiLeTour]!=13)||(positionJoueurs[aQuiLeTour]!=16)||(positionJoueurs[aQuiLeTour]!=26)||(positionJoueurs[aQuiLeTour]!=29)||(positionJoueurs[aQuiLeTour]!=36)){
+             } else {
+            switch (possessions[aQuiLeTour][i]) {
+              case 2://Une maison
+                  cagnotteReparations+=2500;
+                break;
+              case 3://Deux maisons
+                  cagnotteReparations+=5000;
+                break;                          
+              case 4://Trois maisons
+                  cagnotteReparations+=7500;
+                break;
+              case 5://Quatres maisons
+                  cagnotteReparations+=10000;
+                break;
+              case 6://Un hôtel
+                  cagnotteReparations+=10000;
+                break;
+            }}}
+          argentJoueur[aQuiLeTour]-=cagnotteReparations;
+          cagnotteReparations=0;
         break;
       case 3://Votre immeuble rapportent 15.000
           argentJoueur[aQuiLeTour]+=15000;
@@ -232,7 +243,7 @@ function InitialisationPartie() {
           positionJoueurs[aQuiLeTour]=16;
         break;
       case 8://Libéré de prison
-          prison=0
+          prison=0                        //A compléer plus tard
         break;
       case 9://Amende vitesse 1.500
           argentJoueur[aQuiLeTour]-=1500;
@@ -254,8 +265,30 @@ function InitialisationPartie() {
       case 14://Mots Croisés 10.000
           argentJoueur[aQuiLeTour]+=10000;
         break;
-      case 15://împots 4.000 ou 11.500
-
+      case 15://Réparation voirie 4.000 ou 11.500
+           cagnotteReparations = 0;
+          for (var i = 1; i <= possessions[aQuiLeTour].length; i++) {
+            if ((positionJoueurs[aQuiLeTour]!=6)||(positionJoueurs[aQuiLeTour]!=13)||(positionJoueurs[aQuiLeTour]!=16)||(positionJoueurs[aQuiLeTour]!=26)||(positionJoueurs[aQuiLeTour]!=29)||(positionJoueurs[aQuiLeTour]!=36)){
+             } else {
+            switch (possessions[aQuiLeTour][i]) {
+              case 2://Une maison
+                  cagnotteReparations+=4000;
+                break;
+              case 3://Deux maisons
+                  cagnotteReparations+=8000;
+                break;                          
+              case 4://Trois maisons
+                  cagnotteReparations+=12000;
+                break;
+              case 5://Quatres maisons
+                  cagnotteReparations+=16000;
+                break;
+              case 6://Un hôtel
+                  cagnotteReparations+=11500;
+                break;
+            }}}
+          argentJoueur[aQuiLeTour]-=cagnotteReparations;
+          cagnotteReparations=0;
         break;
       case 16://Amende ivresse 2000
           argentJoueur[aQuiLeTour]-=2000;
@@ -404,6 +437,16 @@ function InitialisationPartie() {
   }
 
 
-  function FonctionDeTest() {
-    alert(possessions[1][1]);
+  function FonctionDeTest(identifiantJoueur) {
+    var possessionsDuJoueur = false;
+    switch (possessionsDuJoueur) {
+      case true:
+          document.getElementById('PossessionsJoueur'+identifiantJoueur).style.display="none";
+          possessionsDuJoueur=false;
+        break;
+      case false:
+          document.getElementById('PossessionsJoueur'+identifiantJoueur).style.display="block";
+          possessionsDuJoueur=true;
+        break;
+    }
   }
