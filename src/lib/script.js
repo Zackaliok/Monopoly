@@ -243,13 +243,13 @@ function InitialisationPartie() {
           positionJoueurs[aQuiLeTour]=16;
         break;
       case 8://Libéré de prison
-          prison=0                        //A compléer plus tard
+          prison=0                        //A compléter plus tard
         break;
       case 9://Amende vitesse 1.500
           argentJoueur[aQuiLeTour]-=1500;
           parcGratuit+=1500;
         break;
-      case 10://Banque  vers 5.000
+      case 10://Banque  verse 5.000
           argentJoueur[aQuiLeTour]+=5000;
         break;
       case 11://Go Villette
@@ -437,16 +437,34 @@ function InitialisationPartie() {
   }
 
 
-  function FonctionDeTest(identifiantJoueur) {
-    var possessionsDuJoueur = false;
-    switch (possessionsDuJoueur) {
-      case true:
-          document.getElementById('PossessionsJoueur'+identifiantJoueur).style.display="none";
-          possessionsDuJoueur=false;
-        break;
-      case false:
-          document.getElementById('PossessionsJoueur'+identifiantJoueur).style.display="block";
-          possessionsDuJoueur=true;
-        break;
+  var dernierCheckPossessionsJoueur = 0;
+  var possessionsDuJoueur = false;
+  function AffichagePossessionsJoueurs(identifiantJoueur) { //Pour Afficher/Désafficher les div de possessions
+    
+    if (possessionsDuJoueur == false) {
+      document.querySelector("#PossessionsJoueur"+identifiantJoueur).style.display="block";
+      dernierCheckPossessionsJoueur = identifiantJoueur;
+      possessionsDuJoueur = true;
+    } else {
+      for (var i = 1; i <=6 ; i++) {
+          document.getElementById('PossessionsJoueur'+i).style.display="none";
+        }
+      if (dernierCheckPossessionsJoueur==identifiantJoueur) {
+        possessionsDuJoueur = false;
+      } else {
+        document.querySelector("#PossessionsJoueur"+identifiantJoueur).style.display="block";
+        dernierCheckPossessionsJoueur = identifiantJoueur;
+        possessionsDuJoueur = true;
+      }
     }
+    AffichagePossessionsJoueursDeux(identifiantJoueur);
+    console.log("La fonction a été appelée");
+  }
+
+  function AffichagePossessionsJoueursDeux(identifiantJoueur) { //Pour afficher le contenu des possessions /!\ Plus tard ce sera des cartes
+    var contenuPossessions = "<p> Possessions du joueur " + pseudos[identifiantJoueur] + " : <br><br>";
+    for (var i = 0; i < possessions[identifiantJoueur].length; i++) {
+      contenuPossessions+= nomCases[possessions[identifiantJoueur][i]]+ " - Loyer de "+ loyer[possessions[identifiantJoueur][i]][maisons[possessions[identifiantJoueur][i]]]+" € <br>";
+    }
+    document.querySelector("#PossessionsJoueur"+identifiantJoueur).innerHTML=contenuPossessions + "</p>";
   }
