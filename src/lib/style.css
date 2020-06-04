@@ -32,13 +32,12 @@ body {
 
 /*------ Style de la selection du nbr de joueurs ------------*/
 
-h1 {
-  text-align: center;
-}
-table {
-  position: absolute;
-  left: 34.5%;
-  top: 25%;
+h1{text-align: center;}
+.tableNbrJoueurs {
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  transform: translateY(175px);
 }
 input[type=radio].css-checkbox {
   position:absolute;
@@ -202,10 +201,6 @@ label.css-label {
 
 /*------- Style du lobby ------------------------------------*/
 
-
-
-
-
 /*-------- Style de la table de jeu -------------------------*/
 
 .Plateau {
@@ -248,17 +243,17 @@ label.css-label {
  bottom: 20%;
 }
 
-.InformationJoueur1 {
+#InformationJoueur1 {
   position: absolute;
   left: 5px;
   top: 11.5px;
   height: 80px;
   width: 150px;
-  border: 1px solid white;
+  border: 5px solid red;
   padding-left: 75px;
 }
 
-.InformationJoueur2 {
+#InformationJoueur2 {
   position: absolute;
   right: 5px;
   top: 11.5px;
@@ -266,9 +261,10 @@ label.css-label {
   width: 150px;
   border: 1px solid white;
   padding-left: 75px;
+  //margin-right: 5px;
 }
 
-.InformationJoueur3 {
+#InformationJoueur3 {
   position: absolute;
   left: 5px;
   bottom: 45%;
@@ -279,7 +275,7 @@ label.css-label {
   /*margin: 0;*/
 }
 
-.InformationJoueur4 {
+#InformationJoueur4 {
   position: absolute;
   right: 5px;
   bottom: 45%;
@@ -289,7 +285,7 @@ label.css-label {
   padding-left: 75px;
 }
 
-.InformationJoueur5 {
+#InformationJoueur5 {
   position: absolute;
   left: 5px;
   bottom: 11.5px;
@@ -299,7 +295,7 @@ label.css-label {
   padding-left: 75px;
 }
 
-.InformationJoueur6 {
+#InformationJoueur6 {
   position: absolute;
   right: 5px;
   bottom: 11.5px;
@@ -311,6 +307,3 @@ label.css-label {
 .PossessionsJoueurs {
   display: none; height: 500px; width: 100%; background: white; color: black; position: absolute;bottom: 0px; left: 0px; z-index: 3;
 }
-/*#PossessionsJoueur6 {
-  display: none; height: 500px; width: 100%; background: white; color: black; position: absolute;bottom: 0px; left: 0px; z-index: 3;
-}*/

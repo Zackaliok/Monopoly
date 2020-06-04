@@ -83,7 +83,7 @@ function InitialisationPartie() {
   for (var i = 1; i <= nbrJoueur; i++) {
     document.querySelector("#ArgentJoueur"+i).innerHTML = 200000;
     document.querySelector("#PseudoJoueur"+i).innerHTML = document.querySelector("#InputPseudoJoueur"+i).value;
-    document.querySelector(".InformationJoueur1").style.border="5px solid red";
+    //document.querySelector("#InformationJoueur1").style.border="5px solid red";
     pseudos[i]=document.querySelector("#InputPseudoJoueur"+i).value;
   }
 }
@@ -104,7 +104,7 @@ function InitialisationPartie() {
     function PassageSelectionNbrJoueurToLobby() {
       selectionNbrJoueurAffiché = false;
       document.querySelector(".SelectionNbrJoueur").style.display="none";
-      for (var i = 1; i <= nbrJoueur; i++) {document.querySelector(".LobbyJoueur"+i).style.display="block";}
+      for (var i = 1; i <= nbrJoueur; i++) {document.querySelector("#LobbyJoueur"+i).style.display="block";}
       lobbyAffiché = true;
       document.querySelector(".Lobby").style.display="block";
     }
@@ -112,7 +112,7 @@ function InitialisationPartie() {
     function PassageMenuToTableDeJeu() {
       alert("Démarrage de la Partie. Bon Jeu !");
 
-      for (var i = 1; i <= nbrJoueur; i++) {document.querySelector(".InformationJoueur"+i).style.display="block";}
+      for (var i = 1; i <= nbrJoueur; i++) {document.querySelector("#InformationJoueur"+i).style.display="block";}
 
       lobbyAffiché = false; document.querySelector(".Lobby").style.display="none";
       menuAffiché = false;  document.querySelector(".Menu").style.display="none";
@@ -243,7 +243,7 @@ function InitialisationPartie() {
           positionJoueurs[aQuiLeTour]=16;
         break;
       case 8://Libéré de prison
-          prison=0                        //A compléter plus tard
+          prison=0                        //A compléter plus tard au dev du sys carcéral
         break;
       case 9://Amende vitesse 1.500
           argentJoueur[aQuiLeTour]-=1500;
@@ -295,6 +295,11 @@ function InitialisationPartie() {
           parcGratuit+=2000;
         break;}}
 
+        function TEST() {
+          alert("ATTENTION TEST");
+          document.querySelector(".FondGris").style.display="block";
+        }
+
   function CheckCarteCaisseDeCommunaute() {
     if (positionJoueurs[aQuiLeTour]==3||positionJoueurs[aQuiLeTour]==18||positionJoueurs[aQuiLeTour]==34) {
             alert("Caisse de Communauté !");
@@ -314,12 +319,12 @@ function InitialisationPartie() {
                 cagnotteAnniv=0;
               break;
             case 3://Erreur banque 20000
-                argentJoueur[aQuiLeTour]=20000;
+                argentJoueur[aQuiLeTour]+=20000;
               break;
             case 4://Allez en Prison
                 prison=aQuiLeTour;
                 positionJoueurs[aQuiLeTour]=11;
-                alert("En prison : Joueur "+prison+" En position "+positionJoueurs[aQuiLeTour]);
+                alert("En prison : Joueur "+prison);
               break;
             case 5://Recevez votre intérêt sur l'emprunt à 7% : 2500 Francs
                 argentJoueur[aQuiLeTour]+=2500;
@@ -328,6 +333,7 @@ function InitialisationPartie() {
                 argentJoueur[aQuiLeTour]+=10000;
               break;
             case 7://Payez une amende de 1000 Francs ou tirer une carte chance
+                                                                                      // A  FAIRE
 
               break;
             case 8://contributions rapportent 2000
@@ -341,7 +347,7 @@ function InitialisationPartie() {
                 argentJoueur[aQuiLeTour]+=5000;
               break;
             case 11://REtounez Belleville
-                positionJoueurs[aQuiLeTour]=2;    //  A COMPLETER
+                positionJoueurs[aQuiLeTour]=2;   
               break;
             case 12://Prix de beauté 1000
                 argentJoueur[aQuiLeTour]+=1000;
@@ -360,6 +366,7 @@ function InitialisationPartie() {
                 argentJoueur[aQuiLeTour]-=10000;
                 parcGratuit+=10000;
               break;}}
+
 
   function CheckPrisonParcTaxeDépart() {
     switch (positionJoueurs[aQuiLeTour]) {
@@ -395,6 +402,7 @@ function InitialisationPartie() {
 
   function PropositionAchat() {
     if  (((prixPropriétés[positionJoueurs[aQuiLeTour]]!="null")&&(argentJoueur[aQuiLeTour]>=prixPropriétés[positionJoueurs[aQuiLeTour]]))||((prixPropriétés[positionJoueurs[aQuiLeTour]]!="vendu")&&(argentJoueur[aQuiLeTour]>=prixPropriétés[positionJoueurs[aQuiLeTour]]))){
+      document.querySelector(".FondGris").style.display="block";
       document.querySelector(".PropositionAchat").style.display="block";//On affiche la proposition d'achat
       document.querySelector("#EMAchat1").innerHTML=nomCases[positionJoueurs[aQuiLeTour]];//Et les buttons
       document.querySelector("#EMAchat2").innerHTML=prixPropriétés[positionJoueurs[aQuiLeTour]];//idem
@@ -419,14 +427,14 @@ function InitialisationPartie() {
     document.querySelector(".ResultatTirageDe").innerHTML="";//Reset du dé
     document.querySelector(".DoubleDe").innerHTML="";
     document.querySelector(".buttonLancerDeDe").style.display="block";
-    document.querySelector(".InformationJoueur"+aQuiLeTour).style.border="2px solid white";//On remet le contour du joueur normal
+    document.querySelector("#InformationJoueur"+aQuiLeTour).style.border="2px solid white";//On remet le contour du joueur normal
     ActualisationArgent();
     if (aQuiLeTour==nbrJoueur) {
       aQuiLeTour=1 // Si le joueur est le dernier, on retourne au début
     } else {
       aQuiLeTour++; // Sinon on fait ++
     }
-    document.querySelector(".InformationJoueur"+aQuiLeTour).style.border="5px solid red";//On change le contour du joueur en train de jouer
+    document.querySelector("#InformationJoueur"+aQuiLeTour).style.border="5px solid red";//On change le contour du joueur en train de jouer
 
   }
 
