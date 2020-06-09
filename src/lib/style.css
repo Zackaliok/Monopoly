@@ -1,309 +1,194 @@
-@font-face {
-    font-family: 'bikolight';
-    src: url('../media/font/biko_light-restricted-webfont.woff2') format('woff2'),
-         url('../media/biko_light-restricted-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}@font-face {
-    font-family: 'bikoblack';
-    src: url('../media/font/biko_black-webfont.woff2') format('woff2'),
-         url('../media/font/biko_black-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}@font-face {
-    font-family: 'bikobold';
-    src: url('../media/font/biko_bold-webfont.woff2') format('woff2'),
-         url('../media/font/biko_bold-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}@font-face {
-    font-family: 'bikoregular';
-    src: url('../media/font/biko_regular-webfont.woff2') format('woff2'),
-         url('../media/font/biko_regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;}
-
-body {
-  background-color: #5e03fc;
-  color: white;
-  font-family: bikobold;
+html, body {
+	background-color: pink;
+	font-family: "Ubuntu","Roboto";
+	height: 100%;
+}
+* {
+	padding: 0;		/* Pour régler les soucis de bandeau idésirable */
+	margin: 0;
 }
 
-/*------ Style de la selection du nbr de joueurs ------------*/
+/* ------------------------------------------------------- */
+/* ------------------- Partie du Menu -------------------- */
+/* ------------------------------------------------------- */
 
-h1{text-align: center;}
-.tableNbrJoueurs {
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  transform: translateY(175px);
+	#Menu {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: center;
+	}
+	input[type=radio].checkbox {
+	  position:absolute;
+	  z-index: 2;
+	  left:-1000px;
+	  overflow: hidden;
+	  clip: rect(0 0 0 0);
+	  height:1px;
+	  width:1px;
+	  margin:-1px;
+	  padding:0;
+	  border:0;
+	}
+	input[type=radio].checkbox + label.LabelRadio {
+	  z-index: 2;
+		padding-left:30px;
+	  padding-right: 10px;
+		height:15px;
+		display:inline-block;
+		line-height:15px;
+		background-repeat:no-repeat;
+		background-position: 0 0;
+		font-size:15px;
+	  vertical-align:middle;
+		cursor:pointer;
+	}
+	input[type=radio].checkbox:checked + label.LabelRadio {
+		background-position: 0 -15px;
+	}
+	label.LabelRadio {
+		background-image:url(../media/checkbox_radio.png);
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+
+/* ------------------------------------------------------- */
+/* ------------------- Partie du Lobby ------------------- */
+/* ------------------------------------------------------- */
+
+#Lobby {
+	height: 100%;
+	background-color: gray;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction: row;
 }
-input[type=radio].css-checkbox {
-  position:absolute;
-  z-index: 10;
-  left:-1000px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  height:1px;
-  width:1px;
-  margin:-1px;
-  padding:0;
-  border:0;
+.EspaceJoueurLobby {
+	width: 200px;
+	height: 300px;
+	border: 1px solid black;
 }
-input[type=radio].css-checkbox + label.css-label {
-	padding-left:30px;
-  padding-right: 10px;
-	height:15px;
-	display:inline-block;
-	line-height:15px;
-	background-repeat:no-repeat;
-	background-position: 0 0;
-	font-size:15px;
-  vertical-align:middle;
-	cursor:pointer;
+#h1Lobby {
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	top: 50px;
 }
-input[type=radio].css-checkbox:checked + label.css-label {
-	background-position: 0 -15px;
+input[type=text] {
+	position: relative;
+	left: 12.5%;
+	top: 90%;
 }
-label.css-label {
-	background-image:url(../media/checkbox_radio.png);
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+#BoutonLobby {
+	top: 65%;
 }
 
+/* ------------------------------------------------------- */
+/* ------------------- Partie du Jeu --------------------- */
+/* ------------------------------------------------------- */
 
-/*En dessous (le portfolio) c'est pour l'animation du bouton Let's Go ! */
-.portfolio-experiment, .scene {
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  flex-wrap: wrap;
-  flex-wrap: wrap;
-  -webkit-display: flex;
-  -webkit-flex-wrap: wrap;
-  -webkit-flex-wrap: wrap;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  justify-content: center;
-  align-items: center;
-  -webkit-justify-content: center;
-  -webkit-align-items: center;
+#Jeu {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	height: 100%;
+	background-color: green;
+	display: flex;
+	justify-content: space-between;
 }
-.portfolio-experiment a {
-  color: white;
-  padding: 0.7em calc(0.7em * 1.2);
-  display: inline-block;
-  border: 3px solid transparent;
-  position: relative;
-  font-size: 1.5em;
-  cursor: pointer;
-  letter-spacing: 0.07em;
+
+#Plateau {
+	display: flex;
+	align-items: center;
 }
-.portfolio-experiment a .text {
-  font-family: proxima-nova, monospace;
-  transform: translate3d(0, 0.7em, 0);
-  display: block;
-  transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1) 0.4s;
+#De {
+	position: absolute;
+	left: 41%;
+} 
+#BoutonDe {
+	background:none;
+	border: none;
 }
-.portfolio-experiment a:after {
-  position: absolute;
-  content: '';
-  bottom: -3px;
-  left: calc(0.7em * 1.2);
-  right: calc(0.7em * 1.2);
-  height: 3px;
-  background: #f26522;
-  transition: transform 0.8s cubic-bezier(1, 0, 0.37, 1) 0.2s, right 0.2s cubic-bezier(0.04, 0.48, 0, 1) 0.6s, left 0.4s cubic-bezier(0.04, 0.48, 0, 1) 0.6s;
-  transform-origin: left;
+#InfoDe {
+	position: absolute;
+	left: 47.5%;
+	top: 65%
 }
-.portfolio-experiment .line {
-  position: absolute;
-  background: #f26522;
+#ResultatTirageDe {
+	padding: 10px;
 }
-.portfolio-experiment .line.-right, .portfolio-experiment .line.-left {
-  width: 3px;
-  bottom: -3px;
-  top: -3px;
-  transform: scale3d(1, 0, 1);
-}
-.portfolio-experiment .line.-top, .portfolio-experiment .line.-bottom {
-  height: 3px;
-  left: -3px;
-  right: -3px;
-  transform: scale3d(0, 1, 1);
-}
-.portfolio-experiment .line.-right {
-  right: -3px;
-  transition: transform 0.1s cubic-bezier(1, 0, 0.65, 1.01) 0.23s;
-  transform-origin: top;
-}
-.portfolio-experiment .line.-top {
-  top: -3px;
-  transition: transform 0.08s linear 0.43s;
-  transform-origin: left;
-}
-.portfolio-experiment .line.-left {
-  left: -3px;
-  transition: transform 0.08s linear 0.51s;
-  transform-origin: bottom;
-}
-.portfolio-experiment .line.-bottom {
-  bottom: -3px;
-  transition: transform 0.3s cubic-bezier(1, 0, 0.65, 1.01);
-  transform-origin: right;
-}
-.portfolio-experiment a:hover .text,
-.portfolio-experiment a:active .text {
-  transform: translate3d(0, 0, 0);
-  transition: transform 0.6s cubic-bezier(0.2, 0, 0, 1) 0.4s;
-}
-.portfolio-experiment a:hover:after,
-.portfolio-experiment a:active:after {
-  transform: scale3d(0, 1, 1);
-  right: -3px;
-  left: -3px;
-  transform-origin: right;
-  transition: transform 0.2s cubic-bezier(1, 0, 0.65, 1.01) 0.17s, right 0.2s cubic-bezier(1, 0, 0.65, 1.01), left 0s 0.3s;
-}
-.portfolio-experiment a:hover .line,
-.portfolio-experiment a:active .line {
-  transform: scale3d(1, 1, 1);
-}
-.portfolio-experiment a:hover .line.-right,
-.portfolio-experiment a:active .line.-right {
-  transition: transform 0.1s cubic-bezier(1, 0, 0.65, 1.01) 0.2s;
-  transform-origin: bottom;
-}
-.portfolio-experiment a:hover .line.-top,
-.portfolio-experiment a:active .line.-top {
-  transition: transform 0.08s linear 0.4s;
-  transform-origin: right;
-}
-.portfolio-experiment a:hover .line.-left,
-.portfolio-experiment a:active .line.-left {
-  transition: transform 0.08s linear 0.48s;
-  transform-origin: top;
-}
-.portfolio-experiment a:hover .line.-bottom,
-.portfolio-experiment a:active .line.-bottom {
-  transition: transform 0.5s cubic-bezier(0, 0.53, 0.29, 1) 0.56s;
-  transform-origin: left;
+#ValiderTour{
+	transform: translateX(-10px);
 }
 
 
-/*------- Style du lobby ------------------------------------*/
 
-/*-------- Style de la table de jeu -------------------------*/
 
-.Plateau {
-  z-index: 1;
-  position: absolute;
-  left: 30%;
-  top: 10%;
+#InfoPartieA {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	
+}
+#InfoPartieB {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
 }
 
-.buttonLancerDeDe {
-  z-index: 2;
-  position: absolute;
-  top: 40%;
-  left: 41%;
-  border: none;
-  background: none;
+.InformationJoueur {
+	height: 75px;
+	width: 250px;
+	margin: 5px;
+	border: 1px solid black;
+	cursor: pointer;
+}
+.Pseudos {
+	display: flex;
+	margin-top: 5px;
+	justify-content: center;
+}
+.Argent {
+	display: flex;
+	justify-content: center;
+	position: relative;
+	top: 20px;
 }
 
-.ResultatTirageDe {
-  z-index: 2;
-  color: black;
-  font-size: 2em;
-  position: absolute;
-  top: 60%;
-  left: 48%;
+
+/* Div cachées */
+#BackgroundPop {
+	display: none;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	background-color: rgba(158, 165, 176, 0.5);
+	position: fixed;
+}
+#BuyDiv {
+	display: none;
+	width: 700px;
+	height: 500px;
+	background-color: white;
+	margin-left: 28%;
+	align-self: center;
+	z-index: 3;
+	position: fixed;
 }
 
-.DoubleDe {
-  z-index: 2;
-  color: black;
-  position: absolute;
-  top: 70%;
-  left: 48%;
-}
 
-.ValiderLeTour {
-  z-index: 2;
- position: absolute;
- left: 47.5%;
- bottom: 20%;
-}
-
-#InformationJoueur1 {
-  position: absolute;
-  left: 5px;
-  top: 11.5px;
-  height: 80px;
-  width: 150px;
-  border: 5px solid red;
-  padding-left: 75px;
-}
-
-#InformationJoueur2 {
-  position: absolute;
-  right: 5px;
-  top: 11.5px;
-  height: 80px;
-  width: 150px;
-  border: 1px solid white;
-  padding-left: 75px;
-  //margin-right: 5px;
-}
-
-#InformationJoueur3 {
-  position: absolute;
-  left: 5px;
-  bottom: 45%;
-  height: 80px;
-  width: 150px;
-  border: 1px solid white;
-  padding-left: 75px;
-  /*margin: 0;*/
-}
-
-#InformationJoueur4 {
-  position: absolute;
-  right: 5px;
-  bottom: 45%;
-  height: 80px;
-  width: 150px;
-  border: 1px solid white;
-  padding-left: 75px;
-}
-
-#InformationJoueur5 {
-  position: absolute;
-  left: 5px;
-  bottom: 11.5px;
-  height: 80px;
-  width: 150px;
-  border: 1px solid white;
-  padding-left: 75px;
-}
-
-#InformationJoueur6 {
-  position: absolute;
-  right: 5px;
-  bottom: 11.5px;
-  height: 80px;
-  width: 150px;
-  border: 1px solid white;
-  padding-left: 75px;
-}
-.PossessionsJoueurs {
-  display: none; height: 500px; width: 100%; background: white; color: black; position: absolute;bottom: 0px; left: 0px; z-index: 3;
+#PossessionsDiv {
+	display: none;
+	width: 100%;
+	height: 70%;
+	background-color: white;
+	z-index: 3;
+	position: fixed;
+	margin-top: 15%
 }
