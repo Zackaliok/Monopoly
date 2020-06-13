@@ -138,7 +138,17 @@
       </span>
     </div>
     <div id="PossessionsDiv"></div>
-    
+    <div id="CarteCommunaute">
+      <p id="ContentCommunaute">Payez une amende de 1000 Francs ou tirer une carte chance</p>
+      <span>
+        <button id="CarteChanceButton" onclick="Chance(-1)">Tirer une carte chance</button>
+        <button id="AmendeButton" onclick="Chance(1)">Payer 1000 €</button>
+      </span>
+    </div>
+    <div id="JailDiv">
+      <button id="BoutonLibeCarte" onclick="Jail(false,3)">Utiliser ma carte</button>
+      <button id="BoutonCaution" onclick="Jail(false,2)">Payer la caution de 5000 €</button>
+    </div>
    
   </div>
 <script type="module" src="src/lib/script.js"></script>

@@ -181,8 +181,6 @@ input[type=text] {
 	z-index: 3;
 	position: fixed;
 }
-
-
 #PossessionsDiv {
 	display: none;
 	width: 100%;
@@ -191,4 +189,17 @@ input[type=text] {
 	z-index: 3;
 	position: fixed;
 	margin-top: 15%
+}
+#CarteCommunaute {
+	display: none;
+	width: 700px;
+	height: 500px;
+	background-color: white;
+	margin-left: 28%;
+	align-self: center;
+	z-index: 3;
+	position: fixed;
+}
+#JailDiv {
+	display: none;
 }
