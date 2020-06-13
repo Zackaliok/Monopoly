@@ -47,7 +47,8 @@ var menu = $("#Menu"),
 
 var resultatTirageDe = null,
 	de1 = null,
-	de2 = null;
+	de2 = null,
+  nbrDouble = 0;
 
 var nbrJoueur = null,
 	prison = new Array(null, false,false,false,false,false,false,0,0,0,0,0,0),
@@ -129,20 +130,22 @@ async function RollDice(min, max, maxAudio) {
           await sleep(50);
       }
     if (de1==de2) {
-    	$("#DoubleDe").html("Double !");
-    }
-
-    if ((prison[aQuiLeTour])&&(de1==de2)) {
-      Jail(false, 1);
-      console.log('Le joueur est libéré de prison car il a fait un double.');
-      PlayerMoving();
+      $("#DoubleDe").html("Double !");
+      nbrDouble++;
+      if (prison[aQuiLeTour]) {
+        Jail(false, 1);// Si prison, libéré
+      } else {
+        if (nbrDouble==3) {
+        Jail(true,0);     // Si 3 doubles prison
+        nbrDouble = 0;
+        NextTurn();
+      } else {
+        PlayerMoving(); // Si double < 3 et pas prison, on joue
+      }}
     } else {
-      PlayerMoving();
+        PlayerMoving(); // Si pas doubles, on joue
     }
-
-
 }
-
 
 
 
@@ -195,10 +198,11 @@ function NextTurn() {
       aQuiLeTour++;
     }
   document.querySelector("#Joueur"+aQuiLeTour).style.border="1px solid red";
+  nbrDouble = 0;
   if (prison[aQuiLeTour]) {
     if (libérable[aQuiLeTour]) {
       $("#BoutonLibeCarte").show();
-    }                                       //bouton à faire pour le système carcéral
+    }                                 
     $("#JailDiv").show();
   }
 }
