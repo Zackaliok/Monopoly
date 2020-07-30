@@ -15,6 +15,8 @@
 </head>
 
 <body>
+
+
 	<div id="Menu">
 		<h1 >Monopoly 1.1</h1>
 		<div id="Radio">
@@ -41,24 +43,48 @@
 	</div>
 
 	<div id="Lobby">
-    <h1 id="h1Lobby">Sélection d'Avatar</h1>
-    <div class="EspaceJoueurLobby" id="Espace1">
-      <input type="text" id="InputPseudo1" placeholder="Joueur 1">
+    <h1 id="h1Lobby">Sélection de couleur et de pseudo</h1>
+    <div class="Player-Container" id="Lobby1">
+        <input type="text" id="Lobby-Input1" placeholder="Joueur 1 " class="Lobby-Input">
+        <div class="Btn-Avatar">
+            <button onclick="ChooseColor(1, false)">Précédent</button>
+            <button onclick="ChooseColor(1, true)">Suivant</button>
+        </div>
     </div>
-    <div class="EspaceJoueurLobby" id="Espace2">
-      <input type="text" id="InputPseudo2" placeholder="Joueur 2">
+    <div class="Player-Container" id="Lobby2">
+        <input type="text" id="Lobby-Input2" placeholder="Joueur 2 " class="Lobby-Input">
+        <div class="Btn-Avatar">
+            <button onclick="ChooseColor(2, false)">Précédent</button>
+            <button onclick="ChooseColor(2, true)">Suivant</button>
+        </div>
     </div>
-    <div class="EspaceJoueurLobby" id="Espace3">
-      <input type="text" id="InputPseudo3" placeholder="Joueur 3">
+    <div class="Player-Container" id="Lobby3">
+        <input type="text" id="Lobby-Input3" placeholder="Joueur 3 " class="Lobby-Input">
+        <div class="Btn-Avatar">
+            <button onclick="ChooseColor(3, false)">Précédent</button>
+            <button onclick="ChooseColor(3, true)">Suivant</button>
+        </div>
     </div>
-    <div class="EspaceJoueurLobby" id="Espace4">
-      <input type="text" id="InputPseudo4" placeholder="Joueur 4">
+    <div class="Player-Container" id="Lobby4">
+        <input type="text" id="Lobby-Input4" placeholder="Joueur 4 " class="Lobby-Input">
+        <div class="Btn-Avatar">
+            <button onclick="ChooseColor(4, false)">Précédent</button>
+            <button onclick="ChooseColor(4, true)">Suivant</button>
+        </div>
     </div>
-    <div class="EspaceJoueurLobby" id="Espace5">
-      <input type="text" id="InputPseudo5" placeholder="Joueur 5">
+    <div class="Player-Container" id="Lobby5">
+        <input type="text" id="Lobby-Input5" placeholder="Joueur 5 " class="Lobby-Input">
+        <div class="Btn-Avatar">
+            <button onclick="ChooseColor(5, false)">Précédent</button>
+            <button onclick="ChooseColor(5, true)">Suivant</button>
+        </div>
     </div>
-    <div class="EspaceJoueurLobby" id="Espace6">
-      <input type="text" id="InputPseudo6" placeholder="Joueur 6">
+    <div class="Player-Container" id="Lobby6">
+        <input type="text" id="Lobby-Input6" placeholder="Joueur 6 " class="Lobby-Input">
+        <div class="Btn-Avatar">
+            <button onclick="ChooseColor(6, false)">Précédent</button>
+            <button onclick="ChooseColor(6, true)">Suivant</button>
+        </div>
     </div>
     <section class="portfolio-experiment" id="BoutonLobby">
       <a onclick="GoToJeu()">
@@ -72,6 +98,7 @@
   </div>
 
 	<div id="Jeu">
+    <!--<div id="cursor"></div>-->
     <div id="InfoPartieA">
       <a onclick="OpenPossessions(1)">
         <div class="InformationJoueur" id="Joueur1">
@@ -94,18 +121,18 @@
     </div>
    
     <div id="Plateau">
-      <img src="src/media/template_plateau-lanczos3.png" alt="Plateau du Jeu" id="PlateauDuJeu">
-      <div id="De">
-        <button type="button" id="BoutonDe" onclick="RollDice(1,7,8)">
-          <img src="src/media/de.png" alt="Lancer les dés">
-        </button>
+      <canvas width="650px" height="650px" id="canvas">
+        <p>Si vous ne voyez pas le canvas il y a un problème</p>
+      </canvas>
+  </div>
+    <!--<div class="Div-Dice">
+      <a onclick="RollDice(1,7,8)" id="BtnRoll"><img src="src/media/de/roll.svg" alt="Lancer les dés" title="Lance les dés !" style="width: 150px; height: 150px;"></a>
+      <div>
+        <div class="Img-Dice"></div>
       </div>
-      <div id="InfoDe">
-        <p id="ResultatTirageDe"></p>
-        <span id="DoubleDe"></span>
-        <button onclick="NextTurn()" id="ValiderTour">Valider le tour</button>
-      </div>
-    </div>
+      <span id="DoubleDe"></span>
+      <button onclick="NextTurn()" id="ValiderTour">Valider le tour</button>
+    </div>-->
 
     <div id="InfoPartieB">
       <a onclick="OpenPossessions(2)">
@@ -120,7 +147,7 @@
           <p id="Argent4" class="Argent"></p>
         </div>
       </a>
-      <a onclick="OpenPossessions(6)"></a>
+      <a onclick="OpenPossessions(6)">
         <div class="InformationJoueur" id="Joueur6">
           <p id="Pseudo6" class="Pseudos"></p>
           <p id="Argent6" class="Argent"></p>
@@ -151,6 +178,23 @@
     </div>
    
   </div>
-<script type="module" src="src/lib/script.js"></script>
+
+
+
+
+
+  <div class="Div-All"> <!-- Onglet Paramètres -->
+    <div class="Div-Btn">
+        <button onclick="ShowHideOnglet()" id="Btn">
+            <img src="src/media/btn/up-arrow.svg" alt="Flèche vers le haut" style="height: 20px; width: 20px;" id="Img-Btn">
+        </button>
+    </div>
+    <div class="Div-Obj">
+      <a onclick="GestionAudio(true)"><img id="Btn-Ambient" src="src/media/btn/speaker.svg" alt="AmbientButton" title="Activer/Désactiver le son" style="width: 50px; height: 50px;"></a>
+      <a onclick="GestionAudio(false)"><img id="Btn-Music" src="src/media/btn/music.svg" alt="MusicButton" title="Activer/Désactiver la musique" style="width: 75px; height: 75px;"></a>
+      <a onclick="Quit()" id="Btn-Quit" style="display:none;"><img src="src/media/btn/remove.svg" alt="QuitButton" title="Quitter la partie" style="width: 75px; height: 75px;"></a>
+    </div>
+</div>
+<script src="src/lib/script.js"></script>
 </body>
 </html>

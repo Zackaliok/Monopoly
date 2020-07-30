@@ -57,6 +57,7 @@ var nbrJoueur = null,
   
 
 var pseudos = new Array(),
+    avatar = new Array(null)
     argent = new Array(null,200000,200000,200000,200000,200000,200000),
     autorisation = new Array(null, false, false, false, false, false, false),
     position = new Array(null,1,1,1,1,1,1),
@@ -75,13 +76,15 @@ lobby.hide();
 jeu.hide();
 $("#ValiderTour").hide();
 for (var i = 1; i <= 6; i++) {
-	$("#Joueur"+i).hide();
-	$("#Espace"+i).hide();
+  $("#Joueur"+i).hide();
+	$("#Lobby"+i).hide();
 }
 
+
+
 /* ByPass des menus */
-GoToLobby();
-GoToJeu();
+//GoToLobby();
+//GoToJeu();
 
 
 window.GoToLobby = GoToLobby;
@@ -93,7 +96,7 @@ function GoToLobby() {
 		}
 	}
 	for (var i = 1; i <= nbrJoueur; i++) {
-		$("#Espace"+i).show();
+		$("#Lobby"+i).show();
 	}
 	menu.hide();
 	lobby.show();
@@ -106,34 +109,37 @@ function GoToJeu() {
 	lobby.hide();
 	jeu.show();
 	for (var i = 1; i <= nbrJoueur; i++) {
-		pseudos[i]=document.querySelector("#InputPseudo"+i).value;
+		pseudos[i]= document.querySelector("#Lobby-Input"+i).value;
 		$("#Pseudo"+i).html(pseudos[i]);
 		$("#Argent"+i).html(argent[i]);
-		$("#Joueur"+i).show();
+    $("#Joueur"+i).show();
+    document.querySelector('#Joueur'+i).style.backgroundColor = colors[playerColors[i]];
 	}
-	document.querySelector("#Joueur1").style.border="1px solid red";
+  document.querySelector("#Joueur1").style.border="1px solid red";
+  document.querySelector('#Btn-Quit').style.display="block";
 	console.log(pseudos);
 	console.log("Lancement de la partie.")
 }
 
 window.RollDice = RollDice;
 async function RollDice(min, max, maxAudio) {
-  $("#BoutonDe").hide();
+  $("#BtnRoll").hide();
 	$("#DoubleDe").html("");
-	var deAudio = new Audio("src/media/de_lance_"+parseInt(Math.random()*(maxAudio-min)+min)+".mp3");
+	var deAudio = new Audio("src/media/de/de_lance_"+parseInt(Math.random()*(maxAudio-min)+min)+".mp3");
 	deAudio.play();
 	for (var i = 0; i < 10; i++) {
           de1 = parseInt(Math.random()*(max-min)+min);
           de2 = parseInt(Math.random()*(max-min)+min);
           resultatTirageDe=de1+de2;
-          $("#ResultatTirageDe").html(de1 + " + " + de2);
+          $(".Img-Dice").html('<img src="src/media/de/' + de1 + '.svg">' + '<img src="src/media/de/' + de2 + '.svg">');
           await sleep(50);
       }
     if (de1==de2) {
       $("#DoubleDe").html("Double !");
       nbrDouble++;
       if (prison[aQuiLeTour]) {
-        Jail(false, 1);// Si prison, libéré
+        Jail(false, 1);// Si prison, libéré et il rejoue
+        $("#BtnRoll").show();
       } else {
         if (nbrDouble==3) {
         Jail(true,0);     // Si 3 doubles prison
@@ -141,6 +147,7 @@ async function RollDice(min, max, maxAudio) {
         NextTurn();
       } else {
         PlayerMoving(); // Si double < 3 et pas prison, on joue
+        $('#BtnRoll').show();
       }}
     } else {
         PlayerMoving(); // Si pas doubles, on joue
@@ -152,10 +159,14 @@ async function RollDice(min, max, maxAudio) {
 window.PlayerMoving = PlayerMoving;
 function PlayerMoving() {
 
-  if (prison[aQuiLeTour]==true) {
-
+  if ((prison[aQuiLeTour]==true)&&(nbrToursPrison<3)) {
     nbrToursPrison++;
+    console.log("Tours en prison : "+nbrToursPrison)
   } else {
+    if ((prison[aQuiLeTour])&&(nbrToursPrison==3)) {
+      Jail(false,1);
+      console.log("Joueur libéré dû aux 3 tours");
+    }
       
       //position[aQuiLeTour]+=resultatTirageDe;
       position[aQuiLeTour]=prompt("Sur quelle case on va Patron ?");
@@ -181,22 +192,22 @@ function PlayerMoving() {
 		$("#ValiderTour").show(); 
 	}
 	
-	
 }
 
 
 window.NextTurn = NextTurn;
 function NextTurn() {
 	document.querySelector("#Joueur"+aQuiLeTour).style.border="1px solid black";
-	$("#ValiderTour").hide();
-	$("#ResultatTirageDe").html("");
+  $("#JailDiv").hide();
+	$(".Img-Dice").html("");
 	$("#DoubleDe").html("");
-	$("#BoutonDe").show();
+	$("#BtnRoll").show();
 	if (aQuiLeTour==nbrJoueur) {
       aQuiLeTour=1
     } else {
       aQuiLeTour++;
     }
+  $("#ValiderTour").hide();
   document.querySelector("#Joueur"+aQuiLeTour).style.border="1px solid red";
   nbrDouble = 0;
   if (prison[aQuiLeTour]) {
@@ -206,6 +217,95 @@ function NextTurn() {
     $("#JailDiv").show();
   }
 }
+
+window.Jail = Jail;
+function Jail(type, moyen) {// true = Mise en prison       false = Sortie de prison
+  $("#BoutonLibeCarte").hide();
+  $("#JailDiv").hide();
+  if (type) { //On mets en prison
+    console.log(`${pseudos[aQuiLeTour]} va en prison.`);
+    prison = new Array(null, false,false,false,false,false,false);
+    prison[aQuiLeTour]=true;
+    position[aQuiLeTour]=11;
+    $("#ValiderTour").hide();
+    NextTurn();
+
+  } else { // On sort de prison
+    switch (moyen) { // 1 = Double ou attente     2 = Caution     3 = Carte
+      case 1:
+          prison = new Array(null, false, false, false, false, false, false);
+          nbrToursPrison = 0;
+        break;
+
+      case 2:
+          prison = new Array(null, false, false, false, false, false, false);
+          nbrToursPrison = 0;
+          argent[aQuiLeTour]-=5000;
+          parcGratuit+=5000;
+          RefreshMoney();
+        break;
+
+      case 3:
+          $("#Pseudo"+aQuiLeTour).html(pseudos[aQuiLeTour]+"");
+          prison = new Array(null, false, false, false, false, false, false);
+          nbrToursPrison = 0;
+          libérable[aQuiLeTour] = false;
+        break;
+    }
+    console.log('Le Joueur est libéré de prison');
+  }
+}
+
+
+
+
+
+//const cursor = document.querySelector("#cursor");
+
+//document.addEventListener('mousemove', e => {
+  //console.log(e.pageX, e.pageY);
+  //cursor.setAttribute("style", "top:"+(e.pageY -5)+"px; left:"+(e.pageX -5)+"px;");
+
+//})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function BuyPopup() {
@@ -261,91 +361,6 @@ function Loyer() {
     }
   }
 }
-
-
-window.Jail = Jail;
-function Jail(type, moyen) {// true = Mise en prison       false = Sortie de prison
-  $("#BoutonLibeCarte").hide();
-  $("#JailDiv").hide();
-  if (type==true) { //On mets en prison
-    console.log(`${pseudos[aQuiLeTour]} va en prison.`);
-    prison = new Array(null, false,false,false,false,false,false);
-    prison[aQuiLeTour]=true;
-    position[aQuiLeTour]=11;
-  } else { // On sort de prison
-    switch (moyen) { // 1 = Double     2 = Caution     3 = Carte
-      case 1:
-          prison = new Array(null, false, false, false, false, false, false);
-          nbrToursPrison = 0;
-        break;
-
-      case 2:
-          prison = new Array(null, false, false, false, false, false, false);
-          nbrToursPrison = 0;
-          argent[aQuiLeTour]-=5000;
-          parcGratuit+=5000;
-          RefreshMoney();
-        break;
-
-      case 3:
-          $("#Pseudo"+aQuiLeTour).html(pseudos[aQuiLeTour]+"");
-          prison = new Array(null, false, false, false, false, false, false);
-          nbrToursPrison = 0;
-          libérable[aQuiLeTour] = false;
-        break;
-    }
-    console.log('Le Joueur est libéré de prison');
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 window.ClosePop = ClosePop;
@@ -408,7 +423,7 @@ window.Chance = Chance;
 function Chance(test) {
   ClosePop();
   if ((position[aQuiLeTour]==8)||(position[aQuiLeTour]==23)||(position[aQuiLeTour]==37)||(test==-1)) {
-    console.log("Le Joueur " + aQuiLeTour + " est sur " + nomCases[position[aQuiLeTour]]);
+    //console.log("Le Joueur " + aQuiLeTour + " est sur " + nomCases[position[aQuiLeTour]]);
     var random =8; //parseInt(Math.random()*(17-1)+1)
     console.log(chance[random]);
     switch (random) {
@@ -608,3 +623,133 @@ function Communaute() {
 
             RefreshMoney();
             }
+
+
+
+
+/* Script pour afficher les paramètres */
+var displayOnglet = false;
+var img = document.querySelector('#Img-Btn');
+var divObj = document.querySelector('.Div-Obj');
+var divAll = document.querySelector('.Div-All');
+
+window.ShowHideOnglet = ShowHideOnglet;
+  function ShowHideOnglet() {
+      if (displayOnglet == true) {
+          console.log('Paramètres Dissimulés');
+          displayOnglet = false;
+          img.src="src/media/btn/up-arrow.svg";
+          divAll.style.bottom="5px";
+          divAll.style.height="20px";
+          divObj.style.display="none"; 
+      }   else {
+          console.log('Paramètres Affichés');
+          displayOnglet = true;
+          img.src="src/media/btn/down-arrow.svg";
+          divAll.style.bottom="0px";
+          divAll.style.height="25%";
+          divObj.style.display="flex";
+      }
+  }
+/* Script pour l'audio */
+var music = new Audio("src/media/music/Monopoly Song Freeway 1.mp3"),
+    btnMusic = document.querySelector('#Btn-Music'),
+    btnAmbient = document.querySelector('#Btn-Ambient'),
+    ambient = new Audio("src/media/de/de_lance_1.mp3");
+    //music.play();
+
+    music.setAttribute("loop", "true") // On rend la musique "infinissable"
+
+window.GestionAudio = GestionAudio;
+function GestionAudio(type) { // True = ambient  False = music
+  if (type) {
+    if (ambient.muted) {
+      ambient.muted=false;
+      btnAmbient.src="src/media/btn/speaker.svg";
+    } else {
+      ambient.muted=true;
+      btnAmbient.src="src/media/btn/mute.svg";
+    }
+  } else {
+    if (music.muted) {
+      music.muted=false;
+      btnMusic.src="src/media/btn/music.svg";
+    } else {
+      music.muted=true;
+      btnMusic.src="src/media/btn/music-mute.svg";
+    }
+  }
+  
+}
+
+window.Quit = Quit;
+
+function Quit() {
+  console.log("Voulez-vous vraiment quitter la partie ?");
+  jeu.hide();
+  menu.show();
+  document.querySelector('#Btn-Quit').style.display="none";
+  ShowHideOnglet();
+}
+
+
+/*  Script du Canvas */
+
+const canvas = document.getElementById('canvas'),
+      ctx = canvas.getContext('2d');
+
+canvas.style.backgroundImage = "url('src/media/plateautest.svg')";
+
+//Déplacement des pions
+const pions = new Image;
+pions.src = "src/media/pions.svg";
+
+/*
+setTimeout(() => {
+  ctx.drawImage(pions, 520, 0, 130, 230, 0, 0, 42, 54); // Pion Magenta
+}, 50);
+*/
+/*
+setTimeout(() => {
+  ctx.drawImage(pions, 390, 0, 130, 230, 0, 0, 42, 54); // Pion Bleu
+}, 50);
+*/
+/*
+setTimeout(() => {
+  ctx.drawImage(pions, 260, 0, 130, 230, 0, 0, 42, 54); // Pion Vert
+}, 50);
+*/
+/*
+setTimeout(() => {
+  ctx.drawImage(pions, 130, 0, 130, 230, 0, 0, 42, 54); // Pion Jaune
+}, 50);
+*/
+/*
+setTimeout(() => {
+  ctx.drawImage(pions, 0, 0, 130, 230, 0, 0, 42, 54);   // Pion Rouge
+}, 500);
+*/
+
+
+/* Script Du Lobby */
+var colors = new Array(null, 'red', 'yellow', 'green', 'blue', 'magenta', 'orange');
+var playerColors = new Array(null, 1, 2, 3, 4, 5, 6);
+
+for (let i = 1; i <= 6 ; i++) {
+  document.querySelector('#Lobby'+i).style.backgroundColor= colors[i];  //Mise en place des couleurs de base
+}
+
+function ChooseColor(player, sens) {
+  if (sens) { //Si Suivant
+    playerColors[player] +=1
+    if (playerColors[player]==7) {
+      playerColors[player]=1;
+    }
+  } else { //Si Précédent
+    playerColors[player]-=1;
+    if (playerColors[player]==0) {
+      playerColors[player]=6;
+    }
+  }
+  document.querySelector('#Lobby'+player).style.backgroundColor=colors[playerColors[player]];
+}

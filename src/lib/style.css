@@ -2,11 +2,23 @@ html, body {
 	background-color: pink;
 	font-family: "Ubuntu","Roboto";
 	height: 100%;
+	width: 100%;
+	/*cursor: url("../media/Cursor.svg");*/
+	overflow: hidden;
 }
 * {
 	padding: 0;		/* Pour régler les soucis de bandeau idésirable */
 	margin: 0;
 }
+
+/*#cursor {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: red;
+	position: absolute;
+	//z-index: 12;
+}*/
 
 /* ------------------------------------------------------- */
 /* ------------------- Partie du Menu -------------------- */
@@ -48,7 +60,7 @@ html, body {
 		background-position: 0 -15px;
 	}
 	label.LabelRadio {
-		background-image:url(../media/checkbox_radio.png);
+		background-image:url(../media/btn/checkbox_radio.png);
 		-webkit-touch-callout: none;
 		-webkit-user-select: none;
 		-khtml-user-select: none;
@@ -69,21 +81,31 @@ html, body {
 	align-items: center;
 	flex-direction: row;
 }
-.EspaceJoueurLobby {
+.Player-Container {
 	width: 200px;
 	height: 300px;
-	border: 1px solid black;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+}
+.Btn-Avatar {
+    align-self: center;
+}
+.Lobby-Input {
+    margin-top: 250px;
+    max-height: 20px;
+}
+::placeholder {
+    text-align: center;
 }
 #h1Lobby {
-	position: absolute;
-	margin-left: auto;
-	margin-right: auto;
-	top: 50px;
+    position: fixed;
+    margin-top: -40%;
 }
-input[type=text] {
-	position: relative;
-	left: 12.5%;
-	top: 90%;
+#Lobby > button {
+    margin-top: 3px;
+    max-height: 20px;
 }
 #BoutonLobby {
 	top: 65%;
@@ -106,24 +128,17 @@ input[type=text] {
 	display: flex;
 	align-items: center;
 }
-#De {
-	position: absolute;
-	left: 41%;
-} 
-#BoutonDe {
-	background:none;
-	border: none;
+canvas {
+	border: 1px solid black;
 }
-#InfoDe {
-	position: absolute;
-	left: 47.5%;
-	top: 65%
-}
-#ResultatTirageDe {
-	padding: 10px;
-}
-#ValiderTour{
-	transform: translateX(-10px);
+
+.Div-Dice {
+	z-index: 100;
+	
+	margin-left: auto;
+	margin-right: auto;
+	justify-self: center;
+	align-self: center;
 }
 
 
@@ -202,4 +217,32 @@ input[type=text] {
 }
 #JailDiv {
 	display: none;
+}
+
+.Div-Obj {
+	display: none; /* ICIIIIII faut mettre block */
+	background-color: darkolivegreen;
+	width: 100%;
+	height: 100%;
+	justify-content: space-around;
+	align-items: center;
+}
+.Div-Btn {
+	width: 100%;
+	height: 20px;
+	display: flex;
+	justify-content: center;
+}
+
+button {
+	border: none;
+	background: none;
+}
+
+.Div-All {
+	position: absolute;
+	bottom: 5px; /* ICI faut mettre 20px*/
+	width: 100%;
+	height: 20px; /* ICI faut mettre 25%  */
+	transition: all 1s;
 }
