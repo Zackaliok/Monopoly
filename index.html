@@ -1,165 +1,200 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Monopoly Du Pauvre</title>
-    <link rel="stylesheet" href="src/lib/style.css">
-    <link rel="icon" href="src/media/favicon.png">
-  </head>
+<html>
+<head>
+	<title>Monopoly 1.1</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="src/lib/style.css"><!-- Style de la page entière -->
+	<link rel="stylesheet" type="text/css" href="src/lib/styleAnimation.css"><!-- Style des animations -->
+	<link rel="icon" href="src/media/favicon.png">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu&display=swap" rel="stylesheet">
+  <script
+        src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+  
+</head>
 
-  <body>
-  <!-- PARTIE MENU (SELECTION DU NOMBRE DE JOUEURS, AVATAR, PSEUDOS ETC...)-------->
-    <div class="Menu" style="display:block;">
-      <div class="SelectionNbrJoueur">
-        <br>
-        <h1>Monopoly Du Pauvre</h1>
-        <table class="tableNbrJoueurs">
-          <tr>
-            <td>
-              <input type="radio" name="radiog_lite" id="radio2" class="css-checkbox"checked="checked" style="z-index:1;"/>
-              <label for="radio2" class="css-label radGroup1">2 joueurs</label>
-            </td>
-            <td>
-              <input type="radio" name="radiog_lite" id="radio3" class="css-checkbox" style="z-index:1;"/>
-              <label for="radio3" class="css-label radGroup1">3 joueurs</label>
-            </td>
-            <td>
-              <input type="radio" name="radiog_lite" id="radio4" class="css-checkbox" style="z-index:1;"/>
-              <label for="radio4" class="css-label radGroup1">4 joueurs</label>
-            </td>
-            <td>
-              <input type="radio" name="radiog_lite" id="radio5" class="css-checkbox" style="z-index:1;"/>
-              <label for="radio5" class="css-label radGroup1">5 joueurs</label>
-            </td>
-            <td>
-              <input type="radio" name="radiog_lite" id="radio6" class="css-checkbox" style="z-index:1;"/>
-              <label for="radio6" class="css-label radGroup1">6 joueurs</label>
-            </td>
-          </tr>
-        </table>
-        <section class="portfolio-experiment" style="z-index:-1000;">
-          <a onclick="CheckSelectionNbrJoueur()">
-            <span class="text" style="font-family:bikobold;">Let's Go !</span>
-            <span class="line -right"></span>
-            <span class="line -top"></span>
-            <span class="line -left"></span>
-            <span class="line -bottom"></span>
-          </a>
-        </section>
-        <!--<p>/!\ Bug de loyer pour les compagnies Elec et Eau</p>-->
-      </div>
+<body>
 
-      <div class="Lobby" style="display:none;">
-        <h1>Selectionnez votre Pion (Pour l'instant indisponible) et votre pseudo :</h1>
-        <div class="LobbyJoueur" id="LobbyJoueur1" style="display:none;">
-          <input type="text" id="InputPseudoJoueur1" value="Joueur 1">
+
+	<div id="Menu">
+		<h1 >Monopoly 1.1</h1>
+		<div id="Radio">
+      <input type="radio" name="radioJoueur" id="radio2" class="checkbox"checked="checked"/>
+      <label for="radio2" class="LabelRadio">2 joueurs</label>
+      <input type="radio" name="radioJoueur" id="radio3" class="checkbox"/>
+      <label for="radio3" class="LabelRadio">3 joueurs</label>
+      <input type="radio" name="radioJoueur" id="radio4" class="checkbox"/>
+      <label for="radio4" class="LabelRadio">4 joueurs</label>
+      <input type="radio" name="radioJoueur" id="radio5" class="checkbox"/>
+      <label for="radio5" class="LabelRadio">5 joueurs</label>
+      <input type="radio" name="radioJoueur" id="radio6" class="checkbox"/>
+      <label for="radio6" class="LabelRadio">6 joueurs</label> 
+    </div>
+    <section class="portfolio-experiment" id="BoutonMenu">
+      <a onclick="GoToLobby()">
+        <span class="text">Let's Go !</span>
+        <span class="line -right"></span>
+        <span class="line -top"></span>
+        <span class="line -left"></span>
+        <span class="line -bottom"></span>
+      </a>
+    </section>
+	</div>
+
+	<div id="Lobby">
+    <h1 id="h1Lobby">Sélection de couleur et de pseudo</h1>
+    <div class="Player-Container" id="Lobby1">
+        <input type="text" id="Lobby-Input1" placeholder="Joueur 1 " class="Lobby-Input">
+        <div class="Btn-Avatar">
+            <button onclick="ChooseColor(1, false)">Précédent</button>
+            <button onclick="ChooseColor(1, true)">Suivant</button>
         </div>
-        <div class="LobbyJoueur" id="LobbyJoueur2" style="display:none;">
-          <input type="text" id="InputPseudoJoueur2" value="Joueur 2">
+    </div>
+    <div class="Player-Container" id="Lobby2">
+        <input type="text" id="Lobby-Input2" placeholder="Joueur 2 " class="Lobby-Input">
+        <div class="Btn-Avatar">
+            <button onclick="ChooseColor(2, false)">Précédent</button>
+            <button onclick="ChooseColor(2, true)">Suivant</button>
         </div>
-        <div class="LobbyJoueur" id="LobbyJoueur3" style="display:none;">
-          <input type="text" id="InputPseudoJoueur3" value="Joueur 3">
+    </div>
+    <div class="Player-Container" id="Lobby3">
+        <input type="text" id="Lobby-Input3" placeholder="Joueur 3 " class="Lobby-Input">
+        <div class="Btn-Avatar">
+            <button onclick="ChooseColor(3, false)">Précédent</button>
+            <button onclick="ChooseColor(3, true)">Suivant</button>
         </div>
-        <div class="LobbyJoueur" id="LobbyJoueur4" style="display:none;">
-          <input type="text" id="InputPseudoJoueur4" value="Joueur 4">
+    </div>
+    <div class="Player-Container" id="Lobby4">
+        <input type="text" id="Lobby-Input4" placeholder="Joueur 4 " class="Lobby-Input">
+        <div class="Btn-Avatar">
+            <button onclick="ChooseColor(4, false)">Précédent</button>
+            <button onclick="ChooseColor(4, true)">Suivant</button>
         </div>
-        <div class="LobbyJoueur" id="LobbyJoueur5" style="display:none;">
-          <input type="text" id="InputPseudoJoueur5" value="Joueur 5">
+    </div>
+    <div class="Player-Container" id="Lobby5">
+        <input type="text" id="Lobby-Input5" placeholder="Joueur 5 " class="Lobby-Input">
+        <div class="Btn-Avatar">
+            <button onclick="ChooseColor(5, false)">Précédent</button>
+            <button onclick="ChooseColor(5, true)">Suivant</button>
         </div>
-        <div class="LobbyJoueur" id="LobbyJoueur6" style="display:none;">
-          <input type="text" id="InputPseudoJoueur6" value="Joueur 6">
+    </div>
+    <div class="Player-Container" id="Lobby6">
+        <input type="text" id="Lobby-Input6" placeholder="Joueur 6 " class="Lobby-Input">
+        <div class="Btn-Avatar">
+            <button onclick="ChooseColor(6, false)">Précédent</button>
+            <button onclick="ChooseColor(6, true)">Suivant</button>
         </div>
-        <button type="button" id="DémarrageButton" onclick="PassageMenuToTableDeJeu()">C'est parti !</button>
+    </div>
+    <section class="portfolio-experiment" id="BoutonLobby">
+      <a onclick="GoToJeu()">
+        <span class="text">Lancer la partie !</span>
+        <span class="line -right"></span>
+        <span class="line -top"></span>
+        <span class="line -left"></span>
+        <span class="line -bottom"></span>
+      </a>
+    </section>
+  </div>
+
+	<div id="Jeu">
+    <!--<div id="cursor"></div>-->
+    <div id="InfoPartieA">
+      <a onclick="OpenPossessions(1)">
+        <div class="InformationJoueur" id="Joueur1">
+          <p id="Pseudo1" class="Pseudos"></p>
+          <p id="Argent1" class="Argent"></p>
+        </div> 
+      </a>
+      <a onclick="OpenPossessions(3)">
+        <div class="InformationJoueur" id="Joueur3">
+          <p id="Pseudo3" class="Pseudos"></p>
+          <p id="Argent3" class="Argent"></p>
+        </div>
+      </a>
+      <a onclick="OpenPossessions(5)">
+        <div class="InformationJoueur" id="Joueur5">
+          <p id="Pseudo5" class="Pseudos"></p>
+          <p id="Argent5" class="Argent"></p>
+        </div>
+      </a>
+    </div>
+   
+    <div id="Plateau">
+      <canvas width="650px" height="650px" id="canvas">
+        <p>Si vous ne voyez pas le canvas il y a un problème</p>
+      </canvas>
+  </div>
+    <!--<div class="Div-Dice">
+      <a onclick="RollDice(1,7,8)" id="BtnRoll"><img src="src/media/de/roll.svg" alt="Lancer les dés" title="Lance les dés !" style="width: 150px; height: 150px;"></a>
+      <div>
+        <div class="Img-Dice"></div>
       </div>
+      <span id="DoubleDe"></span>
+      <button onclick="NextTurn()" id="ValiderTour">Valider le tour</button>
+    </div>-->
+
+    <div id="InfoPartieB">
+      <a onclick="OpenPossessions(2)">
+        <div class="InformationJoueur" id="Joueur2">
+          <p id="Pseudo2" class="Pseudos"></p>
+          <p id="Argent2" class="Argent"></p>
+        </div>
+      </a>
+      <a onclick="OpenPossessions(4)">
+        <div class="InformationJoueur" id="Joueur4">
+          <p id="Pseudo4" class="Pseudos"></p>
+          <p id="Argent4" class="Argent"></p>
+        </div>
+      </a>
+      <a onclick="OpenPossessions(6)">
+        <div class="InformationJoueur" id="Joueur6">
+          <p id="Pseudo6" class="Pseudos"></p>
+          <p id="Argent6" class="Argent"></p>
+        </div>
+      </a>
     </div>
 
-
-
-  <!-- PARTIE DU JEU AVEC PLATEAU ET DIFFERENTES DIV CACHEES POUR LE FONCTIONNEMENT DE LA PARTIE -------->
-    <div class="TableDeJeu" style="display:none;">
-    <!-- DIV NON CACHEES -------->
-        <div class="Plateau">
-          <img src="src/media/template_plateau-lanczos3.png" alt="Plateau du Jeu" id="ImgPlateauDuJeu">
-        </div>
-
-        <div class="De">
-          <button type="button" class="buttonLancerDeDe" onclick="LancerDeDes(1,7,8)">
-            <img src="src/media/de.png" alt="Lancer les dés">
-          </button>
-          <p class="ResultatTirageDe"></p>
-          <span class="DoubleDe"></span>
-        </div>
-        <span id="PartieA">
-          <a onclick="AffichagePossessionsJoueurs(1)" style="cursor: pointer;" class="EspaceJoueur">
-          <div id="InformationJoueur1" style="display:none;">
-            <p id="PseudoJoueur1">Joueur 1 :</p>
-            <p id="ArgentJoueur1"></p>
-          </div>
-          <div id="PossessionsJoueur1" class="PossessionsJoueurs">
-          </div>
-          </a>
-          <a onclick="AffichagePossessionsJoueurs(2)" style="cursor: pointer;" class="EspaceJoueur">
-          <div id="InformationJoueur2" style="display:none;">
-            <p id="PseudoJoueur2">Joueur 2 :</p>
-            <p id="ArgentJoueur2"></p>
-          </div>
-          <div id="PossessionsJoueur2" class="PossessionsJoueurs">
-          </div>
-          </a>
-        </span>
-        <span id="PartieB">
-          <a onclick="AffichagePossessionsJoueurs(3)" style="cursor: pointer;" class="EspaceJoueur">
-          <div id="InformationJoueur3" style="display:none;">
-            <p id="PseudoJoueur3">Joueur 3 :</p>
-            <p id="ArgentJoueur3"></p>
-          </div>
-          <div id="PossessionsJoueur3" class="PossessionsJoueurs">
-          </div>
-        </a>
-        <a onclick="AffichagePossessionsJoueurs(4)" style="cursor: pointer;" class="EspaceJoueur">
-          <div id="InformationJoueur4" style="display:none;">
-            <p id="PseudoJoueur4">Joueur 4 :</p>
-            <p id="ArgentJoueur4"></p>
-          </div>
-          <div id="PossessionsJoueur4" class="PossessionsJoueurs">
-          </div>
-        </a>
-        </span>
-        
-        <span id="PartieC">
-          <a onclick="AffichagePossessionsJoueurs(5)" style="cursor: pointer;" class="EspaceJoueur">
-            <div id="InformationJoueur5" style="display:none;">
-              <p id="PseudoJoueur5">Joueur 5 :</p>
-              <p id="ArgentJoueur5"></p>
-            </div>
-            <div id="PossessionsJoueur5" class="PossessionsJoueurs">
-            </div>
-          </a>
-          <a onclick="AffichagePossessionsJoueurs(6)" style="cursor: pointer;" class="EspaceJoueur">
-            <div id="InformationJoueur6"  style="display:none;">
-              <p id="PseudoJoueur6">Joueur 6 :</p>
-              <p id="ArgentJoueur6"></p>
-            </div>
-            <div id="PossessionsJoueur6" class="PossessionsJoueurs">
-            </div>
-          </a>
-        </span>
-        <button onclick="TEST()">TEST</button>
-  
-    <!-- DIV CACHEES -------->
-      <div class="FondGris" style="display: none; z-index: 5; width: 100%;height: 100%; background-color: black;">
-        
-      </div>
-      <div class="PropositionAchat" style="z-index:6; display:none; background: white;color:black;" >
-          <span>Voulez-vous acheter <em id="EMAchat1"></em> d'une valeur de <em id="EMAchat2"></em> Francs ?</span>
-          <button type="button" id="buttonAchat" onclick="AchatPropriété()">J'achète !</button>
-          <button type="button" id="buttonRefusAchat" onclick="RefusAchatPropriété()">Je refuse</button>
-        </div>
-      <div class="ValiderLeTour" style="display:none;">
-        <button type="button" name="button" onclick="ChangementDeTour()">Valider Le Tour</button>
-      </div>
-
+    <!-- Partie des div cachées -->
+    <div id="BackgroundPop" onclick="ClosePop()"></div>
+    <div id="BuyDiv">
+      <p id="ContentBuyDiv"></p>
+      <span>
+        <button id="BuyButton" onclick="Buy(true)">Acheter</button>
+        <button id="NoBuyButton" onclick="Buy(false)">Ne pas acheter</button>
+      </span>
+    </div>
+    <div id="PossessionsDiv"></div>
+    <div id="CarteCommunaute">
+      <p id="ContentCommunaute">Payez une amende de 1000 Francs ou tirer une carte chance</p>
+      <span>
+        <button id="CarteChanceButton" onclick="Chance(-1)">Tirer une carte chance</button>
+        <button id="AmendeButton" onclick="Chance(1)">Payer 1000 €</button>
+      </span>
+    </div>
+    <div id="JailDiv">
+      <button id="BoutonLibeCarte" onclick="Jail(false,3)">Utiliser ma carte</button>
+      <button id="BoutonCaution" onclick="Jail(false,2)">Payer la caution de 5000 €</button>
+    </div>
+   
   </div>
-    <script src="src/lib/script.js" charset="utf-8"></script>
-  </body>
+
+
+
+
+
+  <div class="Div-All"> <!-- Onglet Paramètres -->
+    <div class="Div-Btn">
+        <button onclick="ShowHideOnglet()" id="Btn">
+            <img src="src/media/btn/up-arrow.svg" alt="Flèche vers le haut" style="height: 20px; width: 20px;" id="Img-Btn">
+        </button>
+    </div>
+    <div class="Div-Obj">
+      <a onclick="GestionAudio(true)"><img id="Btn-Ambient" src="src/media/btn/speaker.svg" alt="AmbientButton" title="Activer/Désactiver le son" style="width: 50px; height: 50px;"></a>
+      <a onclick="GestionAudio(false)"><img id="Btn-Music" src="src/media/btn/music.svg" alt="MusicButton" title="Activer/Désactiver la musique" style="width: 75px; height: 75px;"></a>
+      <a onclick="Quit()" id="Btn-Quit" style="display:none;"><img src="src/media/btn/remove.svg" alt="QuitButton" title="Quitter la partie" style="width: 75px; height: 75px;"></a>
+    </div>
+</div>
+<script src="src/lib/script.js"></script>
+</body>
 </html>
