@@ -3,7 +3,47 @@
         {
             "id": 0,
             "sentence": "Allez en prison. Avancez tout droit en prison. Ne passez pas par la case départ",
-            "command": "alert(\"Hello\")"
+            "command": "alert(\"Hello from la 1 carte\")"
+        },
+        {
+            "id": 1,
+            "sentence": "Faites des réparations dans toutes vos maisons. Versez pour chaque maison 2500 Francs. Versez pour chaque hôtel 10000 Francs",
+            "command":"alert(\"Hello from la 2 carte\")"
+        },
+        {
+            "id": 2,
+            "sentence": "Votre immeuble et votre prêt vous rapportent. Vous touchez 15000 Francs",
+            "command":"alert(\"Hello from la 3 carte\")"
+        },
+        {
+            "id": 3,
+            "sentence": "Avancez jusqu'à la case départ",
+            "command":"alert(\"Hello from la 4 carte\")"
+        },
+        {
+            "id": 4,
+            "sentence": "Reculez de trois cases",
+            "command":"alert(\"Hello from la 5 carte\")"
+        },
+        {
+            "id": 5,
+            "sentence": "Rendez vous Rue de La Paix",
+            "command":"alert(\"Hello from la 6 carte\")"
+        },
+        {
+            "id": 6,
+            "sentence": "Allez à la gare de Lyon",
+            "command":"alert(\"Hello from la 7 carte\")"
+        },
+        {
+            "id": 7,
+            "sentence": "Vous êtes libéré de prison. Cette carte peut être conservée",
+            "command":"alert(\"Hello from la 7 carte\")"
+        },
+        {
+            "id": 8,
+            "sentence": "Amende pour excès de vitesse 1500 Francs",
+            "command":"alert(\"Hello from la 9 carte\")"
         }
     ]
 }
