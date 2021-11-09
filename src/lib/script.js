@@ -1,4 +1,4 @@
-//import {aQuiLeTour, plateau, nomCases, prixPropriétés, maisons, loyer} from "./stockage.js";
+
  var aQuiLeTour = 1;
  var plateau = new Array(null,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39);
  var nomCases = new Array(null,"Case départ","Boulevard de Belleville","Caisse de communauté","Rue Lecourbe","Impôts sur le revenu","Gare Montparnasse","Rue de Vaugirard","Chance","Rue de Courcelles","Avenue de la République","Prison","Boulevard de la Villette","Compagnie de distribution d'électricité","Avenue de Neuilly","Rue de Paradis","Gare de Lyon","Avenue Mozart","Caisse de communauté","Boulevard Saint-Michel","Place Pigalle","Parc Gratuit","Avenue Matignon","Chance","Boulevard Malesherbes","Avenue Henri-Martin","Gare du Nord","Faubourg Saint-Honoré","Place de la Bourse","Compagnie de distribution des eaux","Rue la Fayette","Allez en prison","Avenue de Breuteuil","Avenue Foch","Caisse de communauté","Boulevard des Capucines","Gare Saint-Lazare","Chance","Avenue des Champs-Elysées","Taxe de luxe","Rue de la Paix");
@@ -426,7 +426,7 @@ function Special() {
 
 
 
-
+/*
 window.Chance = Chance;
 function Chance(test) {
   ClosePop();
@@ -555,7 +555,7 @@ function Chance(test) {
   }
   RefreshMoney();
   backPop.attr('onclick', "ClosePop()");
-}
+}*/
 
 window.Communaute = Communaute;
 function Communaute() {
