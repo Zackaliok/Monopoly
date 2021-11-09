@@ -1,0 +1,403 @@
+{
+    "cases" : [
+        {
+            "id": 1,
+            "name": "Départ",
+            "buyable": false,
+            "price": 0,
+            "rent": [
+                
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Boulevard de Belleville",
+            "buyable": true,
+            "price": 6000,
+            "rent": [
+                200,400,1000,3000,9000,16000,25000
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Caisse de communauté",
+            "buyable": false,
+            "price": 0,
+            "rent": [
+
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Rue Lecourbe",
+            "buyable": true,
+            "price": 6000,
+            "rent": [
+                400,800,2000,6000,18000,32000,45000
+            ]
+        },
+
+        {
+            "id": 5,
+            "name": "Impôt sur le revenu",
+            "buyable": false,
+            "price": 20000,
+            "rent": [
+                
+            ]
+        },
+
+        {
+            "id": 6,
+            "name": "Gare Montparnasse",
+            "buyable": true,
+            "price": 20000,
+            "rent": [
+                2500,5000,10000,20000
+            ]
+        },
+
+        {
+            "id": 7,
+            "name": "Rue de Vaugirard",
+            "buyable": true,
+            "price": 10000,
+            "rent": [
+                600,1200,3000,9000,27000,40000,55000
+            ]
+        },
+
+        {
+            "id": 8,
+            "name": "Rue de Courcelles",
+            "buyable": true,
+            "price": 10000,
+            "rent": [
+                600,1200,3000,9000,27000,40000,55000
+            ]
+        },
+
+        {
+            "id": 9,
+            "name": "Chance",
+            "buyable": false,
+            "price": 0,
+            "rent": [
+                
+            ]
+        },
+
+        {
+            "id": 10,
+            "name": "Avenue de la République",
+            "buyable": true,
+            "price": 10000,
+            "rent": [
+                800,1600,4000,10000,30000,45000,60000
+            ]
+        },
+        {
+            "id": 11,
+            "name": "En prison",
+            "buyable": false,
+            "price": 5000,
+            "rent": [
+                
+            ]
+        },
+
+        {
+            "id": 12,
+            "name": "Boulevard de la Villette",
+            "buyable": true,
+            "price": 14000,
+            "rent": [
+                1000,2000,5000,15000,45000,62500,75000
+            ]
+        },
+
+        
+
+        {
+            "id": 13,
+            "name": "Compagnie d'électricité",
+            "buyable": true,
+            "price": 15000,
+            "rent": [
+                400, 1000
+            ]
+        },
+
+        {
+            "id": 14,
+            "name": "Avenue de Neuilly",
+            "buyable": true,
+            "price": 14000,
+            "rent": [
+                1000,2000,5000,15000,45000,62500,75000
+            ]
+        },
+
+        {
+            "id": 15,
+            "name": "Rue de Paradis",
+            "buyable": true,
+            "price": 16000,
+            "rent": [
+                1200,2400,6000,18000,50000,70000,90000
+            ]
+        },
+
+        {
+            "id": 16,
+            "name": "Gare de Lyon",
+            "buyable": true,
+            "price": 20000,
+            "rent": [
+                2500,5000,10000,20000
+            ]
+        },
+
+        {
+            "id": 17,
+            "name": "Avenue Mozart",
+            "buyable": true,
+            "price": 18000,
+            "rent": [
+                1400,2800,7000,20000,55000,75000,95000
+            ]
+        },
+
+        {
+            "id": 18,
+            "name": "Caisse de communauté",
+            "buyable": false,
+            "price": 0,
+            "rent": [
+                
+            ]
+        },
+
+        {
+            "id": 19,
+            "name": "Boulevard Saint-Michel",
+            "buyable": true,
+            "price": 18000,
+            "rent": [
+                1400,2800,7000,20000,55000,75000,95000
+            ]
+        },
+
+        {
+            "id": 20,
+            "name": "Place Pigalle",
+            "buyable": true,
+            "price": 20000,
+            "rent": [
+                1600,3200,8000,22000,60000,80000,100000
+            ]
+        },
+
+        {
+            "id": 21,
+            "name": "Parc Gratuit",
+            "buyable": false,
+            "price": 0,
+            "rent": [
+                
+            ]
+        },
+
+        {
+            "id": 22,
+            "name": "Avenue Matignon",
+            "buyable": true,
+            "price": 22000,
+            "rent": [
+                1800,3600,9000,25000,70000,87500,105000
+            ]
+        },
+
+        {
+            "id": 23,
+            "name": "Chance",
+            "buyable": false,
+            "price": 0,
+            "rent": [
+                
+            ]
+        },
+
+        {
+            "id": 24,
+            "name": "Boulevard Malesherbes",
+            "buyable": true,
+            "price": 22000,
+            "rent": [
+                1800,3600,9000,25000,70000,87500,105000
+            ]
+        },
+
+        {
+            "id": 25,
+            "name": "Avenue Henri-Martin",
+            "buyable": true,
+            "price": 24000,
+            "rent": [
+                2000,4000,10000,30000,75000,92500,110000
+            ]
+        },
+
+        {
+            "id": 26,
+            "name": "Gare du Nord",
+            "buyable": true,
+            "price": 20000,
+            "rent": [
+                2500,5000,10000,20000
+            ]
+        },
+
+        {
+            "id": 27,
+            "name": "Faubourg Saint-Honoré",
+            "buyable": true,
+            "price": 26000,
+            "rent": [
+                2200,4400,11000,33000,80000,97500,115000
+            ]
+        },
+
+        {
+            "id": 28,
+            "name": "Place de la Bourse",
+            "buyable": true,
+            "price": 26000,
+            "rent": [
+                2200,4400,11000,33000,80000,97500,115000
+            ]
+        },
+
+        {
+            "id": 29,
+            "name": "Compagnie des eaux",
+            "buyable": true,
+            "price": 15000,
+            "rent": [
+                400, 1000
+            ]
+        },
+
+        {
+            "id": 30,
+            "name": "Rue la Fayette",
+            "buyable": true,
+            "price": 28000,
+            "rent": [
+                2400,4800,12000,36000,85000,102500,120000
+            ]
+        },
+
+        {
+            "id": 31,
+            "name": "Allez en Prison",
+            "buyable": false,
+            "price": 0,
+            "rent": [
+                
+            ]
+        },
+
+        {
+            "id": 32,
+            "name": "Avenue de Breteuil",
+            "buyable": true,
+            "price": 30000,
+            "rent": [
+                2600,5200,13000,39000,90000,110000,127500
+            ]
+        },
+
+        {
+            "id": 33,
+            "name": "Avenue Foch",
+            "buyable": true,
+            "price": 30000,
+            "rent": [
+                2600,5200,13000,39000,90000,110000,127500
+            ]
+        },
+
+        {
+            "id": 34,
+            "name": "Caisse de communauté",
+            "buyable": false,
+            "price": 0,
+            "rent": [
+                
+            ]
+        },
+
+        {
+            "id": 35,
+            "name": "Boulevard des Capucines",
+            "buyable": true,
+            "price": 32000,
+            "rent": [
+                2800,5600,15000,45000,100000,120000,140000 
+            ]
+        },
+
+        {
+            "id": 36,
+            "name": "Gare Saint-Lazare",
+            "buyable": true,
+            "price": 20000,
+            "rent": [
+                2500,5000,10000,20000
+            ]
+        },
+
+        {
+            "id": 36,
+            "name": "Chance",
+            "buyable": false,
+            "price": 0,
+            "rent": [
+                
+            ]
+        },
+
+        {
+            "id": 37,
+            "name": "Avenue des Champs-Élysées",
+            "buyable": true,
+            "price": 35000,
+            "rent": [
+                3500,7000,17500,50000,11000,130000,150000
+            ]
+        },
+
+        {
+            "id": 38,
+            "name": "Taxe de luxe",
+            "buyable": false,
+            "price": 10000,
+            "rent": [
+                
+            ]
+        },
+
+        {
+            "id": 39,
+            "name": "Rue de la Paix",
+            "buyable": true,
+            "price": 40000,
+            "rent": [
+                5000,10000,20000,60000,140000,170000,200000
+            ]
+        }
+
+
+    ]
+}
