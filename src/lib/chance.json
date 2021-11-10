@@ -44,6 +44,42 @@
             "id": 8,
             "sentence": "Amende pour excès de vitesse 1500 Francs",
             "command":"alert(\"Hello from la 9 carte\")"
+        }, 
+        {
+            "id": 9,
+            "sentence": "La Banque vous verse un dividende de 5000 Francs",
+            "command":"alert(\"Hello from la 10 carte\")"
+        },
+        {
+            "id": 10,
+            "sentence": "Avancez au Boulevard de la Villette",
+            "command":"alert(\"Hello from la 11 carte\")"
+        },
+        {
+            "id": 11,
+            "sentence": "Rendez vous à l'Avenue Henri-Martin",
+            "command":"alert(\"Hello from la 12 carte\")"
+        },
+        {
+            "id": 12,
+            "sentence": "Payez pour frais de scolarité 15000 Francs",
+            "command":"alert(\"Hello from la 13 carte\")"
+        },
+        {
+            "id": 13,
+            "sentence": "Vous avez gagné le prix de mots croisés. Recevez 10000 Francs",
+            "command":"alert(\"Hello from la 14 carte\")"
+        },
+        {
+            "id": 14,
+            "sentence": "Vous êtes imposé pour les réparations de voirie à raison de : 4000 Francs par maison et 11500 Francs par hôtel",
+            "command":"alert(\"Hello from la 15 carte\")"
+        },
+        {
+            "id": 15,
+            "sentence": "Amende pour ivresse 2000 Francs",
+            "command":"alert(\"Hello from la 16 carte\")"
         }
+
     ]
 }

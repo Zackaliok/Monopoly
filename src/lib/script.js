@@ -1,8 +1,7 @@
-
- var aQuiLeTour = 1;
- var plateau = new Array(null,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39);
- var nomCases = new Array(null,"Case départ","Boulevard de Belleville","Caisse de communauté","Rue Lecourbe","Impôts sur le revenu","Gare Montparnasse","Rue de Vaugirard","Chance","Rue de Courcelles","Avenue de la République","Prison","Boulevard de la Villette","Compagnie de distribution d'électricité","Avenue de Neuilly","Rue de Paradis","Gare de Lyon","Avenue Mozart","Caisse de communauté","Boulevard Saint-Michel","Place Pigalle","Parc Gratuit","Avenue Matignon","Chance","Boulevard Malesherbes","Avenue Henri-Martin","Gare du Nord","Faubourg Saint-Honoré","Place de la Bourse","Compagnie de distribution des eaux","Rue la Fayette","Allez en prison","Avenue de Breuteuil","Avenue Foch","Caisse de communauté","Boulevard des Capucines","Gare Saint-Lazare","Chance","Avenue des Champs-Elysées","Taxe de luxe","Rue de la Paix");
- var maisons = new Array(null,null,0,null,0,null,0,0,null,0,0,null,0,0,0,0,0,0,null,0,0,null,0,null,0,0,0,0,0,0,0,null,0,0,null,0,0,null,0,null,0);
+var aQuiLeTour = 1;
+var plateau = new Array(null,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39);
+var nomCases = new Array(null,"Case départ","Boulevard de Belleville","Caisse de communauté","Rue Lecourbe","Impôts sur le revenu","Gare Montparnasse","Rue de Vaugirard","Chance","Rue de Courcelles","Avenue de la République","Prison","Boulevard de la Villette","Compagnie de distribution d'électricité","Avenue de Neuilly","Rue de Paradis","Gare de Lyon","Avenue Mozart","Caisse de communauté","Boulevard Saint-Michel","Place Pigalle","Parc Gratuit","Avenue Matignon","Chance","Boulevard Malesherbes","Avenue Henri-Martin","Gare du Nord","Faubourg Saint-Honoré","Place de la Bourse","Compagnie de distribution des eaux","Rue la Fayette","Allez en prison","Avenue de Breuteuil","Avenue Foch","Caisse de communauté","Boulevard des Capucines","Gare Saint-Lazare","Chance","Avenue des Champs-Elysées","Taxe de luxe","Rue de la Paix");
+var maisons = new Array(null,null,0,null,0,null,0,0,null,0,0,null,0,0,0,0,0,0,null,0,0,null,0,null,0,0,0,0,0,0,0,null,0,0,null,0,0,null,0,null,0);
  
 
  /* Cases array importation */
@@ -25,13 +24,11 @@ $.getJSON("src/lib/cases.json", function (data) {
 
 
 
+
+
 var communaute = new Array(null,"Vous êtes libéré de prison. Cette carte peut être conservée.","C'est votre anniversaire : Chaque joueurs doit vous donner 1000 Francs.","Erreur de la Banque en votre faveur. Recevez 20000 Francs","Allez en prison. Avancez tout droit en prison. Ne passez pas par la case départ","Recevez votre intérêt sur l'emprunt à 7% : 2500 Francs","Vous héritez 10000 Francs","Payez une amende de 1000 Francs ou tirer une carte chance","Les contributions vous remboursent la somme de 2000 Francs","Payez votre Police d'Assurance s'élevant à 5000 Francs","La vente de votre stock vous rapporte 5000 Francs","Retournez à Belleville","Vous avez gagné le deuxième prix de beauté. Recevez 1000 Francs","Placez vous sur la case départ","Recevez votre revenu annuel 10000 Francs","Payez la note du Médecin 5000 Francs","Payez à l'Hôpital 10000 Francs");
-var chance = new Array(null,"Allez en prison. Avancez tout droit en prison. Ne passez pas par la case départ","Faites des réparations dans toutes vos maisons. Versez pour chaque maison 2500 Francs. Versez pour chaque hôtel 10000 Francs","Votre immeuble et votre prêt vous rapportent. Vous touchez 15000 Francs","Avancez jusqu'à la case départ","Reculez de trois cases","Rendez vous Rue de La Paix","Allez à la gare de Lyon","Vous êtes libéré de prison. Cette carte peut être conservée","Amende pour excès de vitesse 1500 Francs","La Banque vous verse un dividende de 5000 Francs","Avancez au Boulevard de la Villette","Rendez vous à l'Avenue Henri-Martin","Payez pour frais de scolarité 15000 Francs","Vous avez gagné le prix de mots croisés. Recevez 10000 Francs","Vous êtes imposé pour les réparations de voirie à raison de : 4000 Francs par maison et 11500 Francs par hôtel","Amende pour ivresse 2000 Francs");
+//var chance = new Array(null,"Allez en prison. Avancez tout droit en prison. Ne passez pas par la case départ","Faites des réparations dans toutes vos maisons. Versez pour chaque maison 2500 Francs. Versez pour chaque hôtel 10000 Francs","Votre immeuble et votre prêt vous rapportent. Vous touchez 15000 Francs","Avancez jusqu'à la case départ","Reculez de trois cases","Rendez vous Rue de La Paix","Allez à la gare de Lyon","Vous êtes libéré de prison. Cette carte peut être conservée","Amende pour excès de vitesse 1500 Francs","La Banque vous verse un dividende de 5000 Francs","Avancez au Boulevard de la Villette","Rendez vous à l'Avenue Henri-Martin","Payez pour frais de scolarité 15000 Francs","Vous avez gagné le prix de mots croisés. Recevez 10000 Francs","Vous êtes imposé pour les réparations de voirie à raison de : 4000 Francs par maison et 11500 Francs par hôtel","Amende pour ivresse 2000 Francs");
 //console.log("🚀 ~ file: script.js ~ line 30 ~ chance", chance)
-
-//console.log(chance);
-
-
 
 
 var parcGratuit = null;
@@ -53,7 +50,7 @@ var nbrJoueur = null,
   libérable = new Array(null, false,false,false,false,false,false),
   nbrToursPrison = 0;
   
-
+/*
 var pseudos = new Array(),
     avatar = new Array(null)
     argent = new Array(null,200000,200000,200000,200000,200000,200000),
@@ -65,7 +62,7 @@ possessions[2] = new Array();
 possessions[3] = new Array();
 possessions[4] = new Array();
 possessions[5] = new Array();
-possessions[6] = new Array();
+possessions[6] = new Array();*/
 
 
 /* Initialisation de la Page */
@@ -93,30 +90,35 @@ function GoToLobby() {
 			nbrJoueur = i;
 		}
 	}
-	for (var i = 1; i <= nbrJoueur; i++) {
+	for (var i = 0; i < nbrJoueur; i++) {
 		$("#Lobby"+i).show();
+    let player = new Player(i);
+    listeDesJoueurs.push(player);
 	}
 	menu.hide();
 	lobby.show();
 	console.log("Accès au lobby avec " + nbrJoueur + " joueurs.");
 }
 
+var listeDesJoueurs = new Array();
 
 window.GoToJeu = GoToJeu;
 function GoToJeu() {
 	lobby.hide();
 	jeu.show();
   chanceLoading();
-	for (var i = 1; i <= nbrJoueur; i++) {
-		pseudos[i]= document.querySelector("#Lobby-Input"+i).value;
-		$("#Pseudo"+i).html(pseudos[i]);
-		$("#Argent"+i).html(argent[i]);
+	for (var i = 0; i < nbrJoueur; i++) {
+    let player = listeDesJoueurs[i];
+    player.setName($("#Lobby-Input"+i).value);
+
+    $("#Pseudo"+i).html(player.getName());
+    $("#Argent"+i).html(player.getMoney());
     $("#Joueur"+i).show();
-    document.querySelector('#Joueur'+i).style.backgroundColor = colors[playerColors[i]];
+    document.querySelector('#Joueur'+i).style.backgroundColor = player.getAvatar();
+    
 	}
   document.querySelector("#Joueur1").style.border="1px solid red";
   document.querySelector('#Btn-Quit').style.display="block";
-	console.log(pseudos);
 	console.log("Lancement de la partie.")
 }
 
@@ -255,10 +257,6 @@ function Jail(type, moyen) {// true = Mise en prison       false = Sortie de pri
   }
 }
 
-
-
-
-
 //const cursor = document.querySelector("#cursor");
 
 //document.addEventListener('mousemove', e => {
@@ -266,45 +264,6 @@ function Jail(type, moyen) {// true = Mise en prison       false = Sortie de pri
   //cursor.setAttribute("style", "top:"+(e.pageY -5)+"px; left:"+(e.pageX -5)+"px;");
 
 //})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function BuyPopup() {
@@ -626,70 +585,7 @@ function Communaute() {
 
 
 
-/* Script pour afficher les paramètres */
-var displayOnglet = false;
-var img = document.querySelector('#Img-Btn');
-var divObj = document.querySelector('.Div-Obj');
-var divAll = document.querySelector('.Div-All');
 
-window.ShowHideOnglet = ShowHideOnglet;
-  function ShowHideOnglet() {
-      if (displayOnglet == true) {
-          console.log('Paramètres Dissimulés');
-          displayOnglet = false;
-          img.src="src/media/btn/up-arrow.svg";
-          divAll.style.bottom="5px";
-          divAll.style.height="20px";
-          divObj.style.display="none"; 
-      }   else {
-          console.log('Paramètres Affichés');
-          displayOnglet = true;
-          img.src="src/media/btn/down-arrow.svg";
-          divAll.style.bottom="0px";
-          divAll.style.height="25%";
-          divObj.style.display="flex";
-      }
-  }
-/* Script pour l'audio */
-var music = new Audio("src/media/music/Monopoly Song Freeway 1.mp3"),
-    btnMusic = document.querySelector('#Btn-Music'),
-    btnAmbient = document.querySelector('#Btn-Ambient'),
-    ambient = new Audio("src/media/de/de_lance_1.mp3");
-    //music.play();
-
-    music.setAttribute("loop", "true") // On rend la musique "infinissable"
-
-window.GestionAudio = GestionAudio;
-function GestionAudio(type) { // True = ambient  False = music
-  if (type) {
-    if (ambient.muted) {
-      ambient.muted=false;
-      btnAmbient.src="src/media/btn/speaker.svg";
-    } else {
-      ambient.muted=true;
-      btnAmbient.src="src/media/btn/mute.svg";
-    }
-  } else {
-    if (music.muted) {
-      music.muted=false;
-      btnMusic.src="src/media/btn/music.svg";
-    } else {
-      music.muted=true;
-      btnMusic.src="src/media/btn/music-mute.svg";
-    }
-  }
-  
-}
-
-window.Quit = Quit;
-
-function Quit() {
-  console.log("Voulez-vous vraiment quitter la partie ?");
-  jeu.hide();
-  menu.show();
-  document.querySelector('#Btn-Quit').style.display="none";
-  ShowHideOnglet();
-}
 
 
 /*  Script du Canvas */
@@ -731,24 +627,38 @@ setTimeout(() => {
 
 
 /* Script Du Lobby */
-var colors = new Array(null, 'red', 'yellow', 'green', 'blue', 'magenta', 'orange');
-var playerColors = new Array(null, 1, 2, 3, 4, 5, 6);
+var colors = new Array(null, avatar.RED, avatar.YELLOW, avatar.GREEN, avatar.BLUE, avatar.MAGENTA, avatar.ORANGE); // TODO: Essayer de le supprimer
 
-for (let i = 1; i <= 6 ; i++) {
+
+for (let i = 0; i < 6 ; i++) {
   document.querySelector('#Lobby'+i).style.backgroundColor= colors[i];  //Mise en place des couleurs de base
 }
 
-function ChooseColor(player, sens) {
+function ChooseColor(playerId, sens) {
+  var playerColors = new Array(1, 2, 3, 4, 5, 6);
+  var player = listeDesJoueurs[0];
+  /*
+  for (let i = 0; i < listeDesJoueurs.length; i++) {
+    if (listeDesJoueurs[i].getId() == i) {
+      player = listeDesJoueurs[i];
+    }
+  }*/
   if (sens) { //Si Suivant
-    playerColors[player] +=1
-    if (playerColors[player]==7) {
-      playerColors[player]=1;
+    playerColors[playerId] +=1
+    if (playerColors[playerId]==7) {
+      playerColors[playerId]=1;
     }
   } else { //Si Précédent
-    playerColors[player]-=1;
-    if (playerColors[player]==0) {
-      playerColors[player]=6;
+    playerColors[playerId]-=1;
+    if (playerColors[playerId]==0) {
+      playerColors[playerId]=6;
     }
   }
-  document.querySelector('#Lobby'+player).style.backgroundColor=colors[playerColors[player]];
+
+  
+  
+  console.log("🚀 ~ file: script.js ~ line 656 ~ ChooseColor ~ player.setAvatar(colors[playerColors[playerId]]);", player.getAvatar(colors[playerColors[playerId]]))
+  //player.setAvatar(colors[playerColors[playerId]]);
+
+  document.querySelector('#Lobby'+playerId).style.backgroundColor=player.getAvatar();
 }

@@ -11,7 +11,11 @@
         src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous"></script>
-  <script src="src/lib/chance.js" type="module" defer></script>
+  <script src="src/lib/chance.js" defer></script>
+  <script src="src/lib/avatar.js" defer></script>
+  <script src="src/lib/Player.js" defer></script>
+
+  <script src="src/lib/parameters.js"></script>
   <script src="src/lib/script.js" defer></script>
 </head>
 
@@ -45,43 +49,43 @@
 
 	<div id="Lobby">
     <h1 id="h1Lobby">Sélection de couleur et de pseudo</h1>
-    <div class="Player-Container" id="Lobby1">
-        <input type="text" id="Lobby-Input1" placeholder="Joueur 1 " class="Lobby-Input">
+    <div class="Player-Container" id="Lobby0">
+        <input type="text" id="Lobby-Input0" placeholder="Joueur 1 " class="Lobby-Input">
         <div class="Btn-Avatar">
             <button onclick="ChooseColor(1, false)">Précédent</button>
             <button onclick="ChooseColor(1, true)">Suivant</button>
         </div>
     </div>
-    <div class="Player-Container" id="Lobby2">
-        <input type="text" id="Lobby-Input2" placeholder="Joueur 2 " class="Lobby-Input">
+    <div class="Player-Container" id="Lobby1">
+        <input type="text" id="Lobby-Input1" placeholder="Joueur 2 " class="Lobby-Input">
         <div class="Btn-Avatar">
             <button onclick="ChooseColor(2, false)">Précédent</button>
             <button onclick="ChooseColor(2, true)">Suivant</button>
         </div>
     </div>
-    <div class="Player-Container" id="Lobby3">
-        <input type="text" id="Lobby-Input3" placeholder="Joueur 3 " class="Lobby-Input">
+    <div class="Player-Container" id="Lobby2">
+        <input type="text" id="Lobby-Input2" placeholder="Joueur 3 " class="Lobby-Input">
         <div class="Btn-Avatar">
             <button onclick="ChooseColor(3, false)">Précédent</button>
             <button onclick="ChooseColor(3, true)">Suivant</button>
         </div>
     </div>
-    <div class="Player-Container" id="Lobby4">
-        <input type="text" id="Lobby-Input4" placeholder="Joueur 4 " class="Lobby-Input">
+    <div class="Player-Container" id="Lobby3">
+        <input type="text" id="Lobby-Input3" placeholder="Joueur 4 " class="Lobby-Input">
         <div class="Btn-Avatar">
             <button onclick="ChooseColor(4, false)">Précédent</button>
             <button onclick="ChooseColor(4, true)">Suivant</button>
         </div>
     </div>
-    <div class="Player-Container" id="Lobby5">
-        <input type="text" id="Lobby-Input5" placeholder="Joueur 5 " class="Lobby-Input">
+    <div class="Player-Container" id="Lobby4">
+        <input type="text" id="Lobby-Input4" placeholder="Joueur 5 " class="Lobby-Input">
         <div class="Btn-Avatar">
             <button onclick="ChooseColor(5, false)">Précédent</button>
             <button onclick="ChooseColor(5, true)">Suivant</button>
         </div>
     </div>
-    <div class="Player-Container" id="Lobby6">
-        <input type="text" id="Lobby-Input6" placeholder="Joueur 6 " class="Lobby-Input">
+    <div class="Player-Container" id="Lobby5">
+        <input type="text" id="Lobby-Input5" placeholder="Joueur 6 " class="Lobby-Input">
         <div class="Btn-Avatar">
             <button onclick="ChooseColor(6, false)">Précédent</button>
             <button onclick="ChooseColor(6, true)">Suivant</button>
@@ -166,6 +170,7 @@
       </span>
     </div>
     <div id="PossessionsDiv"></div>
+    <div id="CarteChance"></div>
     <div id="CarteCommunaute">
       <p id="ContentCommunaute">Payez une amende de 1000 Francs ou tirer une carte chance</p>
       <span>
