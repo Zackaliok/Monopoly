@@ -8,15 +8,14 @@ const avatar = {
     WHITE: "White"
 }
 
-
+var playerColors = new Array(0, 1, 2, 3, 4, 5);
 var colors = new Array(avatar.RED, avatar.YELLOW, avatar.GREEN, avatar.BLUE, avatar.MAGENTA, avatar.ORANGE);
 for (let i = 0; i < 6 ; i++) {
-  document.querySelector('#Lobby'+i).style.backgroundColor= colors[i];  //Mise en place des couleurs de base
+  document.querySelector('#Lobby'+i).style.backgroundColor= colors[playerColors[i]];  //Mise en place des couleurs de base
 }
 
+
 function ChooseColor(playerId, sens) {
-  var playerColors = new Array(0, 1, 2, 3, 4, 5);
-  
   for (let i = 0; i < listeDesJoueurs.length; i++) {
     if (listeDesJoueurs[i].getId() == playerId) {
       player = listeDesJoueurs[i];
