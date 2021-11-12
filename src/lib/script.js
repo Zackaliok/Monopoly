@@ -1,7 +1,6 @@
-var aQuiLeTour = 1;
-var plateau = new Array(null,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39);
-var nomCases = new Array(null,"Case départ","Boulevard de Belleville","Caisse de communauté","Rue Lecourbe","Impôts sur le revenu","Gare Montparnasse","Rue de Vaugirard","Chance","Rue de Courcelles","Avenue de la République","Prison","Boulevard de la Villette","Compagnie de distribution d'électricité","Avenue de Neuilly","Rue de Paradis","Gare de Lyon","Avenue Mozart","Caisse de communauté","Boulevard Saint-Michel","Place Pigalle","Parc Gratuit","Avenue Matignon","Chance","Boulevard Malesherbes","Avenue Henri-Martin","Gare du Nord","Faubourg Saint-Honoré","Place de la Bourse","Compagnie de distribution des eaux","Rue la Fayette","Allez en prison","Avenue de Breuteuil","Avenue Foch","Caisse de communauté","Boulevard des Capucines","Gare Saint-Lazare","Chance","Avenue des Champs-Elysées","Taxe de luxe","Rue de la Paix");
-var maisons = new Array(null,null,0,null,0,null,0,0,null,0,0,null,0,0,0,0,0,0,null,0,0,null,0,null,0,0,0,0,0,0,0,null,0,0,null,0,0,null,0,null,0);
+var aQuiLeTour = 0;
+var plateau = new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39);
+var maisons = new Array(null,0,null,0,null,0,0,null,0,0,null,0,0,0,0,0,0,null,0,0,null,0,null,0,0,0,0,0,0,0,null,0,0,null,0,0,null,0,null,0);
  
 
  /* Cases array importation */
@@ -50,27 +49,13 @@ var nbrJoueur = null,
   libérable = new Array(null, false,false,false,false,false,false),
   nbrToursPrison = 0;
   
-/*
-var pseudos = new Array(),
-    avatar = new Array(null)
-    argent = new Array(null,200000,200000,200000,200000,200000,200000),
-    autorisation = new Array(null, false, false, false, false, false, false),
-    position = new Array(null,1,1,1,1,1,1),
-    possessions = new Array();
-possessions[1] = new Array();
-possessions[2] = new Array();
-possessions[3] = new Array();
-possessions[4] = new Array();
-possessions[5] = new Array();
-possessions[6] = new Array();*/
-
 
 /* Initialisation de la Page */
 menu.show();
 lobby.hide();
 jeu.hide();
 $("#ValiderTour").hide();
-for (var i = 1; i <= 6; i++) {
+for (var i = 0; i < 6; i++) {
   $("#Joueur"+i).hide();
 	$("#Lobby"+i).hide();
 }
@@ -117,7 +102,7 @@ function GoToJeu() {
     document.querySelector('#Joueur'+i).style.backgroundColor = player.getAvatar();
     
 	}
-  document.querySelector("#Joueur1").style.border="1px solid red";
+  document.querySelector("#Joueur0").style.border="1px solid red";
   document.querySelector('#Btn-Quit').style.display="block";
 	console.log("Lancement de la partie.")
 }
@@ -204,7 +189,7 @@ function NextTurn() {
 	$("#DoubleDe").html("");
 	$("#BtnRoll").show();
 	if (aQuiLeTour==nbrJoueur) {
-      aQuiLeTour=1
+      aQuiLeTour=0
     } else {
       aQuiLeTour++;
     }
@@ -598,67 +583,3 @@ canvas.style.backgroundImage = "url('src/media/plateautest.svg')";
 //Déplacement des pions
 const pions = new Image;
 pions.src = "src/media/pions.svg";
-
-/*
-setTimeout(() => {
-  ctx.drawImage(pions, 520, 0, 130, 230, 0, 0, 42, 54); // Pion Magenta
-}, 50);
-*/
-/*
-setTimeout(() => {
-  ctx.drawImage(pions, 390, 0, 130, 230, 0, 0, 42, 54); // Pion Bleu
-}, 50);
-*/
-/*
-setTimeout(() => {
-  ctx.drawImage(pions, 260, 0, 130, 230, 0, 0, 42, 54); // Pion Vert
-}, 50);
-*/
-/*
-setTimeout(() => {
-  ctx.drawImage(pions, 130, 0, 130, 230, 0, 0, 42, 54); // Pion Jaune
-}, 50);
-*/
-/*
-setTimeout(() => {
-  ctx.drawImage(pions, 0, 0, 130, 230, 0, 0, 42, 54);   // Pion Rouge
-}, 500);
-*/
-
-
-/* Script Du Lobby */
-var colors = new Array(null, avatar.RED, avatar.YELLOW, avatar.GREEN, avatar.BLUE, avatar.MAGENTA, avatar.ORANGE); // TODO: Essayer de le supprimer
-
-
-for (let i = 0; i < 6 ; i++) {
-  document.querySelector('#Lobby'+i).style.backgroundColor= colors[i];  //Mise en place des couleurs de base
-}
-
-function ChooseColor(playerId, sens) {
-  var playerColors = new Array(1, 2, 3, 4, 5, 6);
-  var player = listeDesJoueurs[0];
-  /*
-  for (let i = 0; i < listeDesJoueurs.length; i++) {
-    if (listeDesJoueurs[i].getId() == i) {
-      player = listeDesJoueurs[i];
-    }
-  }*/
-  if (sens) { //Si Suivant
-    playerColors[playerId] +=1
-    if (playerColors[playerId]==7) {
-      playerColors[playerId]=1;
-    }
-  } else { //Si Précédent
-    playerColors[playerId]-=1;
-    if (playerColors[playerId]==0) {
-      playerColors[playerId]=6;
-    }
-  }
-
-  
-  
-  console.log("🚀 ~ file: script.js ~ line 656 ~ ChooseColor ~ player.setAvatar(colors[playerColors[playerId]]);", player.getAvatar(colors[playerColors[playerId]]))
-  //player.setAvatar(colors[playerColors[playerId]]);
-
-  document.querySelector('#Lobby'+playerId).style.backgroundColor=player.getAvatar();
-}

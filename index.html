@@ -15,7 +15,7 @@
   <script src="src/lib/avatar.js" defer></script>
   <script src="src/lib/Player.js" defer></script>
 
-  <script src="src/lib/parameters.js"></script>
+  <script src="src/lib/parameters.js" defer></script>
   <script src="src/lib/script.js" defer></script>
 </head>
 
@@ -52,43 +52,43 @@
     <div class="Player-Container" id="Lobby0">
         <input type="text" id="Lobby-Input0" placeholder="Joueur 1 " class="Lobby-Input">
         <div class="Btn-Avatar">
-            <button onclick="ChooseColor(1, false)">Précédent</button>
-            <button onclick="ChooseColor(1, true)">Suivant</button>
+            <button onclick="ChooseColor(0, false)">Précédent</button>
+            <button onclick="ChooseColor(0, true)">Suivant</button>
         </div>
     </div>
     <div class="Player-Container" id="Lobby1">
         <input type="text" id="Lobby-Input1" placeholder="Joueur 2 " class="Lobby-Input">
         <div class="Btn-Avatar">
-            <button onclick="ChooseColor(2, false)">Précédent</button>
-            <button onclick="ChooseColor(2, true)">Suivant</button>
+            <button onclick="ChooseColor(1, false)">Précédent</button>
+            <button onclick="ChooseColor(1, true)">Suivant</button>
         </div>
     </div>
     <div class="Player-Container" id="Lobby2">
         <input type="text" id="Lobby-Input2" placeholder="Joueur 3 " class="Lobby-Input">
         <div class="Btn-Avatar">
-            <button onclick="ChooseColor(3, false)">Précédent</button>
-            <button onclick="ChooseColor(3, true)">Suivant</button>
+            <button onclick="ChooseColor(2, false)">Précédent</button>
+            <button onclick="ChooseColor(2, true)">Suivant</button>
         </div>
     </div>
     <div class="Player-Container" id="Lobby3">
         <input type="text" id="Lobby-Input3" placeholder="Joueur 4 " class="Lobby-Input">
         <div class="Btn-Avatar">
-            <button onclick="ChooseColor(4, false)">Précédent</button>
-            <button onclick="ChooseColor(4, true)">Suivant</button>
+            <button onclick="ChooseColor(3, false)">Précédent</button>
+            <button onclick="ChooseColor(3, true)">Suivant</button>
         </div>
     </div>
     <div class="Player-Container" id="Lobby4">
         <input type="text" id="Lobby-Input4" placeholder="Joueur 5 " class="Lobby-Input">
         <div class="Btn-Avatar">
-            <button onclick="ChooseColor(5, false)">Précédent</button>
-            <button onclick="ChooseColor(5, true)">Suivant</button>
+            <button onclick="ChooseColor(4, false)">Précédent</button>
+            <button onclick="ChooseColor(4, true)">Suivant</button>
         </div>
     </div>
     <div class="Player-Container" id="Lobby5">
         <input type="text" id="Lobby-Input5" placeholder="Joueur 6 " class="Lobby-Input">
         <div class="Btn-Avatar">
-            <button onclick="ChooseColor(6, false)">Précédent</button>
-            <button onclick="ChooseColor(6, true)">Suivant</button>
+            <button onclick="ChooseColor(5, false)">Précédent</button>
+            <button onclick="ChooseColor(5, true)">Suivant</button>
         </div>
     </div>
     <section class="portfolio-experiment" id="BoutonLobby">
@@ -105,22 +105,22 @@
 	<div id="Jeu">
     <!--<div id="cursor"></div>-->
     <div id="InfoPartieA">
-      <a onclick="OpenPossessions(1)">
-        <div class="InformationJoueur" id="Joueur1">
-          <p id="Pseudo1" class="Pseudos"></p>
-          <p id="Argent1" class="Argent"></p>
+      <a onclick="OpenPossessions(0)">
+        <div class="InformationJoueur" id="Joueur0">
+          <p id="Pseudo0" class="Pseudos"></p>
+          <p id="Argent0" class="Argent"></p>
         </div> 
       </a>
-      <a onclick="OpenPossessions(3)">
-        <div class="InformationJoueur" id="Joueur3">
-          <p id="Pseudo3" class="Pseudos"></p>
-          <p id="Argent3" class="Argent"></p>
+      <a onclick="OpenPossessions(2)">
+        <div class="InformationJoueur" id="Joueur2">
+          <p id="Pseudo2" class="Pseudos"></p>
+          <p id="Argent2" class="Argent"></p>
         </div>
       </a>
-      <a onclick="OpenPossessions(5)">
-        <div class="InformationJoueur" id="Joueur5">
-          <p id="Pseudo5" class="Pseudos"></p>
-          <p id="Argent5" class="Argent"></p>
+      <a onclick="OpenPossessions(4)">
+        <div class="InformationJoueur" id="Joueur4">
+          <p id="Pseudo4" class="Pseudos"></p>
+          <p id="Argent4" class="Argent"></p>
         </div>
       </a>
     </div>
@@ -140,22 +140,22 @@
     </div>
 
     <div id="InfoPartieB">
-      <a onclick="OpenPossessions(2)">
-        <div class="InformationJoueur" id="Joueur2">
-          <p id="Pseudo2" class="Pseudos"></p>
-          <p id="Argent2" class="Argent"></p>
+      <a onclick="OpenPossessions(1)">
+        <div class="InformationJoueur" id="Joueur1">
+          <p id="Pseudo1" class="Pseudos"></p>
+          <p id="Argent1" class="Argent"></p>
         </div>
       </a>
-      <a onclick="OpenPossessions(4)">
-        <div class="InformationJoueur" id="Joueur4">
-          <p id="Pseudo4" class="Pseudos"></p>
-          <p id="Argent4" class="Argent"></p>
+      <a onclick="OpenPossessions(3)">
+        <div class="InformationJoueur" id="Joueur3">
+          <p id="Pseudo3" class="Pseudos"></p>
+          <p id="Argent3" class="Argent"></p>
         </div>
       </a>
-      <a onclick="OpenPossessions(6)">
-        <div class="InformationJoueur" id="Joueur6">
-          <p id="Pseudo6" class="Pseudos"></p>
-          <p id="Argent6" class="Argent"></p>
+      <a onclick="OpenPossessions(5)">
+        <div class="InformationJoueur" id="Joueur5">
+          <p id="Pseudo5" class="Pseudos"></p>
+          <p id="Argent5" class="Argent"></p>
         </div>
       </a>
     </div>
