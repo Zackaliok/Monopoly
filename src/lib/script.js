@@ -1,5 +1,4 @@
-var aQuiLeTour = 0;
-var plateau = new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39);
+var aQuiLeTour, plateau;
 var maisons = new Array(null,0,null,0,null,0,0,null,0,0,null,0,0,0,0,0,0,null,0,0,null,0,null,0,0,0,0,0,0,0,null,0,0,null,0,0,null,0,null,0);
  
 
@@ -11,9 +10,12 @@ request.open('GET', requestURL);
 request.responseType = 'json';
 request.send();
 
+
+
 request.onload = function() {
-  prop = request.response;
-  //console.log(prop);
+  var resp = request.response;
+  plateau = resp.cases;
+  console.log(plateau);
 }
 
 /*
@@ -66,7 +68,7 @@ for (var i = 0; i < 6; i++) {
 //GoToLobby();
 //GoToJeu();
 
-
+var listeDesJoueurs = new Array();
 window.GoToLobby = GoToLobby;
 function GoToLobby() {
 	for (var i = 2; i <= 6; i++) {
@@ -80,12 +82,14 @@ function GoToLobby() {
     let player = new Player(i);
     listeDesJoueurs.push(player);
 	}
+  aQuiLeTour = listeDesJoueurs[0];
+  console.log("🚀 ~ file: script.js ~ line 85 ~ GoToLobby ~ aQuiLeTour", aQuiLeTour)
 	menu.hide();
 	lobby.show();
 	console.log("Accès au lobby avec " + nbrJoueur + " joueurs.");
 }
 
-var listeDesJoueurs = new Array();
+
 
 window.GoToJeu = GoToJeu;
 function GoToJeu() {
@@ -123,7 +127,7 @@ async function RollDice(min, max, maxAudio) {
     if (de1==de2) {
       $("#DoubleDe").html("Double !");
       nbrDouble++;
-      if (prison[aQuiLeTour]) {
+      if (aQuiLeTour.getPrison()) {
         Jail(false, 1);// Si prison, libéré et il rejoue
         $("#BtnRoll").show();
       } else {
@@ -183,21 +187,21 @@ function PlayerMoving() {
 
 window.NextTurn = NextTurn;
 function NextTurn() {
-	document.querySelector("#Joueur"+aQuiLeTour).style.border="1px solid black";
+	document.querySelector("#Joueur"+aQuiLeTour.getId()).style.border="1px solid black";
   $("#JailDiv").hide();
 	$(".Img-Dice").html("");
 	$("#DoubleDe").html("");
 	$("#BtnRoll").show();
-	if (aQuiLeTour==nbrJoueur) {
+	if (aQuiLeTour==nbrJoueur) { // TODO: Changer le fonctionnement de switch de tour
       aQuiLeTour=0
     } else {
       aQuiLeTour++;
     }
   $("#ValiderTour").hide();
-  document.querySelector("#Joueur"+aQuiLeTour).style.border="1px solid red";
+  document.querySelector("#Joueur"+aQuiLeTour.getId()).style.border="1px solid red";
   nbrDouble = 0;
-  if (prison[aQuiLeTour]) {
-    if (libérable[aQuiLeTour]) {
+  if (aQuiLeTour.getPrison()) {
+    if (aQuiLeTour.getLibertyCard()) {
       $("#BoutonLibeCarte").show();
     }                                 
     $("#JailDiv").show();
@@ -206,36 +210,42 @@ function NextTurn() {
 
 window.Jail = Jail;
 function Jail(type, moyen) {// true = Mise en prison       false = Sortie de prison
+  function nobodyJailed() {
+    for (let i = 0; i < listeDesJoueurs.length; i++) {
+      listeDesJoueurs[i].setPrison(false);
+    }
+  }
+
   $("#BoutonLibeCarte").hide();
   $("#JailDiv").hide();
   if (type) { //On mets en prison
-    console.log(`${pseudos[aQuiLeTour]} va en prison.`);
-    prison = new Array(null, false,false,false,false,false,false);
-    prison[aQuiLeTour]=true;
-    position[aQuiLeTour]=11;
+    console.log(`${aQuiLeTour.getName()} va en prison.`);
+    nobodyJailed();
+    aQuiLeTour.setPrison(true);
+    aQuiLeTour.setPosition(11);
     $("#ValiderTour").hide();
     NextTurn();
 
   } else { // On sort de prison
     switch (moyen) { // 1 = Double ou attente     2 = Caution     3 = Carte
       case 1:
-          prison = new Array(null, false, false, false, false, false, false);
+          nobodyJailed();
           nbrToursPrison = 0;
         break;
 
       case 2:
-          prison = new Array(null, false, false, false, false, false, false);
+          nobodyJailed();
           nbrToursPrison = 0;
-          argent[aQuiLeTour]-=5000;
+          aQuiLeTour.delMoney(5000)
           parcGratuit+=5000;
           RefreshMoney();
         break;
 
       case 3:
-          $("#Pseudo"+aQuiLeTour).html(pseudos[aQuiLeTour]+"");
-          prison = new Array(null, false, false, false, false, false, false);
+          $("#Pseudo"+aQuiLeTour.getId()).html(aQuiLeTour.getName()+"");
+          nobodyJailed();
           nbrToursPrison = 0;
-          libérable[aQuiLeTour] = false;
+          aQuiLeTour.setLibertyCard(false);
         break;
     }
     console.log('Le Joueur est libéré de prison');
@@ -252,27 +262,30 @@ function Jail(type, moyen) {// true = Mise en prison       false = Sortie de pri
 
 
 function BuyPopup() {
-  if ( (prixPropriétés[position[aQuiLeTour]]!=null) && (prixPropriétés[position[aQuiLeTour]]<=argent[aQuiLeTour]) && (autorisation[aQuiLeTour]==true) ) {
+  if ( (plateau[aQuiLeTour.getPosition()].buyable) && (plateau.cases[aQuiLeTour.getPosition()].price <= aQuiLeTour.getMoney()) && (aQuiLeTour.getAuthorization()) ) {
     backPop.show();
     $("#BuyDiv").show();
-    $("#ContentBuyDiv").html(`Tu es sur ${nomCases[position[aQuiLeTour]]} qui est au prix de ${prixPropriétés[position[aQuiLeTour]]}.`);
+    $("#ContentBuyDiv").html(`Tu es sur ${plateau[aQuiLeTour.getPosition()].name} qui est au prix de ${plateau[aQuiLeTour.getPosition()].price}.`);
   }
 }
+
+
+
 window.Buy = Buy;
 function Buy(answer) {
   if (answer) {
-    possessions[aQuiLeTour].push(position[aQuiLeTour]);
-    console.log(`Le joueur ${aQuiLeTour} possède désormais ${nomCases[position[aQuiLeTour]]}.`)
-    argent[aQuiLeTour]-=prixPropriétés[position[aQuiLeTour]];
-    prixPropriétés[position[aQuiLeTour]]="sell";
+    possessions[aQuiLeTour].push(position[aQuiLeTour]); // Utiliser player.addPossession()
+    aQuiLeTour.delMoney(plateau[aQuiLeTour.getPosition()].price);
+    plateau[aQuiLeTour.getPosition()].buyable = false;
+    console.log(`Le joueur ${aQuiLeTour.getName()} possède désormais ${plateau[aQuiLeTour.getPosition()]}.`)
+    RefreshMoney();
   }
   ClosePop();
-  RefreshMoney();
 }
 
 window.OpenPossessions = OpenPossessions;
 var lastPlayer = 0;
-function OpenPossessions(player) {
+function OpenPossessions(player) { // TODO: Entièrement repenser cette méthode avec les nouveaux objets à disposition
   if (($("#PossessionsDiv").is(":hidden")==true) || (lastPlayer!=player)) {
     $("#PossessionsDiv").show();
     backPop.show();
@@ -287,17 +300,20 @@ function OpenPossessions(player) {
   }
 }
 
-function Loyer() {
+
+
+function Loyer() { // TODO: Repenser aussi beaucoup cette méthode, surtout comment gérer le système de maisons etc...
   var check = 0;
 
-  if (prixPropriétés[position[aQuiLeTour]]=="sell") {
-    for (var i = 1; i <= nbrJoueur; i++) {
-      check = possessions[i].indexOf(position[aQuiLeTour]);
+  if (!plateau[aQuiLeTour.getPosition()].buyable) {
+    for (var i = 0; i < nbrJoueur; i++) {
+      check = possessions[i].indexOf(position[aQuiLeTour]); // Rajouter dans le json un onglet pour y mettre l'id du propriétaire ?? Pour une recherche plus rapide.
       if ((check =! -1)&&(i==aQuiLeTour)) {
         break;
       } else {
         console.log(`${pseudos[aQuiLeTour]} doit payer ${loyer[position[aQuiLeTour]][maisons[position[aQuiLeTour]]]} €`);
         argent[aQuiLeTour]-=loyer[position[aQuiLeTour]][maisons[position[aQuiLeTour]]];
+
         argent[i]+=loyer[position[aQuiLeTour]][maisons[position[aQuiLeTour]]];
         break;
       }
@@ -319,10 +335,9 @@ function ClosePop() {
 
 
 function RefreshMoney() {
-	for (var i = 1; i <= nbrJoueur; i++) {
-		$("#Argent"+i).html(argent[i]);
+	for (var i = 0; i < listeDesJoueurs.length; i++) {
+		$("#Argent"+i).html(listeDesJoueurs[i].getMoney());
 	}
-	//console.log("L'argent a été actualisé");
 }
 
 function sleep(ms) {
@@ -331,19 +346,19 @@ function sleep(ms) {
 
 
 function Special() {
-  switch (parseInt(position[aQuiLeTour])) {
+  switch (aQuiLeTour.getPosition()) {
       case 1://Case départ
-          console.log(`${pseudos[aQuiLeTour]} gagne 40000 €`);
-          argent[aQuiLeTour]+=40000;
+          aQuiLeTour.addMoney(40000);
+          console.log(`${aQuiLeTour.getName()} gagne 40000 €`);
         break;
       case 5:
-          console.log(`${pseudos[aQuiLeTour]} doit payer 20000 €`);
-          argent[aQuiLeTour]-=20000;
+          console.log(`${aQuiLeTour.getName()} doit payer 20000 €`);
+          aQuiLeTour.delMoney(20000);
           parcGratuit+=20000;
         break;
       case 21:
-          console.log(`${pseudos[aQuiLeTour]} gagne ${parcGratuit} €`);
-          argent[aQuiLeTour]+=parcGratuit;
+          console.log(`${aQuiLeTour.getName()} gagne ${parcGratuit} €`);
+          aQuiLeTour.addMoney(parcGratuit);
           parcGratuit=0;
         break;
       case 31:
@@ -351,8 +366,8 @@ function Special() {
           //console.log("La fonction Jail exectutée");
         break;
       case 39:
-          console.log(`${pseudos[aQuiLeTour]} doit payer 10000 €`);
-          argent[aQuiLeTour]-=10000;
+          console.log(`${aQuiLeTour.getName()} doit payer 10000 €`);
+          aQuiLeTour.delMoney(10000)
           parcGratuit+=10000;
         break;
     }

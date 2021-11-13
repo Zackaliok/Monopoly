@@ -8,6 +8,8 @@ class Player {
         this.authorization = false;
         this.position = 1;
         this.possessions = new Array();
+        this.prison = false;
+        this.libertyCard = false;
     }
   
     getId() {return this.id;}
@@ -42,4 +44,10 @@ class Player {
     }
 
     getPossessions() {return this.possessions;}
+
+    getPrison() {return this.prison;}
+    setPrison(prison) {this.prison = prison;}
+
+    getLibertyCard() {return this.libertyCard;}
+    setLibertyCard(bool) {this.libertyCard = bool;}
   }
