@@ -4,14 +4,9 @@ var maisons = new Array(null,0,null,0,null,0,0,null,0,0,null,0,0,0,0,0,0,null,0,
 
  /* Cases array importation */
 $.getJSON("src/lib/cases.json", function (data) {
-  plateau = data;
+  plateau = data["cases"];
 })
 
-
-
-
-var communaute = new Array("Vous êtes libéré de prison. Cette carte peut être conservée.","C'est votre anniversaire : Chaque joueurs doit vous donner 1000 Francs.","Erreur de la Banque en votre faveur. Recevez 20000 Francs","Allez en prison. Avancez tout droit en prison. Ne passez pas par la case départ","Recevez votre intérêt sur l'emprunt à 7% : 2500 Francs","Vous héritez 10000 Francs","Payez une amende de 1000 Francs ou tirer une carte chance","Les contributions vous remboursent la somme de 2000 Francs","Payez votre Police d'Assurance s'élevant à 5000 Francs","La vente de votre stock vous rapporte 5000 Francs","Retournez à Belleville","Vous avez gagné le deuxième prix de beauté. Recevez 1000 Francs","Placez vous sur la case départ","Recevez votre revenu annuel 10000 Francs","Payez la note du Médecin 5000 Francs","Payez à l'Hôpital 10000 Francs");
-console.log("🚀 ~ file: script.js ~ line 14 ~ communaute", communaute)
 
 var parcGratuit, prison;
 
@@ -57,7 +52,7 @@ function GoToLobby() {
 	}
 	for (var i = 0; i < nbrJoueur; i++) {
 		$("#Lobby"+i).show();
-    let player = new Player(i);
+    var player = new Player(i);
     listeDesJoueurs.push(player);
 	}
   aQuiLeTour = listeDesJoueurs[0];
@@ -70,18 +65,22 @@ function GoToLobby() {
 
 window.GoToJeu = GoToJeu;
 function GoToJeu() {
-	lobby.hide();
-	jeu.show();
-	for (var i = 0; i < listeDesJoueurs.length; i++) {
+  for (var i = 0; i < listeDesJoueurs.length; i++) {
     let player = listeDesJoueurs[i];
-    player.setName($("#Lobby-Input"+i).value);
 
+    if ($("#Lobby-Input"+i).val() != "") { // Si laissé vide, set avec DEFAULT_NAME
+      player.setName($("#Lobby-Input"+i).val());
+    }
+    
     $("#Pseudo"+i).html(player.getName());
     $("#Argent"+i).html(player.getMoney());
     $("#Joueur"+i).show();
     document.querySelector('#Joueur'+i).style.backgroundColor = player.getAvatar();
     
 	}
+	lobby.hide();
+	jeu.show();
+	
   document.querySelector("#Joueur0").style.border="1px solid red";
   document.querySelector('#Btn-Quit').style.display="block";
 	console.log("Lancement de la partie.")
@@ -154,8 +153,7 @@ function PlayerMoving() {
       if (pos==0 || pos==4 || pos==20 || pos==30 || pos==38) {
         Special(pos);
       } else {
-        //Loyer(); TODO: Mettre une condition pour appliquer le loyer
-	      //BuyPopup();
+        Loyer();
       }
     }
   }
@@ -177,11 +175,7 @@ function NextTurn() {
 	$(".Img-Dice").html("");
 	$("#DoubleDe").html("");
 	$("#BtnRoll").show();
-	if (aQuiLeTour==nbrJoueur) { // TODO: Changer le fonctionnement de switch de tour
-      aQuiLeTour=0
-    } else {
-      aQuiLeTour++;
-    }
+  aQuiLeTour = listeDesJoueurs[(aQuiLeTour.getId() + 1) % listeDesJoueurs.length];
   $("#ValiderTour").hide();
   document.querySelector("#Joueur"+aQuiLeTour.getId()).style.border="1px solid red";
   nbrDouble = 0;
@@ -239,10 +233,11 @@ function Jail(type, moyen) {// true = Mise en prison       false = Sortie de pri
 
 
 function BuyPopup() {
-  if ( (plateau[aQuiLeTour.getPosition()].buyable) && (plateau.cases[aQuiLeTour.getPosition()].price <= aQuiLeTour.getMoney()) && (aQuiLeTour.getAuthorization()) ) {
+  let pos = aQuiLeTour.getPosition()
+  if ( (plateau[pos].buyable) && (plateau[pos].price <= aQuiLeTour.getMoney()) && (aQuiLeTour.getAuthorization()) ) {
     backPop.show();
     $("#BuyDiv").show();
-    $("#ContentBuyDiv").html(`Tu es sur ${plateau[aQuiLeTour.getPosition()].name} qui est au prix de ${plateau[aQuiLeTour.getPosition()].price}.`);
+    $("#ContentBuyDiv").html(`Tu es sur ${plateau[pos].name} qui est au prix de ${plateau[pos].price}.`);
   }
 }
 
@@ -251,25 +246,27 @@ function BuyPopup() {
 window.Buy = Buy;
 function Buy(answer) {
   if (answer) {
-    possessions[aQuiLeTour].push(position[aQuiLeTour]); // Utiliser player.addPossession()
-    aQuiLeTour.delMoney(plateau[aQuiLeTour.getPosition()].price);
-    plateau[aQuiLeTour.getPosition()].buyable = false;
-    console.log(`Le joueur ${aQuiLeTour.getName()} possède désormais ${plateau[aQuiLeTour.getPosition()]}.`)
+    let pos = aQuiLeTour.getPosition();
+    aQuiLeTour.addPossession(pos);
+    aQuiLeTour.delMoney(plateau[pos].price);
+    plateau[pos].buyable = false;
+    console.log(`Le joueur ${aQuiLeTour.getName()} possède désormais ${plateau[pos]}.`)
     RefreshMoney();
   }
   ClosePop();
 }
 
 window.OpenPossessions = OpenPossessions;
-var lastPlayer = 0;
-function OpenPossessions(player) { // TODO: Entièrement repenser cette méthode avec les nouveaux objets à disposition
-  if (($("#PossessionsDiv").is(":hidden")==true) || (lastPlayer!=player)) {
+var lastPlayerId = 0;
+function OpenPossessions(playerId) { // TODO: Entièrement repenser cette méthode avec les nouveaux objets à disposition
+  let player = listeDesJoueurs[playerId];
+  if (($("#PossessionsDiv").is(":hidden")==true) || (lastPlayerId!=playerId)) {
     $("#PossessionsDiv").show();
     backPop.show();
-    lastPlayer = player;
-    var contenuPossessions = "<p> Possessions du joueur " + pseudos[player] + " : <br><br>";
-    for (var i = 0; i < possessions[player].length; i++) {
-      contenuPossessions+= nomCases[possessions[player][i]]+ " - Loyer de "+ loyer[possessions[player][i]][maisons[possessions[player][i]]]+" € <br>";
+    lastPlayerId = playerId;
+    var contenuPossessions = "<p> Possessions du joueur " + player.getName() + " : <br><br>";
+    for (var i = 0; i < player.getPossessions().length; i++) {
+      contenuPossessions+= plateau[player.getPossessions()[i]] + " - Loyer de " + plateau[player.getPossessions()[i]].rent[0] + " € <br>"; // TODO: Remplacer le 0 par un indice qui prends le nombre de maisons.
     }
     $("#PossessionsDiv").html(contenuPossessions + "</p>");
   } else {
@@ -278,7 +275,7 @@ function OpenPossessions(player) { // TODO: Entièrement repenser cette méthode
 }
 
 
-
+/*
 function Loyer() { // TODO: Repenser aussi beaucoup cette méthode, surtout comment gérer le système de maisons etc...
   var check = 0;
 
@@ -297,7 +294,18 @@ function Loyer() { // TODO: Repenser aussi beaucoup cette méthode, surtout comm
     }
   }
 }
+*/
 
+function Loyer() {
+  if (plateau[aQuiLeTour.getPosition()].buyable) {
+    BuyPopup();
+    console.log("Pas de loyer, le terrain ne possède pas de propriétaire");
+  } else {
+    let proprio = plateau[aQuiLeTour.getPosition()].PropId;
+    console.log("🚀 ~ file: script.js ~ line 305 ~ Loyer ~ proprio", proprio)
+    
+  }
+}
 
 window.ClosePop = ClosePop;
 function ClosePop() {
@@ -357,11 +365,12 @@ function Special(position) {
 
 /*  Script du Canvas */
 
+
 const canvas = document.getElementById('canvas'),
       ctx = canvas.getContext('2d');
 
 canvas.style.backgroundImage = "url('src/media/plateautest.svg')";
-
+/*
 //Déplacement des pions
 const pions = new Image;
-pions.src = "src/media/pions.svg";
+pions.src = "src/media/pions.svg";*/

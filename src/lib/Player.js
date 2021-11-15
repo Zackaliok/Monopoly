@@ -35,12 +35,25 @@ class Player {
     getPosition() {return this.position;}
     setPosition(position) {this.position = position;}
 
-    addPossession() {
-        //TODO
+    addPossession(caseId) {
+        if (plateau[caseId].PropId == null) {
+            this.possessions.push((caseId, 0));
+            plateau[caseId].PropId = this.id;
+            console.log(`Propriété ${caseId} achetée !`);
+        } else {
+            console.log("ERREUR : la propriété ne peux pas être ajoutée car elle possède déjà un propriétaire.");
+        }
     }
 
-    delPossession() {
-        //TODO
+    delPossession(caseId) {
+        let indexCarte;
+        for (let i = 0; i < this.possessions.length; i++) {
+            if (caseId == i) {
+                indexCarte = i;
+            }
+        }
+        this.possessions.splice(indexCarte, 1);
+        plateau[caseId].PropId = null;
     }
 
     getPossessions() {return this.possessions;}
