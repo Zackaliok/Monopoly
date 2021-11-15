@@ -1,0 +1,84 @@
+{
+    "cards": [
+        {
+            "id": 0,
+            "sentence": "Vous êtes libéré de prison. Cette carte peut être conservée.",
+            "command": "aQuiLeTour.setLibertyCard(true);$(\"#Pseudo\"+aQuiLeTour).html(pseudos[aQuiLeTour]+\" ⭐\");"
+        },
+        {
+            "id": 1,
+            "sentence": "C'est votre anniversaire : Chaque joueurs doit vous donner 1000 Francs.",
+            "command": "var cagnotteAnniv=0;for (var i = 1; i <= listeDesJoueurs.length; i++) {listeDesJoueurs[i].delMoney(1000);cagnotteAnniv+=1000;}aQuiLeTour.addMoney(cagnotteAnniv);"
+        },
+        {
+            "id": 2,
+            "sentence": "Erreur de la Banque en votre faveur. Recevez 20000 Francs",
+            "command": "aQuiLeTour.addMoney(20000);"
+        },
+        {
+            "id": 3,
+            "sentence": "Allez en prison. Avancez tout droit en prison. Ne passez pas par la case départ",
+            "command": "alert('Pas encore implémenté !');"
+        },
+        {
+            "id": 4,
+            "sentence": "Recevez votre intérêt sur l'emprunt à 7% : 2500 Francs",
+            "command": "aQuiLeTour.addMoney(2500);"
+        },
+        {
+            "id": 5,
+            "sentence": "Vous héritez 10000 Francs",
+            "command": "aQuiLeTour.addMoney(10000);"
+        },
+        {
+            "id": 6,
+            "sentence": "Payez une amende de 1000 Francs ou tirer une carte chance",
+            "command": "$(\"#CarteCommunaute\").show();backPop.show();backPop.attr('onclick', null);"
+        },
+        {
+            "id": 7,
+            "sentence": "Les contributions vous remboursent la somme de 2000 Francs",
+            "command": "aQuiLeTour.addMoney(2000)"
+        },
+        {
+            "id": 8,
+            "sentence": "Payez votre Police d'Assurance s'élevant à 5000 Francs",
+            "command": "aQuiLeTour.delMoney(5000);parcGratuit+=5000;"
+        },
+        {
+            "id": 9,
+            "sentence": "La vente de votre stock vous rapporte 5000 Francs",
+            "command": "aQuiLeTour.addMoney(5000);"
+        },
+        {
+            "id": 10,
+            "sentence": "Retournez à Belleville",
+            "command": "aQuiLeTour.setPosition(1)"
+        },
+        {
+            "id": 11,
+            "sentence": "Vous avez gagné le deuxième prix de beauté. Recevez 1000 Francs",
+            "command": "aQuiLeTour.addMoney(1000);"
+        },
+        {
+            "id": 12,
+            "sentence": "Placez vous sur la case départ",
+            "command": "aQuiLeTour.setPosition(0);"
+        },
+        {
+            "id": 13,
+            "sentence": "Recevez votre revenu annuel 10000 Francs",
+            "command": "aQuiLeTour.addMoney(10000);"
+        },
+        {
+            "id": 14,
+            "sentence": "Payez la note du Médecin 5000 Francs",
+            "command": "aQuiLeTour.delMoney(5000);parcGratuit+=5000;"
+        },
+        {
+            "id": 15,
+            "sentence": "Payez à l'Hôpital 10000 Francs",
+            "command": "aQuiLeTour.delMoney(10000);parcGratuit+=10000;"
+        }
+    ]
+}

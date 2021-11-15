@@ -3,83 +3,82 @@
         {
             "id": 0,
             "sentence": "Allez en prison. Avancez tout droit en prison. Ne passez pas par la case départ",
-            "command": "alert(\"Hello from la 1 carte\")"
+            "command": "Jail(true, 0);"
         },
         {
             "id": 1,
             "sentence": "Faites des réparations dans toutes vos maisons. Versez pour chaque maison 2500 Francs. Versez pour chaque hôtel 10000 Francs",
-            "command":"alert(\"Hello from la 2 carte\")"
+            "command":"let cagnotteReparations = 0; for (var i = 0; i < aQuiLeTour.getPossessions().length; i++) { if ((aQuiLeTour.getPosition()!=6)||(aQuiLeTour.getPosition()!=13)||(aQuiLeTour.getPosition()!=16)||(aQuiLeTour.getPosition()!=26)||(aQuiLeTour.getPosition()!=29)||(aQuiLeTour.getPosition()!=36)){ } else { switch (aQuiLeTour.getPossessions()[i]) { case 2: cagnotteReparations+=2500; break; case 3: cagnotteReparations+=5000; break; case 4: cagnotteReparations+=7500;break;case 5:cagnotteReparations+=10000;break;case 6:cagnotteReparations+=10000;break;}}}aQuiLeTour.delMoney(cagnotteReparations); alert('La fonction est terminée');"
         },
         {
             "id": 2,
             "sentence": "Votre immeuble et votre prêt vous rapportent. Vous touchez 15000 Francs",
-            "command":"alert(\"Hello from la 3 carte\")"
+            "command":"aQuiLeTour.addMoney(15000);"
         },
         {
             "id": 3,
             "sentence": "Avancez jusqu'à la case départ",
-            "command":"alert(\"Hello from la 4 carte\")"
+            "command":"aQuiLeTour.setPosition(1);"
         },
         {
             "id": 4,
             "sentence": "Reculez de trois cases",
-            "command":"alert(\"Hello from la 5 carte\")"
+            "command":"aQuiLeTour.setPosition(aQuiLeTour.getPosition()-3);"
         },
         {
             "id": 5,
             "sentence": "Rendez vous Rue de La Paix",
-            "command":"alert(\"Hello from la 6 carte\")"
+            "command":"aQuiLeTour.setPosition(40);"
         },
         {
             "id": 6,
             "sentence": "Allez à la gare de Lyon",
-            "command":"alert(\"Hello from la 7 carte\")"
+            "command":"if (aQuiLeTour.getPosition()>16) {aQuiLeTour.addMoney(20000);}aQuiLeTour.setPosition(16);"
         },
         {
             "id": 7,
             "sentence": "Vous êtes libéré de prison. Cette carte peut être conservée",
-            "command":"alert(\"Hello from la 7 carte\")"
+            "command":"aQuiLeTour.setLibertyCard(true);$(\"#Pseudo\"+aQuiLeTour.getName()).html(aQuiLeTour.getName()+\" ⭐\");"
         },
         {
             "id": 8,
             "sentence": "Amende pour excès de vitesse 1500 Francs",
-            "command":"alert(\"Hello from la 9 carte\")"
+            "command":"aQuiLeTour.delMoney(1500);parcGratuit+=1500;"
         }, 
         {
             "id": 9,
             "sentence": "La Banque vous verse un dividende de 5000 Francs",
-            "command":"alert(\"Hello from la 10 carte\")"
+            "command":"aQuiLeTour.addMoney(5000);"
         },
         {
             "id": 10,
             "sentence": "Avancez au Boulevard de la Villette",
-            "command":"alert(\"Hello from la 11 carte\")"
+            "command":"if (aQuiLeTour.getPosition()>12) {aQuiLeTour.addMoney(20000);}aQuiLeTour.setPosition(12);"
         },
         {
             "id": 11,
             "sentence": "Rendez vous à l'Avenue Henri-Martin",
-            "command":"alert(\"Hello from la 12 carte\")"
+            "command":"if (aQuiLeTour.getPosition()>25) {aQuiLeTour.addMoney(20000);}aQuiLeTour.setPosition(25);"
         },
         {
             "id": 12,
             "sentence": "Payez pour frais de scolarité 15000 Francs",
-            "command":"alert(\"Hello from la 13 carte\")"
+            "command":"aQuiLeTour.delMoney(15000);parcGratuit+=15000;"
         },
         {
             "id": 13,
             "sentence": "Vous avez gagné le prix de mots croisés. Recevez 10000 Francs",
-            "command":"alert(\"Hello from la 14 carte\")"
+            "command":"aQuiLeTour.addMoney(10000);"
         },
         {
             "id": 14,
             "sentence": "Vous êtes imposé pour les réparations de voirie à raison de : 4000 Francs par maison et 11500 Francs par hôtel",
-            "command":"alert(\"Hello from la 15 carte\")"
+            "command":"cagnotteReparations = 0;for (var i = 0; i < aQuiLeTour.getPossessions().length; i++) {if ((aQuiLeTour.getPosition()!=6)||(aQuiLeTour.getPosition()!=13)||(aQuiLeTour.getPosition()!=16)||(aQuiLeTour.getPosition()!=26)||(aQuiLeTour.getPosition()!=29)||(aQuiLeTour.getPosition()!=36)){} else {switch (aQuiLeTour.getPossessions()[i]) {case 2:cagnotteReparations+=4000;break;case 3:cagnotteReparations+=8000;break;case 4:cagnotteReparations+=12000;break;case 5:cagnotteReparations+=16000;break;case 6:cagnotteReparations+=11500;break;}}}aQuiLeTour.delMoney(cagnotteReparations);"
         },
         {
             "id": 15,
             "sentence": "Amende pour ivresse 2000 Francs",
-            "command":"alert(\"Hello from la 16 carte\")"
+            "command":"aQuiLeTour.delMoney(2000);parcGratuit+=2000;"
         }
-
     ]
 }

@@ -3,37 +3,17 @@ var maisons = new Array(null,0,null,0,null,0,0,null,0,0,null,0,0,0,0,0,0,null,0,
  
 
  /* Cases array importation */
- 
-var requestURL = 'src/lib/cases.json';
-var request = new XMLHttpRequest();
-request.open('GET', requestURL);
-request.responseType = 'json';
-request.send();
-
-
-
-request.onload = function() {
-  var resp = request.response;
-  plateau = resp.cases;
-  console.log(plateau);
-}
-
-/*
 $.getJSON("src/lib/cases.json", function (data) {
-  const cases = data;
-})*/
+  plateau = data;
+})
 
 
 
 
+var communaute = new Array("Vous êtes libéré de prison. Cette carte peut être conservée.","C'est votre anniversaire : Chaque joueurs doit vous donner 1000 Francs.","Erreur de la Banque en votre faveur. Recevez 20000 Francs","Allez en prison. Avancez tout droit en prison. Ne passez pas par la case départ","Recevez votre intérêt sur l'emprunt à 7% : 2500 Francs","Vous héritez 10000 Francs","Payez une amende de 1000 Francs ou tirer une carte chance","Les contributions vous remboursent la somme de 2000 Francs","Payez votre Police d'Assurance s'élevant à 5000 Francs","La vente de votre stock vous rapporte 5000 Francs","Retournez à Belleville","Vous avez gagné le deuxième prix de beauté. Recevez 1000 Francs","Placez vous sur la case départ","Recevez votre revenu annuel 10000 Francs","Payez la note du Médecin 5000 Francs","Payez à l'Hôpital 10000 Francs");
+console.log("🚀 ~ file: script.js ~ line 14 ~ communaute", communaute)
 
-var communaute = new Array(null,"Vous êtes libéré de prison. Cette carte peut être conservée.","C'est votre anniversaire : Chaque joueurs doit vous donner 1000 Francs.","Erreur de la Banque en votre faveur. Recevez 20000 Francs","Allez en prison. Avancez tout droit en prison. Ne passez pas par la case départ","Recevez votre intérêt sur l'emprunt à 7% : 2500 Francs","Vous héritez 10000 Francs","Payez une amende de 1000 Francs ou tirer une carte chance","Les contributions vous remboursent la somme de 2000 Francs","Payez votre Police d'Assurance s'élevant à 5000 Francs","La vente de votre stock vous rapporte 5000 Francs","Retournez à Belleville","Vous avez gagné le deuxième prix de beauté. Recevez 1000 Francs","Placez vous sur la case départ","Recevez votre revenu annuel 10000 Francs","Payez la note du Médecin 5000 Francs","Payez à l'Hôpital 10000 Francs");
-//var chance = new Array(null,"Allez en prison. Avancez tout droit en prison. Ne passez pas par la case départ","Faites des réparations dans toutes vos maisons. Versez pour chaque maison 2500 Francs. Versez pour chaque hôtel 10000 Francs","Votre immeuble et votre prêt vous rapportent. Vous touchez 15000 Francs","Avancez jusqu'à la case départ","Reculez de trois cases","Rendez vous Rue de La Paix","Allez à la gare de Lyon","Vous êtes libéré de prison. Cette carte peut être conservée","Amende pour excès de vitesse 1500 Francs","La Banque vous verse un dividende de 5000 Francs","Avancez au Boulevard de la Villette","Rendez vous à l'Avenue Henri-Martin","Payez pour frais de scolarité 15000 Francs","Vous avez gagné le prix de mots croisés. Recevez 10000 Francs","Vous êtes imposé pour les réparations de voirie à raison de : 4000 Francs par maison et 11500 Francs par hôtel","Amende pour ivresse 2000 Francs");
-//console.log("🚀 ~ file: script.js ~ line 30 ~ chance", chance)
-
-
-var parcGratuit = null;
-var prison = null;
+var parcGratuit, prison;
 
 /* Variables globales */
 var menu = $("#Menu"),
@@ -46,10 +26,7 @@ var resultatTirageDe = null,
 	de2 = null,
   nbrDouble = 0;
 
-var nbrJoueur = null,
-	prison = new Array(null, false,false,false,false,false,false,0,0,0,0,0,0),
-  libérable = new Array(null, false,false,false,false,false,false),
-  nbrToursPrison = 0;
+var nbrToursPrison = 0;
   
 
 /* Initialisation de la Page */
@@ -71,6 +48,7 @@ for (var i = 0; i < 6; i++) {
 var listeDesJoueurs = new Array();
 window.GoToLobby = GoToLobby;
 function GoToLobby() {
+  var nbrJoueur = 0;
 	for (var i = 2; i <= 6; i++) {
 		var radio = document.querySelector("#radio"+i).checked;
 		if (radio) {
@@ -83,10 +61,9 @@ function GoToLobby() {
     listeDesJoueurs.push(player);
 	}
   aQuiLeTour = listeDesJoueurs[0];
-  console.log("🚀 ~ file: script.js ~ line 85 ~ GoToLobby ~ aQuiLeTour", aQuiLeTour)
 	menu.hide();
 	lobby.show();
-	console.log("Accès au lobby avec " + nbrJoueur + " joueurs.");
+	console.log("Accès au lobby avec " + listeDesJoueurs.length + " joueurs.");
 }
 
 
@@ -95,8 +72,7 @@ window.GoToJeu = GoToJeu;
 function GoToJeu() {
 	lobby.hide();
 	jeu.show();
-  chanceLoading();
-	for (var i = 0; i < nbrJoueur; i++) {
+	for (var i = 0; i < listeDesJoueurs.length; i++) {
     let player = listeDesJoueurs[i];
     player.setName($("#Lobby-Input"+i).value);
 
@@ -149,32 +125,41 @@ async function RollDice(min, max, maxAudio) {
 window.PlayerMoving = PlayerMoving;
 function PlayerMoving() {
 
-  if ((prison[aQuiLeTour]==true)&&(nbrToursPrison<3)) {
+  if (aQuiLeTour.getPrison()&&(nbrToursPrison<3)) {
     nbrToursPrison++;
     console.log("Tours en prison : "+nbrToursPrison)
   } else {
-    if ((prison[aQuiLeTour])&&(nbrToursPrison==3)) {
+    if (aQuiLeTour.getPrison()&&(nbrToursPrison==3)) {
       Jail(false,1);
       console.log("Joueur libéré dû aux 3 tours");
     }
       
       //position[aQuiLeTour]+=resultatTirageDe;
-      position[aQuiLeTour]=prompt("Sur quelle case on va Patron ?");
-      if (position[aQuiLeTour]>40) {
-        position[aQuiLeTour]-=40;
-        autorisation[aQuiLeTour] = true;
-        if ((position[aQuiLeTour]!=1)&&(prison!=aQuiLeTour)) {
-          argent[aQuiLeTour]+=20000;
+      aQuiLeTour.setPosition(prompt("Sur quelle case on va Patron ?"));
+      if (aQuiLeTour.getPosition()>40) {
+        aQuiLeTour.setPosition(aQuiLeTour.getPosition()-40);
+        aQuiLeTour.setAuthorization(true);
+        if ((aQuiLeTour.getPosition()!=1)&&(!aQuiLeTour.getPrison())) {
+          aQuiLeTour.addMoney(20000);
         }
       }
   }
+	let pos = aQuiLeTour.getPosition();
+  if (pos==9 || pos==23 || pos==36) {
+    Chance();
+  } else {
+    if (pos==2||pos==17||pos==33) {
+      Communaute();
+    } else {
+      if (pos==0 || pos==4 || pos==20 || pos==30 || pos==38) {
+        Special(pos);
+      } else {
+        //Loyer(); TODO: Mettre une condition pour appliquer le loyer
+	      //BuyPopup();
+      }
+    }
+  }
 	
-	console.log("Le Joueur " + aQuiLeTour + " est sur " + nomCases[position[aQuiLeTour]]);
-	Chance();
-	Communaute();
-	Special();
-	//Loyer(); TODO: Mettre une condition pour appliquer le loyer
-	//BuyPopup();
 	RefreshMoney();
 	if (de1==de2) {
 		$("#BoutonDe").show();
@@ -251,14 +236,6 @@ function Jail(type, moyen) {// true = Mise en prison       false = Sortie de pri
     console.log('Le Joueur est libéré de prison');
   }
 }
-
-//const cursor = document.querySelector("#cursor");
-
-//document.addEventListener('mousemove', e => {
-  //console.log(e.pageX, e.pageY);
-  //cursor.setAttribute("style", "top:"+(e.pageY -5)+"px; left:"+(e.pageX -5)+"px;");
-
-//})
 
 
 function BuyPopup() {
@@ -345,243 +322,33 @@ function sleep(ms) {
 }
 
 
-function Special() {
-  switch (aQuiLeTour.getPosition()) {
-      case 1://Case départ
+function Special(position) {
+  switch (position) {
+      case 0://Case départ
           aQuiLeTour.addMoney(40000);
           console.log(`${aQuiLeTour.getName()} gagne 40000 €`);
         break;
-      case 5:
+      case 4:
           console.log(`${aQuiLeTour.getName()} doit payer 20000 €`);
           aQuiLeTour.delMoney(20000);
           parcGratuit+=20000;
         break;
-      case 21:
+      case 20:
           console.log(`${aQuiLeTour.getName()} gagne ${parcGratuit} €`);
           aQuiLeTour.addMoney(parcGratuit);
           parcGratuit=0;
         break;
-      case 31:
+      case 30:
           Jail(true,0);
-          //console.log("La fonction Jail exectutée");
+          //console.log("La fonction Jail executée");
         break;
-      case 39:
+      case 38:
           console.log(`${aQuiLeTour.getName()} doit payer 10000 €`);
           aQuiLeTour.delMoney(10000)
           parcGratuit+=10000;
         break;
     }
 }
-
-
-
-
-/*
-window.Chance = Chance;
-function Chance(test) {
-  ClosePop();
-  if ((position[aQuiLeTour]==8)||(position[aQuiLeTour]==23)||(position[aQuiLeTour]==37)||(test==-1)) {
-    //console.log("Le Joueur " + aQuiLeTour + " est sur " + nomCases[position[aQuiLeTour]]);
-    var random =8; //parseInt(Math.random()*(17-1)+1)
-    console.log(chance[random]);
-    switch (random) {
-      case 1://Aller en prison
-          Jail(true, 0);
-        break;
-      case 2://Faites des réparations 2.500 ou 10.000
-          let cagnotteReparations = 0;
-          for (var i = 1; i <= possessions[aQuiLeTour].length; i++) {
-            if ((position[aQuiLeTour]!=6)||(position[aQuiLeTour]!=13)||(position[aQuiLeTour]!=16)||(position[aQuiLeTour]!=26)||(position[aQuiLeTour]!=29)||(position[aQuiLeTour]!=36)){
-             } else {
-            switch (possessions[aQuiLeTour][i]) {
-              case 2://Une maison
-                  cagnotteReparations+=2500;
-                break;
-              case 3://Deux maisons
-                  cagnotteReparations+=5000;
-                break;                          
-              case 4://Trois maisons
-                  cagnotteReparations+=7500;
-                break;
-              case 5://Quatres maisons
-                  cagnotteReparations+=10000;
-                break;
-              case 6://Un hôtel
-                  cagnotteReparations+=10000;
-                break;
-            }}}
-          argent[aQuiLeTour]-=cagnotteReparations;
-          cagnotteReparations=0;
-        break;
-      case 3://Votre immeuble rapportent 15.000
-          argent[aQuiLeTour]+=15000;
-        break;
-      case 4://Avancer Case Départ
-          position[aQuiLeTour]=1;
-          console.log("Le Joueur " + aQuiLeTour + " est sur " + nomCases[position[aQuiLeTour]]);
-        break;
-      case 5://Reculez de 3 case
-          position[aQuiLeTour]-=3;
-          console.log("Le Joueur " + aQuiLeTour + " est sur " + nomCases[position[aQuiLeTour]]);
-        break;
-      case 6://Go Rue de la Paix
-          position[aQuiLeTour]=40;
-          console.log("Le Joueur " + aQuiLeTour + " est sur " + nomCases[position[aQuiLeTour]]);
-        break;
-      case 7://Gare de Lyon
-      	  if (position[aQuiLeTour]>16) {
-      	  	argent[aQuiLeTour]+=20000;
-      	  }
-          position[aQuiLeTour]=16;
-          console.log("Le Joueur " + aQuiLeTour + " est sur " + nomCases[position[aQuiLeTour]]);
-        break;
-      case 8://Libéré de prison
-          libérable[aQuiLeTour]=true;
-          console.log(`${pseudos[aQuiLeTour]} est libérable de prison.`)
-          $("#Pseudo"+aQuiLeTour).html(pseudos[aQuiLeTour]+" ⭐");
-        break;
-      case 9://Amende vitesse 1.500
-          argent[aQuiLeTour]-=1500;
-          parcGratuit+=1500;
-        break;
-      case 10://Banque  verse 5.000
-          argent[aQuiLeTour]+=5000;
-        break;
-      case 11://Go Villette
-      	  if (position[aQuiLeTour]>12) {
-      	  	argent[aQuiLeTour]+=20000;
-      	  }
-          position[aQuiLeTour]=12;
-          console.log("Le Joueur " + aQuiLeTour + " est sur " + nomCases[position[aQuiLeTour]]);
-        break;
-      case 12://Go Henri-Martin
-      	  if (position[aQuiLeTour]>25) {
-      	  	argent[aQuiLeTour]+=20000;
-      	  }
-          position[aQuiLeTour]=25;
-          console.log("Le Joueur " + aQuiLeTour + " est sur " + nomCases[position[aQuiLeTour]]);
-        break;
-      case 13://Scolarité 15.000
-          argent[aQuiLeTour]-=15000;
-          parcGratuit+=15000;
-        break;
-      case 14://Mots Croisés 10.000
-          argent[aQuiLeTour]+=10000;
-        break;
-      case 15://Réparation voirie 4.000 ou 11.500
-           cagnotteReparations = 0;
-          for (var i = 1; i <= possessions[aQuiLeTour].length; i++) {
-            if ((position[aQuiLeTour]!=6)||(position[aQuiLeTour]!=13)||(position[aQuiLeTour]!=16)||(position[aQuiLeTour]!=26)||(position[aQuiLeTour]!=29)||(position[aQuiLeTour]!=36)){
-             } else {
-            switch (possessions[aQuiLeTour][i]) {
-              case 2://Une maison
-                  cagnotteReparations+=4000;
-                break;
-              case 3://Deux maisons
-                  cagnotteReparations+=8000;
-                break;                          
-              case 4://Trois maisons
-                  cagnotteReparations+=12000;
-                break;
-              case 5://Quatres maisons
-                  cagnotteReparations+=16000;
-                break;
-              case 6://Un hôtel
-                  cagnotteReparations+=11500;
-                break;
-            }}}
-          argent[aQuiLeTour]-=cagnotteReparations;
-          cagnotteReparations=0;
-        break;
-      case 16://Amende ivresse 2000
-          argent[aQuiLeTour]-=2000;
-          parcGratuit+=2000;
-        break;}
-  }
-  
-  if (test==1) { // Pour payer les 1000€ d'amende a la caisse de commu
-    argent[aQuiLeTour]-=1000;
-    parcGratuit+=1000;
-  }
-  RefreshMoney();
-  backPop.attr('onclick', "ClosePop()");
-}*/
-
-window.Communaute = Communaute;
-function Communaute() {
-  if (position[aQuiLeTour]==3||position[aQuiLeTour]==18||position[aQuiLeTour]==34) {
-            var idCaisseDeCommunauté = 7;//parseInt(Math.random()*(17-1)+1);
-            console.log(communaute[idCaisseDeCommunauté]);
-          }
-          switch (idCaisseDeCommunauté) {
-            case 1://Libéré de prison
-                libérable[aQuiLeTour]=true;
-                console.log(`${pseudos[aQuiLeTour]} est libérable de prison.`)
-                $("#Pseudo"+aQuiLeTour).html(pseudos[aQuiLeTour]+" ⭐");
-              break;
-            case 2://Anniversaire
-                var cagnotteAnniv=0;
-                for (var i = 1; i <= nbrJoueur; i++) {
-                  argent[i]-=1000
-                  cagnotteAnniv+=1000}
-                argent[aQuiLeTour]+=cagnotteAnniv;
-                cagnotteAnniv=0;
-              break;
-            case 3://Erreur banque 20000
-                argent[aQuiLeTour]+=20000;
-              break;
-            case 4://Allez en Prison
-                prison[aQuiLeTour]=true;
-                position[aQuiLeTour]=11;
-                console.log(`${pseudos[aQuiLeTour]} va en prison.`);
-              break;
-            case 5://Recevez votre intérêt sur l'emprunt à 7% : 2500 Francs
-                argent[aQuiLeTour]+=2500;
-              break;
-            case 6://Héritage 10000
-                argent[aQuiLeTour]+=10000;
-              break;
-            case 7://Payez une amende de 1000 Francs ou tirer une carte chance
-                $("#CarteCommunaute").show();
-                backPop.show();
-                backPop.attr('onclick', null);
-              break;
-            case 8://contributions rapportent 2000
-                argent[aQuiLeTour]+=2000;
-              break;
-            case 9://Payez votre Police d'Assurance s'élevant à 5000 Francs
-                argent[aQuiLeTour]-=5000;
-                parcGratuit+=5000;
-              break;
-            case 10://Vente stock 5000
-                argent[aQuiLeTour]+=5000;
-              break;
-            case 11://REtounez Belleville
-                position[aQuiLeTour]=2;  
-                console.log("Le Joueur " + aQuiLeTour + " est sur " + nomCases[position[aQuiLeTour]]); 
-              break;
-            case 12://Prix de beauté 1000
-                argent[aQuiLeTour]+=1000;
-              break;
-            case 13://Case départ
-                position[aQuiLeTour]=1;
-                console.log("Le Joueur " + aQuiLeTour + " est sur " + nomCases[position[aQuiLeTour]]);
-              break;
-            case 14://Recevez votre revenu annuel 10000
-                argent[aQuiLeTour]+=10000;
-              break;
-            case 15://Medecin 5000
-                argent[aQuiLeTour]-=5000;
-                parcGratuit+=5000;
-              break;
-            case 16://Hopital 10000
-                argent[aQuiLeTour]-=10000;
-                parcGratuit+=10000;
-              break;}
-
-            RefreshMoney();
-            }
-
 
 
 
