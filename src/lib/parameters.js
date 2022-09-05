@@ -1,8 +1,8 @@
 /* Script pour afficher les paramètres */
-var displayOnglet = false;
-var img = document.querySelector('#Img-Btn');
-var divObj = document.querySelector('.Div-Obj');
-var divAll = document.querySelector('.Div-All');
+let displayOnglet = false;
+const img = document.querySelector('#Img-Btn');
+const divObj = document.querySelector('.Div-Obj');
+const divAll = document.querySelector('.Div-All');
 
 window.ShowHideOnglet = ShowHideOnglet;
   function ShowHideOnglet() {
@@ -23,7 +23,7 @@ window.ShowHideOnglet = ShowHideOnglet;
       }
   }
 /* Script pour l'audio */
-var music = new Audio("src/media/music/Monopoly Song Freeway 1.mp3"),
+let music = new Audio("src/media/music/Monopoly Song Freeway 1.mp3"),
     btnMusic = document.querySelector('#Btn-Music'),
     btnAmbient = document.querySelector('#Btn-Ambient'),
     ambient = new Audio("src/media/de/de_lance_1.mp3");

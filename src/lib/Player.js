@@ -1,8 +1,7 @@
-
 class Player {
     constructor(id) {
         this.id = id;
-        this.name = "DEFAULT_NAME";
+        this.name = "Player " + id;
         this.avatar = avatar.WHITE;
         this.money = 200000;
         this.authorization = false;
@@ -19,10 +18,7 @@ class Player {
     setName(name) {this.name = name;}
 
     getAvatar() {return this.avatar;}
-
-    setAvatar(avatar) {
-        this.avatar = avatar;
-    }
+    setAvatar(avatar) {this.avatar = avatar;}
 
     getMoney() {return this.money;}
     setMoney(money) {this.money = money;}

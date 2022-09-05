@@ -8,48 +8,36 @@ const avatar = {
     WHITE: "White"
 }
 
-var playerColors = new Array(0, 1, 2, 3, 4, 5);
-var colors = new Array(avatar.RED, avatar.YELLOW, avatar.GREEN, avatar.BLUE, avatar.MAGENTA, avatar.ORANGE);
+let playerAvatar = Object.keys(avatar);
+
+/* Initialization */
 for (let i = 0; i < 6 ; i++) {
-  document.querySelector('#Lobby'+i).style.backgroundColor= colors[playerColors[i]];  //Mise en place des couleurs de base
+  listeDesJoueurs[i].setAvatar(playerAvatar[i]);
+  document.querySelector('#Lobby'+i).style.backgroundColor = listeDesJoueurs[i].getAvatar();  //Mise en place des couleurs de base
 }
 
-
 function ChooseColor(playerId, sens) {
-  for (let i = 0; i < listeDesJoueurs.length; i++) {
-    if (listeDesJoueurs[i].getId() == playerId) {
-      player = listeDesJoueurs[i];
+  let player;
+
+  /* Searching the player */
+  listeDesJoueurs.forEach(el => {
+    if (el.getId() == playerId) {
+      player = el;
     }
+  });
+  if (player == null) {
+    console.log('Erreur, le player est introuvable');
+    return
   }
 
   if (sens) { // Next
-    playerColors[playerId]+=1;
-    playerColors[playerId]%=6;
+    playerColors[player.getId()] += 1;
   } else { // Previous
-    if (playerColors[playerId] == 0) {
-        playerColors[playerId] = 5;
-    } else {
-        playerColors[playerId] -= 1;
-    }
+    playerColors[player.getId()] += 5;
   }
+  playerColors[player.getId()] %= 6;
 
-/*
-  if (sens) { //Si Suivant
-    playerColors[playerId] +=1
-    if (playerColors[playerId]==6) {
-      playerColors[playerId]=1;
-    }
-  } else { //Si Précédent
-    playerColors[playerId]-=1;
-    if (playerColors[playerId]==0) {
-      playerColors[playerId]=5;
-    }
-  }
-*/
-player.setAvatar(colors[playerColors[playerId]]);
-  
-  console.log("🚀 ~ file: script.js ~ line 656 ~ ChooseColor ~ player.setAvatar(colors[playerColors[playerId]]);", player.getAvatar());
-  
-
+  player.setAvatar(colors[playerColors[player.getId()]]);
+  console.log("Mise à jour de l'avatar de ", player.getName(), " : ",player.getAvatar());
   document.querySelector('#Lobby'+playerId).style.backgroundColor=player.getAvatar();
 }

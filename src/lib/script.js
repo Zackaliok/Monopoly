@@ -1,5 +1,5 @@
-var aQuiLeTour, plateau;
-var maisons = new Array(null,0,null,0,null,0,0,null,0,0,null,0,0,0,0,0,0,null,0,0,null,0,null,0,0,0,0,0,0,0,null,0,0,null,0,0,null,0,null,0);
+let aQuiLeTour, plateau;
+let maisons = new Array(null,0,null,0,null,0,0,null,0,0,null,0,0,0,0,0,0,null,0,0,null,0,null,0,0,0,0,0,0,0,null,0,0,null,0,0,null,0,null,0);
  
 
  /* Cases array importation */
@@ -8,20 +8,20 @@ $.getJSON("src/lib/cases.json", function (data) {
 })
 
 
-var parcGratuit, prison;
+let parcGratuit, prison;
 
 /* Variables globales */
-var menu = $("#Menu"),
+let menu = $("#Menu"),
 	lobby = $("#Lobby"),
 	jeu = $("#Jeu"),
   backPop = $("#BackgroundPop");
 
-var resultatTirageDe = null,
+let resultatTirageDe = null,
 	de1 = null,
 	de2 = null,
   nbrDouble = 0;
 
-var nbrToursPrison = 0;
+let nbrToursPrison = 0;
   
 
 /* Initialisation de la Page */
@@ -29,7 +29,7 @@ menu.show();
 lobby.hide();
 jeu.hide();
 $("#ValiderTour").hide();
-for (var i = 0; i < 6; i++) {
+for (let i = 0; i < 6; i++) {
   $("#Joueur"+i).hide();
 	$("#Lobby"+i).hide();
 }
@@ -40,19 +40,19 @@ for (var i = 0; i < 6; i++) {
 //GoToLobby();
 //GoToJeu();
 
-var listeDesJoueurs = new Array();
+let listeDesJoueurs = new Array();
 window.GoToLobby = GoToLobby;
 function GoToLobby() {
-  var nbrJoueur = 0;
-	for (var i = 2; i <= 6; i++) {
-		var radio = document.querySelector("#radio"+i).checked;
+  let nbrJoueur = 0;
+	for (let i = 2; i <= 6; i++) {
+		let radio = document.querySelector("#radio"+i).checked;
 		if (radio) {
 			nbrJoueur = i;
 		}
 	}
-	for (var i = 0; i < nbrJoueur; i++) {
+	for (let i = 0; i < nbrJoueur; i++) {
 		$("#Lobby"+i).show();
-    var player = new Player(i);
+    let player = new Player(i);
     listeDesJoueurs.push(player);
 	}
   aQuiLeTour = listeDesJoueurs[0];
@@ -65,10 +65,10 @@ function GoToLobby() {
 
 window.GoToJeu = GoToJeu;
 function GoToJeu() {
-  for (var i = 0; i < listeDesJoueurs.length; i++) {
+  for (let i = 0; i < listeDesJoueurs.length; i++) {
     let player = listeDesJoueurs[i];
 
-    if ($("#Lobby-Input"+i).val() != "") { // Si laissé vide, set avec DEFAULT_NAME
+    if ($("#Lobby-Input"+i).val() != "") { // Si laissé vide, set avec Player X
       player.setName($("#Lobby-Input"+i).val());
     }
     
@@ -90,9 +90,9 @@ window.RollDice = RollDice;
 async function RollDice(min, max, maxAudio) {
   $("#BtnRoll").hide();
 	$("#DoubleDe").html("");
-	var deAudio = new Audio("src/media/de/de_lance_"+parseInt(Math.random()*(maxAudio-min)+min)+".mp3");
+	let deAudio = new Audio("src/media/de/de_lance_"+parseInt(Math.random()*(maxAudio-min)+min)+".mp3");
 	deAudio.play();
-	for (var i = 0; i < 10; i++) {
+	for (let i = 0; i < 10; i++) {
           de1 = parseInt(Math.random()*(max-min)+min);
           de2 = parseInt(Math.random()*(max-min)+min);
           resultatTirageDe=de1+de2;
@@ -257,15 +257,15 @@ function Buy(answer) {
 }
 
 window.OpenPossessions = OpenPossessions;
-var lastPlayerId = 0;
+let lastPlayerId = 0;
 function OpenPossessions(playerId) { // TODO: Entièrement repenser cette méthode avec les nouveaux objets à disposition
   let player = listeDesJoueurs[playerId];
   if (($("#PossessionsDiv").is(":hidden")==true) || (lastPlayerId!=playerId)) {
     $("#PossessionsDiv").show();
     backPop.show();
     lastPlayerId = playerId;
-    var contenuPossessions = "<p> Possessions du joueur " + player.getName() + " : <br><br>";
-    for (var i = 0; i < player.getPossessions().length; i++) {
+    let contenuPossessions = "<p> Possessions du joueur " + player.getName() + " : <br><br>";
+    for (let i = 0; i < player.getPossessions().length; i++) {
       contenuPossessions+= plateau[player.getPossessions()[i]] + " - Loyer de " + plateau[player.getPossessions()[i]].rent[0] + " € <br>"; // TODO: Remplacer le 0 par un indice qui prends le nombre de maisons.
     }
     $("#PossessionsDiv").html(contenuPossessions + "</p>");
@@ -277,10 +277,10 @@ function OpenPossessions(playerId) { // TODO: Entièrement repenser cette métho
 
 /*
 function Loyer() { // TODO: Repenser aussi beaucoup cette méthode, surtout comment gérer le système de maisons etc...
-  var check = 0;
+  let check = 0;
 
   if (!plateau[aQuiLeTour.getPosition()].buyable) {
-    for (var i = 0; i < nbrJoueur; i++) {
+    for (let i = 0; i < nbrJoueur; i++) {
       check = possessions[i].indexOf(position[aQuiLeTour]); // Rajouter dans le json un onglet pour y mettre l'id du propriétaire ?? Pour une recherche plus rapide.
       if ((check =! -1)&&(i==aQuiLeTour)) {
         break;
@@ -320,7 +320,7 @@ function ClosePop() {
 
 
 function RefreshMoney() {
-	for (var i = 0; i < listeDesJoueurs.length; i++) {
+	for (let i = 0; i < listeDesJoueurs.length; i++) {
 		$("#Argent"+i).html(listeDesJoueurs[i].getMoney());
 	}
 }

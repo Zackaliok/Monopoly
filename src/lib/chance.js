@@ -1,5 +1,5 @@
 /* Chance array importation */
-var chance;
+let chance;
 $.getJSON("src/lib/chance.json", function (data) {
   chance = data;
 })
@@ -13,9 +13,9 @@ function Chance(test) {
     parcGratuit+=1000;
   } else {
     ClosePop();
-    var random = 7;//parseInt(Math.random()*(17-1));
+    const random = 7;//parseInt(Math.random()*(17-1));
     console.log(chance["cards"][random]["sentence"]);
-    var F = new Function(chance["cards"][random]["command"]);
+    const F = new Function(chance["cards"][random]["command"]);
     F();
     backPop.attr('onclick', "ClosePop()");
     RefreshMoney();
