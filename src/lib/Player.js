@@ -1,8 +1,8 @@
-class Player {
-    constructor(id) {
+export default class Player {
+    Player(id) {
         this.id = id;
         this.name = "Player " + id;
-        this.avatar = avatar.WHITE;
+        this.avatar = null;
         this.money = 200000;
         this.authorization = false;
         this.position = 1;
@@ -59,4 +59,5 @@ class Player {
 
     getLibertyCard() {return this.libertyCard;}
     setLibertyCard(bool) {this.libertyCard = bool;}
-  }
+}
+

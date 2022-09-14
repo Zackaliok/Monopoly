@@ -1,3 +1,4 @@
-let log = require('./log.js');
+import Player from './Player.js'
+import log from './log.js'
 
-log('Salut');
+let player1 = new Player(999)
